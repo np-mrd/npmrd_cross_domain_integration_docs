@@ -1,0 +1,113 @@
+Guide:
+    - [object] = field that contains a subsection with single set of keys
+    - [list L] = field that contains a list
+    - field_name = name of a field containing single value
+
+    - old_name == old_name = unchanged field name/location
+    - old_name -> subsection/new_name = Moved and/or renamed field
+    - NEW: field_name = New field
+    - NEW: [subsection] = New subsection
+    - X: field_name = Field removed
+    - [old_subsection_name] -> [subsection] = Moved and/or renamed subsection
+    - *[letter] = indicates when a filed that was previous one is now split into two
+
+
+New locations of DEPOSITION RELATED fields in old Json (in order of NEW Json format)
+    - name -> compound_name
+    - smiles == smiles
+    - inchikey == inchikey
+    - NEW: npmrd_id
+
+    - NEW: [submission]
+        - NEW: submission/source
+        - deposition_type -> submission/type
+        - presubmission_uuid -> submission/uuid
+        - NEW: compound_uuid
+        - NEW: submission_date
+        - NEW: embargo_status
+        - NEW: embargo_date
+
+    - NEW: [citation]
+        - origin_doi -> citation/doi
+        - pmid -> citation/pmid
+        - NEW: pii
+
+    - [origin_info] -> [origin]
+        - origin_species -> origin/species
+        - origin_genus -> origin/genus
+
+        - NEW: origin/[private_collection]
+            - NEW: origin/private_collection/compound_source_type
+
+            - NEW: origin/private_collection/[purified_in_house]
+                - origin_info/biological_material_source -> origin/private_collection/purified_in_house/biological_material_source *a
+
+            - NEW: origin/private_collection/[commercial]
+                - origin_info/supplier -> origin/private_collection/commercial/supplier
+                - origin_info/cas_number -> origin/private_collection/commercial/cas_number
+                - origin_info/catalogue_number -> origin/private_collection/commercial/catalogue_number
+
+            - NEW: origin/private_collection/[compound_library]
+                - origin_info/library_name -> origin/private_collection/compound_library/library_name
+                - origin_info/library_description -> origin/private_collection/compound_library/library_description
+                - origin_info/library_compound_code -> origin/private_collection/compound_library/library_compound_code
+
+            - NEW: origin/private_collection/[other]
+                - origin_info/user_specified_compound_source -> origin/private_collection/other/user_specified_compound_source
+                - origin_info/biological_material_source -> origin/private_collection/other/biological_material_source *a
+        
+    - NEW: [depositor_info]
+        - nmr_submitter_email -> depositor_info/email
+        - NEW: depositor_info/account_id
+        - NEW: depositor_info/attribution_organization
+        - NEW: depositor_info/show_email_in_attribution
+        - NEW: depositor_info/show_name_in_attribution
+        - NEW: depositor_info/show_organization_in_attribution
+
+    - NEW: [nmr_data]
+        - [peak_data L] -> nmr_data/[peak_lists L]
+            - peak_data L/solvent -> nmr_data/peak_lists L/solvent
+            - peak_data L/reference -> nmr_data/peak_lists L/reference
+            - peak_data L/c_values -> nmr_data/peak_lists L/c_values
+            - peak_data L/h_values -> nmr_data/peak_lists L/h_values
+            - peak_data L/c_frequency -> nmr_data/peak_lists L/c_frequency
+            - peak_data L/h_frequency -> nmr_data/peak_lists L/h_frequency
+            - peak_data L/c_temperature -> nmr_data/peak_lists L/c_temperature
+            - peak_data L/h_temperature -> nmr_data/peak_lists L/h_temperature
+            - peak_data L/frequency_units -> nmr_data/peak_lists L/frequency_units
+            - peak_data L/temperature_units -> nmr_data/peak_lists L/temperature_units
+            - X: peak_data L/has_other_solvent
+            - X: peak_data L/has_other_reference
+
+        - NEW: [experimental_data]
+            - NEW: nmr_data/experimental_data/nmr_data_download_link
+
+            - [raw_nmr L] -> nmr_data/experimental_data/[nmr_metadata L]
+                - raw_nmr L/vendor -> nmr_data/experimental_data/nmr_metadata L/vendor
+                - NEW: nmr_data/experimental_data/nmr_metadata L/filetype
+                - raw_nmr L/solvent -> nmr_data/experimental_data/nmr_metadata L/solvent
+                - raw_nmr L/frequency -> nmr_data/experimental_data/nmr_metadata L/frequency
+                - NEW: nmr_data/experimental_data/nmr_metadata L/frequency_units
+                - raw_nmr L/f1_nucleus -> nmr_data/experimental_data/nmr_metadata L/f1_nucleus
+                - raw_nmr L/f2_nucleus -> nmr_data/experimental_data/nmr_metadata L/f2_nucleus
+                - raw_nmr L/temperature -> nmr_data/experimental_data/nmr_metadata L/temperature
+                - raw_nmr L/temperature_units -> nmr_data/experimental_data/nmr_metadata L/temperature_units
+                - raw_nmr L/experiment_type -> nmr_data/experimental_data/nmr_metadata L/experiment_type
+                - raw_nmr L/original_data_path -> nmr_data/experimental_data/nmr_metadata L/original_data_path
+                - raw_nmr L/extracted_experiment_folder -> nmr_data/experimental_data/nmr_metadata L/extracted_experiment_folder
+
+
+
+New JSON fields not directly related to submission platform
+- [nmr_data]
+    - nmr_data/[assignment_data]
+        - nmr_data/assignment_data/[h_nmr]
+        - nmr_data/assignment_data/[c_nmr]
+    - nmr_data/[predicted_data]
+        - nmr_data/[dft_protocol]
+            - nmr_data/dft_protocol/[molecular_dynamics]
+            - nmr_data/dft_protocol/[quantum_mechanics]
+
+        - nmr_data/[ml_protocol]
+            - nmr_data/dft_protocol/[molecular_dynamics]
+            - nmr_data/dft_protocol/[quantum_mechanics]
