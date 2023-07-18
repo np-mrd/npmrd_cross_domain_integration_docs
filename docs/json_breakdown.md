@@ -144,18 +144,27 @@
 ## submission <a name="submission"></a>
 - source <a name="submission_source"></a>
   - Example: `deposition_system`
+  - One of “deposition_system”, “npmrd_curator”, “dft_team”, or “ml_team”. This simply indicates where the generated JSON came from.
 - type <a name="submission_type"></a>
   - Example: `published_article`
+  - One of “published_article”, “presubmission_article”, or “private_deposition”. This indicates what the source of the compound in the JSON is.
 - uuid <a name="submission_uuid"></a>
   - Example: `97d6db8a-631d-43bf-8afd-3208f79ec8d3`
+  - This uuid value is used to identify tie each compound back to the deposition entry in the deposition database it came from.
 - compound_uuid <a name="submission_compound_uuid"></a>
   - Example: `SD0z84d9Ds`
+  - This uuid value is a short uuid value (10 characters) used as a secondary identifier to identify a specific compound in a deposition entry. This is a new addition added so that we do not need to rely on inchikey or name for this purpose. This gives us freedom to change either of the structure or name if they are later found to be incorrect.
 - submission_date <a name="submission_submission_date"></a>
   - Example: `2023-04-28T13:45:00.000Z`
 - embargo_status <a name="submission_embargo_status"></a>
   - Example: `embargo_until_publication`
 - embargo_date <a name="submission_embargo_date"></a>
   - Example: `2023-07-22`
+  - Will be one of “publish”, “embargo_until_date”, or “embargo_until_publication”. Since the job of embargoing data will be moved from the deposition database to the website database, the Alberta Team will have to start handling the temporary gating of data.
+    - `publish` indicates that a user wishes to release this data immediately and is the default value indicating to process and release data as soon as possible.
+    - `embargo_until_date` indicates that the <i>embargo_date</i> field must be checked for the release date to make a submission public. It should be withheld from public access until then.
+    - `embargo_until_publication` indicates to without the data from public access until the article is confirmed to be published OR a user manually releases the data. We will know an article has been published when a DOI is identified and attached to the specific compound/deposition.
+  
 
 ## citation <a name="citation"></a>
 - doi <a name="citation_doi"></a>
@@ -170,9 +179,16 @@
   - Example: `SOURCE SPECIES`
 - genus <a name="origin_genus"></a>
   - Example: `SOURCE GENUS`
-- private_collection <a name="origin_private_collection"></a>
+- private_collection <a name="origin_private_collection"></a>- 
+  - (This dictionary contains all necessary origin information if a user has completed a private deposition.)
   - compound_source_type <a name="origin_private_collection_compound_source_type"></a>
     - Example: `null`
+    - For each compound a user adds to a private deposition they choose from one of four different source types. `purified_in_house`, `commercial`, `compound_library`, or `other`. This field indicates which option was chosen for the given compound and therefore which object (see below) to extract origin information from. If the deposition is not a private deposition this field will be set to null.
+    - If `commercial` is selected then <b>species</b> and <b>genus will NOT be submitted</b>. `supplier`, `cas_number`, and `catalogue_number` in this object will be filled.
+    - If `purified_in_house` is selected then a <b>species</b>, <b>genus</b>, and biological_material_source <b>will be submitted</b>. Species and Genus are in the standard locations and the `biological_material_source` will be found in this object.
+    - If `commercial` is selected then <b>species and genus will NOT be submitted</b>. `supplier`, `cas_number`, and `catalogue_number` in this object will be filled.
+    - If `compound_library` is selected then species and genus will NOT be submitted.  `library_name`, `library_description`, and `library_compound_code` in this object will be filled.
+    - If `other` is selected then <b>species and genus WILL be submitted</b>. `user_specified_compound_source`, and `biological_material_source_code` in this object will be filled.
   - purified_in_house <a name="origin_private_collection_purified_in_house"></a>
     - biological_material_source <a name="origin_private_collection_purified_in_house_biological_material_source"></a>
       - Example: `null`
@@ -207,10 +223,13 @@
   - Example: `Simon Fraser University`
 - show_email_in_attribution <a name="depositor_info_show_email_in_attribution"></a>
   - Example: `true`
+  - Whether or not to display provided `email` (address) on NP-Card.
 - show_name_in_attribution <a name="depositor_info_show_name_in_attribution"></a>
   - Example: `true`
+  - Whether or not to display provided `attribution_name` on NP-Card.
 - show_organization_in_attribution <a name="depositor_info_show_organization_in_attribution"></a>
   - Example: `true`
+  - Whether or not to display provided `attribution_organization` on NP-Card.
 
 ## nmr_data <a name="nmr_data"></a>
 - peak_lists <a name="nmr_data_peak_lists"></a>
@@ -237,11 +256,15 @@
 - experimental_data <a name="nmr_data_experimental_data"></a>
   - nmr_data_download_link <a name="nmr_data_experimental_data_nmr_data_download_link"></a>
     - Example: `[Link](https://article-pipeline-test-bucket.s3.amazonaws.com/serve/2023-01-17_16_32.zip?AWSAccessKeyId=AKIATG5FM4URBBXHRLET&Signature=B7QypMRri9XmWbdKUT%2BuFIqtKN4%3D&Expires=1682986167)`
+    - This field will provide a presigned amazon s3 url to download the data in the submission directly from the deposition website’s data warehouse. This is how user submitted NMR data will be passed from the deposition system to the website database. Presigned urls can be used to download the data without an identity verification, however, they are REQUIRED to have an expiration date. This will be always set to the maximum which I believe is 7 days. If this causes issues, we can always transition to providing credentials in the future.
   - nmr_metadata <a name="nmr_data_experimental_data_nmr_metadata"></a>
     - vendor <a name="nmr_data_experimental_data_nmr_metadata_vendor"></a>
       - Example: `Bruker`
     - filetype <a name="nmr_data_experimental_data_nmr_metadata_filetype"></a>
       - Example: `Bruker_native`
+      - One of `Varian_native`, `Bruker_native`, `JEOL_native`, `Jcampdx`, `Mnova`.
+      - Previously we provided only vendor and used that as a means of deciding which pipeline to ingest the data with. However, we have recently discovered cases where the data can be collected on an instrument but then be converted to a different file format. For that reason, we have added this new “filetype” field which will specify the format of the data and make it clear which pipeline to ingest with.
+      - Note that I have included filetypes which we do not yet support (“JEOL_native”, “Mnova”). I have done this to future-proof the JSON in case we do eventually choose to start accepting data in these formats.
     - solvent <a name="nmr_data_experimental_data_nmr_metadata_solvent"></a>
       - Example: `CDCl3`
     - frequency <a name="nmr_data_experimental_data_nmr_metadata_frequency"></a>
