@@ -1,0 +1,407 @@
+## JSON Fields
+- [compound_name](#compound_name)
+- [smiles](#smiles)
+- [inchikey](#inchikey)
+- [npmrd_id](#npmrd_id)
+- [submission](#submission)
+	- [source](#submission_source)
+	- [type](#submission_type)
+	- [uuid](#submission_uuid)
+	- [compound_uuid](#submission_compound_uuid)
+	- [submission_date](#submission_submission_date)
+	- [embargo_status](#submission_embargo_status)
+	- [embargo_date](#submission_embargo_date)
+- [citation](#citation)
+	- [doi](#citation_doi)
+	- [pmid](#citation_pmid)
+	- [pii](#citation_pii)
+- [origin](#origin)
+	- [species](#origin_species)
+	- [genus](#origin_genus)
+	- [private_collection](#origin_private_collection)
+		- [compound_source_type](#origin_private_collection_compound_source_type)
+		- [purified_in_house](#origin_private_collection_purified_in_house)
+			- [biological_material_source](#origin_private_collection_purified_in_house_biological_material_source)
+		- [commercial](#origin_private_collection_commercial)
+			- [supplier](#origin_private_collection_commercial_supplier)
+			- [cas_number](#origin_private_collection_commercial_cas_number)
+			- [catalogue_number](#origin_private_collection_commercial_catalogue_number)
+		- [compound_library](#origin_private_collection_compound_library)
+			- [library_name](#origin_private_collection_compound_library_library_name)
+			- [library_description](#origin_private_collection_compound_library_library_description)
+			- [library_compound_code](#origin_private_collection_compound_library_library_compound_code)
+		- [other](#origin_private_collection_other)
+			- [user_specified_compound_source](#origin_private_collection_other_user_specified_compound_source)
+			- [biological_material_source](#origin_private_collection_other_biological_material_source)
+- [depositor_info](#depositor_info)
+	- [email](#depositor_info_email)
+	- [account_id](#depositor_info_account_id)
+	- [attribution_name](#depositor_info_attribution_name)
+	- [attribution_organization](#depositor_info_attribution_organization)
+	- [show_email_in_attribution](#depositor_info_show_email_in_attribution)
+	- [show_name_in_attribution](#depositor_info_show_name_in_attribution)
+	- [show_organization_in_attribution](#depositor_info_show_organization_in_attribution)
+- [nmr_data](#nmr_data)
+	- [peak_lists](#nmr_data_peak_lists)
+		- [solvent](#nmr_data_peak_lists_solvent)
+		- [reference](#nmr_data_peak_lists_reference)
+		- [c_values](#nmr_data_peak_lists_c_values)
+		- [h_values](#nmr_data_peak_lists_h_values)
+		- [c_frequency](#nmr_data_peak_lists_c_frequency)
+		- [h_frequency](#nmr_data_peak_lists_h_frequency)
+		- [frequency_units](#nmr_data_peak_lists_frequency_units)
+		- [c_temperature](#nmr_data_peak_lists_c_temperature)
+		- [h_temperature](#nmr_data_peak_lists_h_temperature)
+		- [temperature_units](#nmr_data_peak_lists_temperature_units)
+	- [experimental_data](#nmr_data_experimental_data)
+		- [nmr_data_download_link](#nmr_data_experimental_data_nmr_data_download_link)
+		- [nmr_metadata](#nmr_data_experimental_data_nmr_metadata)
+			- [vendor](#nmr_data_experimental_data_nmr_metadata_vendor)
+			- [filetype](#nmr_data_experimental_data_nmr_metadata_filetype)
+			- [solvent](#nmr_data_experimental_data_nmr_metadata_solvent)
+			- [frequency](#nmr_data_experimental_data_nmr_metadata_frequency)
+			- [frequency_units](#nmr_data_experimental_data_nmr_metadata_frequency_units)
+			- [f1_nucleus](#nmr_data_experimental_data_nmr_metadata_f1_nucleus)
+			- [f2_nucleus](#nmr_data_experimental_data_nmr_metadata_f2_nucleus)
+			- [temperature](#nmr_data_experimental_data_nmr_metadata_temperature)
+			- [temperature_units](#nmr_data_experimental_data_nmr_metadata_temperature_units)
+			- [experiment_type](#nmr_data_experimental_data_nmr_metadata_experiment_type)
+			- [original_data_path](#nmr_data_experimental_data_nmr_metadata_original_data_path)
+			- [extracted_experiment_folder](#nmr_data_experimental_data_nmr_metadata_extracted_experiment_folder)
+	- [assignment_data](#nmr_data_assignment_data)
+		- [h_nmr](#nmr_data_assignment_data_h_nmr)
+			- [solvent](#nmr_data_assignment_data_h_nmr_solvent)
+			- [temperature](#nmr_data_assignment_data_h_nmr_temperature)
+			- [temperature_units](#nmr_data_assignment_data_h_nmr_temperature_units)
+			- [reference](#nmr_data_assignment_data_h_nmr_reference)
+			- [frequency](#nmr_data_assignment_data_h_nmr_frequency)
+			- [frequency_units](#nmr_data_assignment_data_h_nmr_frequency_units)
+			- [spectrum](#nmr_data_assignment_data_h_nmr_spectrum)
+				- [shift](#nmr_data_assignment_data_h_nmr_spectrum_shift)
+				- [integration](#nmr_data_assignment_data_h_nmr_spectrum_integration)
+				- [multiplicity](#nmr_data_assignment_data_h_nmr_spectrum_multiplicity)
+				- [coupling](#nmr_data_assignment_data_h_nmr_spectrum_coupling)
+				- [atom_index](#nmr_data_assignment_data_h_nmr_spectrum_atom_index)
+				- [rdkit_index](#nmr_data_assignment_data_h_nmr_spectrum_rdkit_index)
+				- [interchangeable_index](#nmr_data_assignment_data_h_nmr_spectrum_interchangeable_index)
+		- [c_nmr](#nmr_data_assignment_data_c_nmr)
+			- [solvent](#nmr_data_assignment_data_c_nmr_solvent)
+			- [temperature](#nmr_data_assignment_data_c_nmr_temperature)
+			- [temperature_units](#nmr_data_assignment_data_c_nmr_temperature_units)
+			- [reference](#nmr_data_assignment_data_c_nmr_reference)
+			- [frequency](#nmr_data_assignment_data_c_nmr_frequency)
+			- [frequency_units](#nmr_data_assignment_data_c_nmr_frequency_units)
+			- [spectrum](#nmr_data_assignment_data_c_nmr_spectrum)
+				- [shift](#nmr_data_assignment_data_c_nmr_spectrum_shift)
+				- [atom_index](#nmr_data_assignment_data_c_nmr_spectrum_atom_index)
+				- [rdkit_index](#nmr_data_assignment_data_c_nmr_spectrum_rdkit_index)
+	- [predicted_data](#nmr_data_predicted_data)
+		- [prediction_method](#nmr_data_predicted_data_prediction_method)
+		- [dft_protocol](#nmr_data_predicted_data_dft_protocol)
+			- [molecular_dynamics](#nmr_data_predicted_data_dft_protocol_molecular_dynamics)
+				- [md_software](#nmr_data_predicted_data_dft_protocol_molecular_dynamics_md_software)
+				- [md_software_version](#nmr_data_predicted_data_dft_protocol_molecular_dynamics_md_software_version)
+				- [forcefield](#nmr_data_predicted_data_dft_protocol_molecular_dynamics_forcefield)
+				- [energy_window](#nmr_data_predicted_data_dft_protocol_molecular_dynamics_energy_window)
+				- [downselection](#nmr_data_predicted_data_dft_protocol_molecular_dynamics_downselection)
+			- [quantum_mechanics](#nmr_data_predicted_data_dft_protocol_quantum_mechanics)
+				- [qm_software](#nmr_data_predicted_data_dft_protocol_quantum_mechanics_qm_software)
+				- [qm_software_version](#nmr_data_predicted_data_dft_protocol_quantum_mechanics_qm_software_version)
+				- [tasks](#nmr_data_predicted_data_dft_protocol_quantum_mechanics_tasks)
+				- [functionals](#nmr_data_predicted_data_dft_protocol_quantum_mechanics_functionals)
+				- [basis_sets](#nmr_data_predicted_data_dft_protocol_quantum_mechanics_basis_sets)
+				- [solvent](#nmr_data_predicted_data_dft_protocol_quantum_mechanics_solvent)
+				- [conversion_factors](#nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors)
+		- [ml_protocol](#nmr_data_predicted_data_ml_protocol)
+			- [ml_model](#nmr_data_predicted_data_ml_protocol_ml_model)
+			- [training_set](#nmr_data_predicted_data_ml_protocol_training_set)
+			- [training_parameters](#nmr_data_predicted_data_ml_protocol_training_parameters)
+			- [chemical_shifts](#nmr_data_predicted_data_ml_protocol_chemical_shifts)
+				- [solvent](#nmr_data_predicted_data_ml_protocol_chemical_shifts_solvent)
+				- [temperature](#nmr_data_predicted_data_ml_protocol_chemical_shifts_temperature)
+				- [temperature_units](#nmr_data_predicted_data_ml_protocol_chemical_shifts_temperature_units)
+				- [h_nmr](#nmr_data_predicted_data_ml_protocol_chemical_shifts_h_nmr)
+					- [shift](#nmr_data_predicted_data_ml_protocol_chemical_shifts_h_nmr_shift)
+					- [shielding_tensor](#nmr_data_predicted_data_ml_protocol_chemical_shifts_h_nmr_shielding_tensor)
+					- [rdkit_index](#nmr_data_predicted_data_ml_protocol_chemical_shifts_h_nmr_rdkit_index)
+				- [c_nmr](#nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr)
+					- [shift](#nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr_shift)
+					- [shielding_tensor](#nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr_shielding_tensor)
+					- [rdkit_index](#nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr_rdkit_index)
+
+## compound_name <a name="compound_name"></a>
+COMPOUND
+
+## smiles <a name="smiles"></a>
+CCC=CCCC
+
+## inchikey <a name="inchikey"></a>
+VQOIHQFCIVFBEC-IQPAJRPASA-N
+
+## npmrd_id <a name="npmrd_id"></a>
+null
+
+## submission <a name="submission"></a>
+- source <a name="submission_source"></a>
+  - deposition_system
+- type <a name="submission_type"></a>
+  - published_article
+- uuid <a name="submission_uuid"></a>
+  - 97d6db8a-631d-43bf-8afd-3208f79ec8d3
+- compound_uuid <a name="submission_compound_uuid"></a>
+  - SD0z84d9Ds
+- submission_date <a name="submission_submission_date"></a>
+  - 2023-04-28T13:45:00.000Z
+- embargo_status <a name="submission_embargo_status"></a>
+  - embargo_until_publication
+- embargo_date <a name="submission_embargo_date"></a>
+  - 2023-07-22
+
+## citation <a name="citation"></a>
+- doi <a name="citation_doi"></a>
+  - 10.9999/npmr.99999999
+- pmid <a name="citation_pmid"></a>
+  - null
+- pii <a name="citation_pii"></a>
+  - null
+
+## origin <a name="origin"></a>
+- species <a name="origin_species"></a>
+  - SOURCE SPECIES
+- genus <a name="origin_genus"></a>
+  - SOURCE GENUS
+- private_collection <a name="origin_private_collection"></a>
+  - compound_source_type <a name="origin_private_collection_compound_source_type"></a>
+    - null
+  - purified_in_house <a name="origin_private_collection_purified_in_house"></a>
+    - biological_material_source <a name="origin_private_collection_purified_in_house_biological_material_source"></a>
+      - null
+  - commercial <a name="origin_private_collection_commercial"></a>
+    - supplier <a name="origin_private_collection_commercial_supplier"></a>
+      - null
+    - cas_number <a name="origin_private_collection_commercial_cas_number"></a>
+      - null
+    - catalogue_number <a name="origin_private_collection_commercial_catalogue_number"></a>
+      - null
+  - compound_library <a name="origin_private_collection_compound_library"></a>
+    - library_name <a name="origin_private_collection_compound_library_library_name"></a>
+      - null
+    - library_description <a name="origin_private_collection_compound_library_library_description"></a>
+      - null
+    - library_compound_code <a name="origin_private_collection_compound_library_library_compound_code"></a>
+      - null
+  - other <a name="origin_private_collection_other"></a>
+    - user_specified_compound_source <a name="origin_private_collection_other_user_specified_compound_source"></a>
+      - null
+    - biological_material_source <a name="origin_private_collection_other_biological_material_source"></a>
+      - null
+
+## depositor_info <a name="depositor_info"></a>
+- email <a name="depositor_info_email"></a>
+  - mpin@sfu.ca
+- account_id <a name="depositor_info_account_id"></a>
+  - 526
+- attribution_name <a name="depositor_info_attribution_name"></a>
+  - Matthew Pin
+- attribution_organization <a name="depositor_info_attribution_organization"></a>
+  - Simon Fraser University
+- show_email_in_attribution <a name="depositor_info_show_email_in_attribution"></a>
+  - true
+- show_name_in_attribution <a name="depositor_info_show_name_in_attribution"></a>
+  - true
+- show_organization_in_attribution <a name="depositor_info_show_organization_in_attribution"></a>
+  - true
+
+## nmr_data <a name="nmr_data"></a>
+- peak_lists <a name="nmr_data_peak_lists"></a>
+  - solvent <a name="nmr_data_peak_lists_solvent"></a>
+    - CDCl3
+  - reference <a name="nmr_data_peak_lists_reference"></a>
+    - TMS
+  - c_values <a name="nmr_data_peak_lists_c_values"></a>
+    - [172.2, 171.6, 152.1, 146.0, 139.7, 137.7, 123.9, 122.2, 116.3, 106.9, 75.3, 62.8, 61.2, 29.0, 25.3, 24.9, 22.6, 21.4, 20.3, 20.3]
+  - h_values <a name="nmr_data_peak_lists_h_values"></a>
+    - [7.17, 6.15, 5.56, 5.28, 4.12, 3.77, 3.23, 2.77, 2.51, 2.33, 1.94, 1.45, 1.45, 1.33, 1.0]
+  - c_frequency <a name="nmr_data_peak_lists_c_frequency"></a>
+    - 120
+  - h_frequency <a name="nmr_data_peak_lists_h_frequency"></a>
+    - 512
+  - frequency_units <a name="nmr_data_peak_lists_frequency_units"></a>
+    - MHz
+  - c_temperature <a name="nmr_data_peak_lists_c_temperature"></a>
+    - 300
+  - h_temperature <a name="nmr_data_peak_lists_h_temperature"></a>
+    - 300
+  - temperature_units <a name="nmr_data_peak_lists_temperature_units"></a>
+    - K
+- experimental_data <a name="nmr_data_experimental_data"></a>
+  - nmr_data_download_link <a name="nmr_data_experimental_data_nmr_data_download_link"></a>
+    - [Link](https://article-pipeline-test-bucket.s3.amazonaws.com/serve/2023-01-17_16_32.zip?AWSAccessKeyId=AKIATG5FM4URBBXHRLET&Signature=B7QypMRri9XmWbdKUT%2BuFIqtKN4%3D&Expires=1682986167)
+  - nmr_metadata <a name="nmr_data_experimental_data_nmr_metadata"></a>
+    - vendor <a name="nmr_data_experimental_data_nmr_metadata_vendor"></a>
+      - Bruker
+    - filetype <a name="nmr_data_experimental_data_nmr_metadata_filetype"></a>
+      - Bruker_native
+    - solvent <a name="nmr_data_experimental_data_nmr_metadata_solvent"></a>
+      - CDCl3
+    - frequency <a name="nmr_data_experimental_data_nmr_metadata_frequency"></a>
+      - [150.99]
+    - frequency_units <a name="nmr_data_experimental_data_nmr_metadata_frequency_units"></a>
+      - MHz
+    - f1_nucleus <a name="nmr_data_experimental_data_nmr_metadata_f1_nucleus"></a>
+      - 13C
+    - f2_nucleus <a name="nmr_data_experimental_data_nmr_metadata_f2_nucleus"></a>
+      - 
+    - temperature <a name="nmr_data_experimental_data_nmr_metadata_temperature"></a>
+      - 300
+    - temperature_units <a name="nmr_data_experimental_data_nmr_metadata_temperature_units"></a>
+      - K
+    - experiment_type <a name="nmr_data_experimental_data_nmr_metadata_experiment_type"></a>
+      - 1D
+    - original_data_path <a name="nmr_data_experimental_data_nmr_metadata_original_data_path"></a>
+      - Clavilactone K/13C.fid/acqu
+    - extracted_experiment_folder <a name="nmr_data_experimental_data_nmr_metadata_extracted_experiment_folder"></a>
+      - 13C_1D
+    - vendor <a name="nmr_data_experimental_data_nmr_metadata_vendor"></a>
+      - Bruker
+    - filetype <a name="nmr_data_experimental_data_nmr_metadata_filetype"></a>
+      - Bruker_native
+    - solvent <a name="nmr_data_experimental_data_nmr_metadata_solvent"></a>
+      - CDCl3
+    - frequency <a name="nmr_data_experimental_data_nmr_metadata_frequency"></a>
+      - [600.43]
+    - frequency_units <a name="nmr_data_experimental_data_nmr_metadata_frequency_units"></a>
+      - MHz
+    - f1_nucleus <a name="nmr_data_experimental_data_nmr_metadata_f1_nucleus"></a>
+      - 1H
+    - f2_nucleus <a name="nmr_data_experimental_data_nmr_metadata_f2_nucleus"></a>
+      - 
+    - temperature <a name="nmr_data_experimental_data_nmr_metadata_temperature"></a>
+      - 298
+    - temperature_units <a name="nmr_data_experimental_data_nmr_metadata_temperature_units"></a>
+      - K
+    - experiment_type <a name="nmr_data_experimental_data_nmr_metadata_experiment_type"></a>
+      - 1D
+    - original_data_path <a name="nmr_data_experimental_data_nmr_metadata_original_data_path"></a>
+      - Clavilactone K/1H.fid/acqu
+    - extracted_experiment_folder <a name="nmr_data_experimental_data_nmr_metadata_extracted_experiment_folder"></a>
+      - 1H_1D
+
+## assignment_data <a name="nmr_data_assignment_data"></a>
+- h_nmr <a name="nmr_data_assignment_data_h_nmr"></a>
+  - solvent <a name="nmr_data_assignment_data_h_nmr_solvent"></a>
+    - CDCl3
+  - temperature <a name="nmr_data_assignment_data_h_nmr_temperature"></a>
+    - 300
+  - temperature_units <a name="nmr_data_assignment_data_h_nmr_temperature_units"></a>
+    - K
+  - reference <a name="nmr_data_assignment_data_h_nmr_reference"></a>
+    - TMS
+  - frequency <a name="nmr_data_assignment_data_h_nmr_frequency"></a>
+    - 300
+  - frequency_units <a name="nmr_data_assignment_data_h_nmr_frequency_units"></a>
+    - MHz
+  - spectrum <a name="nmr_data_assignment_data_h_nmr_spectrum"></a>
+    - shift <a name="nmr_data_assignment_data_h_nmr_spectrum_shift"></a>
+      - 4.52
+    - integration <a name="nmr_data_assignment_data_h_nmr_spectrum_integration"></a>
+      - 3
+    - multiplicity <a name="nmr_data_assignment_data_h_nmr_spectrum_multiplicity"></a>
+      - t
+    - coupling <a name="nmr_data_assignment_data_h_nmr_spectrum_coupling"></a>
+      - [9.6]
+    - atom_index <a name="nmr_data_assignment_data_h_nmr_spectrum_atom_index"></a>
+      - 4
+    - rdkit_index <a name="nmr_data_assignment_data_h_nmr_spectrum_rdkit_index"></a>
+      - [10]
+    - interchangeable_index <a name="nmr_data_assignment_data_h_nmr_spectrum_interchangeable_index"></a>
+      - []
+
+- c_nmr <a name="nmr_data_assignment_data_c_nmr"></a>
+  - solvent <a name="nmr_data_assignment_data_c_nmr_solvent"></a>
+    - CDCl3
+  - temperature <a name="nmr_data_assignment_data_c_nmr_temperature"></a>
+    - 300
+  - temperature_units <a name="nmr_data_assignment_data_c_nmr_temperature_units"></a>
+    - K
+  - reference <a name="nmr_data_assignment_data_c_nmr_reference"></a>
+    - TMS
+  - frequency <a name="nmr_data_assignment_data_c_nmr_frequency"></a>
+    - 75
+  - frequency_units <a name="nmr_data_assignment_data_c_nmr_frequency_units"></a>
+    - MHz
+  - spectrum <a name="nmr_data_assignment_data_c_nmr_spectrum"></a>
+    - shift <a name="nmr_data_assignment_data_c_nmr_spectrum_shift"></a>
+      - 70.2
+    - atom_index <a name="nmr_data_assignment_data_c_nmr_spectrum_atom_index"></a>
+      - 3
+    - rdkit_index <a name="nmr_data_assignment_data_c_nmr_spectrum_rdkit_index"></a>
+      - 10
+
+## predicted_data <a name="nmr_data_predicted_data"></a>
+- prediction_method <a name="nmr_data_predicted_data_prediction_method"></a>
+  - dft
+- dft_protocol <a name="nmr_data_predicted_data_dft_protocol"></a>
+  - molecular_dynamics <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics"></a>
+    - md_software <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics_md_software"></a>
+      - xtb
+    - md_software_version <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics_md_software_version"></a>
+      - 3.1
+    - forcefield <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics_forcefield"></a>
+      - gff
+    - energy_window <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics_energy_window"></a>
+      - null
+    - downselection <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics_downselection"></a>
+      - null
+  - quantum_mechanics <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics"></a>
+    - qm_software <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_qm_software"></a>
+      - nwchem
+    - qm_software_version <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_qm_software_version"></a>
+      - 6.8.2
+    - tasks <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_tasks"></a>
+      - [optimized, shielding]
+    - functionals <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_functionals"></a>
+      - [b3lyp, mpw91pw91]
+    - basis_sets <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_basis_sets"></a>
+      - [6-31g*, 6-311+g**]
+    - solvent <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_solvent"></a>
+      - CHCl3
+    - conversion_factors <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors"></a>
+      - H <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors_H"></a>
+        - m: 1.0
+        - b: 0.0
+      - C <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors_C"></a>
+        - m: 1.0
+        - b: 0.0
+
+- ml_protocol <a name="nmr_data_predicted_data_ml_protocol"></a>
+  - ml_model <a name="nmr_data_predicted_data_ml_protocol_ml_model"></a>
+    - model_name
+  - training_set <a name="nmr_data_predicted_data_ml_protocol_training_set"></a>
+    - training_set_name
+  - training_parameters <a name="nmr_data_predicted_data_ml_protocol_training_parameters"></a>
+    - parameter_1 <a name="nmr_data_predicted_data_ml_protocol_training_parameters_parameter_1"></a>
+      - null
+    - parameter_2 <a name="nmr_data_predicted_data_ml_protocol_training_parameters_parameter_2"></a>
+      - null
+  - chemical_shifts <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts"></a>
+    - solvent <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_solvent"></a>
+      - CDCl3
+    - temperature <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_temperature"></a>
+      - 298
+    - temperature_units <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_temperature_units"></a>
+      - K
+    - h_nmr <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_h_nmr"></a>
+      - shift <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_h_nmr_shift"></a>
+        - 4.56
+      - shielding_tensor <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_h_nmr_shielding_tensor"></a>
+        - 3X3 array
+      - rdkit_index <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_h_nmr_rdkit_index"></a>
+        - 1
+    - c_nmr <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr"></a>
+     - shift <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr_shift"></a>
+        - 75.2
+      - shielding_tensor <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr_shielding_tensor"></a>
+        - 3x3 array
+      - rdkit_index <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr_rdkit_index"></a>
+        - 1
