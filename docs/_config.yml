@@ -1,0 +1,8 @@
+title: NP-MRD Multi Domain Integration Documentation
+description: Documentation for multi-domain integration across the different tech stacks built for the NP-MRD project.
+theme: just-the-docs
+
+url: https://liningtonlab.github.io/NP-MRD_Multi-Domain_Docs/
+
+aux_links:
+  Template Repository: https://github.com/just-the-docs/just-the-docs-template
