@@ -1,8 +1,9 @@
-title: Just the Docs Template
-description: A starter template for a Jeykll site using the Just the Docs theme!
-theme: just-the-docs
+remote_theme: just-the-docs/just-the-docs
+logo: "https://user-images.githubusercontent.com/55040326/162267823-b6c1ea44-6069-4506-b555-06e89809ee99.png"
 
-url: https://just-the-docs.github.io
+# Back to top link
+back_to_top: true
+back_to_top_text: "Back to top"
 
-aux_links:
-  Template Repository: https://github.com/just-the-docs/just-the-docs-template
+# Footer last edited timestamp
+last_edit_timestamp: true 
