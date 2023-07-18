@@ -130,242 +130,242 @@
 					- [rdkit_index](#nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr_rdkit_index)
 
 ## compound_name <a name="compound_name"></a>
-COMPOUND
+- Example: `TEST COMPOUND`
 
 ## smiles <a name="smiles"></a>
-CCC=CCCC
+- Example: `CCC=CCCC`
 
 ## inchikey <a name="inchikey"></a>
-VQOIHQFCIVFBEC-IQPAJRPASA-N
+- Example: `VQOIHQFCIVFBEC-IQPAJRPASA-N`
 
 ## npmrd_id <a name="npmrd_id"></a>
-null
+- Example: `NP0000001`
 
 ## submission <a name="submission"></a>
 - source <a name="submission_source"></a>
-  - deposition_system
+  - Example: `deposition_system`
 - type <a name="submission_type"></a>
-  - published_article
+  - Example: `published_article`
 - uuid <a name="submission_uuid"></a>
-  - 97d6db8a-631d-43bf-8afd-3208f79ec8d3
+  - Example: `97d6db8a-631d-43bf-8afd-3208f79ec8d3`
 - compound_uuid <a name="submission_compound_uuid"></a>
-  - SD0z84d9Ds
+  - Example: `SD0z84d9Ds`
 - submission_date <a name="submission_submission_date"></a>
-  - 2023-04-28T13:45:00.000Z
+  - Example: `2023-04-28T13:45:00.000Z`
 - embargo_status <a name="submission_embargo_status"></a>
-  - embargo_until_publication
+  - Example: `embargo_until_publication`
 - embargo_date <a name="submission_embargo_date"></a>
-  - 2023-07-22
+  - Example: `2023-07-22`
 
 ## citation <a name="citation"></a>
 - doi <a name="citation_doi"></a>
-  - 10.9999/npmr.99999999
+  - Example: `10.9999/npmr.99999999`
 - pmid <a name="citation_pmid"></a>
-  - null
+  - Example: `null`
 - pii <a name="citation_pii"></a>
-  - null
+  - Example: `null`
 
 ## origin <a name="origin"></a>
 - species <a name="origin_species"></a>
-  - SOURCE SPECIES
+  - Example: `SOURCE SPECIES`
 - genus <a name="origin_genus"></a>
-  - SOURCE GENUS
+  - Example: `SOURCE GENUS`
 - private_collection <a name="origin_private_collection"></a>
   - compound_source_type <a name="origin_private_collection_compound_source_type"></a>
-    - null
+    - Example: `null`
   - purified_in_house <a name="origin_private_collection_purified_in_house"></a>
     - biological_material_source <a name="origin_private_collection_purified_in_house_biological_material_source"></a>
-      - null
+      - Example: `null`
   - commercial <a name="origin_private_collection_commercial"></a>
     - supplier <a name="origin_private_collection_commercial_supplier"></a>
-      - null
+      - Example: `null`
     - cas_number <a name="origin_private_collection_commercial_cas_number"></a>
-      - null
+      - Example: `null`
     - catalogue_number <a name="origin_private_collection_commercial_catalogue_number"></a>
-      - null
+      - Example: `null`
   - compound_library <a name="origin_private_collection_compound_library"></a>
     - library_name <a name="origin_private_collection_compound_library_library_name"></a>
-      - null
+      - Example: `null`
     - library_description <a name="origin_private_collection_compound_library_library_description"></a>
-      - null
+      - Example: `null`
     - library_compound_code <a name="origin_private_collection_compound_library_library_compound_code"></a>
-      - null
+      - Example: `null`
   - other <a name="origin_private_collection_other"></a>
     - user_specified_compound_source <a name="origin_private_collection_other_user_specified_compound_source"></a>
-      - null
+      - Example: `null`
     - biological_material_source <a name="origin_private_collection_other_biological_material_source"></a>
-      - null
+      - Example: `null`
 
 ## depositor_info <a name="depositor_info"></a>
 - email <a name="depositor_info_email"></a>
-  - mpin@sfu.ca
+  - Example: `mpin@sfu.ca`
 - account_id <a name="depositor_info_account_id"></a>
-  - 526
+  - Example: `526`
 - attribution_name <a name="depositor_info_attribution_name"></a>
-  - Matthew Pin
+  - Example: `Matthew Pin`
 - attribution_organization <a name="depositor_info_attribution_organization"></a>
-  - Simon Fraser University
+  - Example: `Simon Fraser University`
 - show_email_in_attribution <a name="depositor_info_show_email_in_attribution"></a>
-  - true
+  - Example: `true`
 - show_name_in_attribution <a name="depositor_info_show_name_in_attribution"></a>
-  - true
+  - Example: `true`
 - show_organization_in_attribution <a name="depositor_info_show_organization_in_attribution"></a>
-  - true
+  - Example: `true`
 
 ## nmr_data <a name="nmr_data"></a>
 - peak_lists <a name="nmr_data_peak_lists"></a>
   - solvent <a name="nmr_data_peak_lists_solvent"></a>
-    - CDCl3
+    - Example: `CDCl3`
   - reference <a name="nmr_data_peak_lists_reference"></a>
-    - TMS
+    - Example: `TMS`
   - c_values <a name="nmr_data_peak_lists_c_values"></a>
-    - [172.2, 171.6, 152.1, 146.0, 139.7, 137.7, 123.9, 122.2, 116.3, 106.9, 75.3, 62.8, 61.2, 29.0, 25.3, 24.9, 22.6, 21.4, 20.3, 20.3]
+    - Example: `[172.2, 171.6, 152.1, 146.0, 139.7, 137.7, 123.9, 122.2, 116.3, 106.9, 75.3, 62.8, 61.2, 29.0, 25.3, 24.9, 22.6, 21.4, 20.3, 20.3]`
   - h_values <a name="nmr_data_peak_lists_h_values"></a>
-    - [7.17, 6.15, 5.56, 5.28, 4.12, 3.77, 3.23, 2.77, 2.51, 2.33, 1.94, 1.45, 1.45, 1.33, 1.0]
+    - Example: `[7.17, 6.15, 5.56, 5.28, 4.12, 3.77, 3.23, 2.77, 2.51, 2.33, 1.94, 1.45, 1.45, 1.33, 1.0]`
   - c_frequency <a name="nmr_data_peak_lists_c_frequency"></a>
-    - 120
+    - Example: `120`
   - h_frequency <a name="nmr_data_peak_lists_h_frequency"></a>
-    - 512
+    - Example: `512`
   - frequency_units <a name="nmr_data_peak_lists_frequency_units"></a>
-    - MHz
+    - Example: `MHz`
   - c_temperature <a name="nmr_data_peak_lists_c_temperature"></a>
-    - 300
+    - Example: `300`
   - h_temperature <a name="nmr_data_peak_lists_h_temperature"></a>
-    - 300
+    - Example: `300`
   - temperature_units <a name="nmr_data_peak_lists_temperature_units"></a>
-    - K
+    - Example: `K`
 - experimental_data <a name="nmr_data_experimental_data"></a>
   - nmr_data_download_link <a name="nmr_data_experimental_data_nmr_data_download_link"></a>
-    - [Link](https://article-pipeline-test-bucket.s3.amazonaws.com/serve/2023-01-17_16_32.zip?AWSAccessKeyId=AKIATG5FM4URBBXHRLET&Signature=B7QypMRri9XmWbdKUT%2BuFIqtKN4%3D&Expires=1682986167)
+    - Example: `[Link](https://article-pipeline-test-bucket.s3.amazonaws.com/serve/2023-01-17_16_32.zip?AWSAccessKeyId=AKIATG5FM4URBBXHRLET&Signature=B7QypMRri9XmWbdKUT%2BuFIqtKN4%3D&Expires=1682986167)`
   - nmr_metadata <a name="nmr_data_experimental_data_nmr_metadata"></a>
     - vendor <a name="nmr_data_experimental_data_nmr_metadata_vendor"></a>
-      - Bruker
+      - Example: `Bruker`
     - filetype <a name="nmr_data_experimental_data_nmr_metadata_filetype"></a>
-      - Bruker_native
+      - Example: `Bruker_native`
     - solvent <a name="nmr_data_experimental_data_nmr_metadata_solvent"></a>
-      - CDCl3
+      - Example: `CDCl3`
     - frequency <a name="nmr_data_experimental_data_nmr_metadata_frequency"></a>
-      - [150.99]
+      - Example: `[150.99]`
     - frequency_units <a name="nmr_data_experimental_data_nmr_metadata_frequency_units"></a>
-      - MHz
+      - Example: `MHz`
     - f1_nucleus <a name="nmr_data_experimental_data_nmr_metadata_f1_nucleus"></a>
-      - 13C
+      - Example: `13C`
     - f2_nucleus <a name="nmr_data_experimental_data_nmr_metadata_f2_nucleus"></a>
-      - 
+      - Example: ``
     - temperature <a name="nmr_data_experimental_data_nmr_metadata_temperature"></a>
-      - 300
+      - Example: `300`
     - temperature_units <a name="nmr_data_experimental_data_nmr_metadata_temperature_units"></a>
-      - K
+      - Example: `K`
     - experiment_type <a name="nmr_data_experimental_data_nmr_metadata_experiment_type"></a>
-      - 1D
+      - Example: `1D`
     - original_data_path <a name="nmr_data_experimental_data_nmr_metadata_original_data_path"></a>
-      - Clavilactone K/13C.fid/acqu
+      - Example: `Clavilactone K/13C.fid/acqu`
     - extracted_experiment_folder <a name="nmr_data_experimental_data_nmr_metadata_extracted_experiment_folder"></a>
-      - 13C_1D
+      - Example: `13C_1D`
     - vendor <a name="nmr_data_experimental_data_nmr_metadata_vendor"></a>
-      - Bruker
+      - Example: `Bruker`
     - filetype <a name="nmr_data_experimental_data_nmr_metadata_filetype"></a>
-      - Bruker_native
+      - Example: `Bruker_native`
     - solvent <a name="nmr_data_experimental_data_nmr_metadata_solvent"></a>
-      - CDCl3
+      - Example: `CDCl3`
     - frequency <a name="nmr_data_experimental_data_nmr_metadata_frequency"></a>
-      - [600.43]
+      - Example: `[600.43]`
     - frequency_units <a name="nmr_data_experimental_data_nmr_metadata_frequency_units"></a>
-      - MHz
+      - Example: `MHz`
     - f1_nucleus <a name="nmr_data_experimental_data_nmr_metadata_f1_nucleus"></a>
-      - 1H
+      - Example: `1H`
     - f2_nucleus <a name="nmr_data_experimental_data_nmr_metadata_f2_nucleus"></a>
-      - 
+      - Example: ``
     - temperature <a name="nmr_data_experimental_data_nmr_metadata_temperature"></a>
-      - 298
+      - Example: `298`
     - temperature_units <a name="nmr_data_experimental_data_nmr_metadata_temperature_units"></a>
-      - K
+      - Example: `K`
     - experiment_type <a name="nmr_data_experimental_data_nmr_metadata_experiment_type"></a>
-      - 1D
+      - Example: `1D`
     - original_data_path <a name="nmr_data_experimental_data_nmr_metadata_original_data_path"></a>
-      - Clavilactone K/1H.fid/acqu
+      - Example: `Clavilactone K/1H.fid/acqu`
     - extracted_experiment_folder <a name="nmr_data_experimental_data_nmr_metadata_extracted_experiment_folder"></a>
-      - 1H_1D
+      - Example: `1H_1D`
 
 ## assignment_data <a name="nmr_data_assignment_data"></a>
 - h_nmr <a name="nmr_data_assignment_data_h_nmr"></a>
   - solvent <a name="nmr_data_assignment_data_h_nmr_solvent"></a>
-    - CDCl3
+    - Example: `CDCl3`
   - temperature <a name="nmr_data_assignment_data_h_nmr_temperature"></a>
-    - 300
+    - Example: `300`
   - temperature_units <a name="nmr_data_assignment_data_h_nmr_temperature_units"></a>
-    - K
+    - Example: `K`
   - reference <a name="nmr_data_assignment_data_h_nmr_reference"></a>
-    - TMS
+    - Example: `TMS`
   - frequency <a name="nmr_data_assignment_data_h_nmr_frequency"></a>
-    - 300
+    - Example: `300`
   - frequency_units <a name="nmr_data_assignment_data_h_nmr_frequency_units"></a>
-    - MHz
+    - Example: `MHz`
   - spectrum <a name="nmr_data_assignment_data_h_nmr_spectrum"></a>
     - shift <a name="nmr_data_assignment_data_h_nmr_spectrum_shift"></a>
-      - 4.52
+      - Example: `4.52`
     - integration <a name="nmr_data_assignment_data_h_nmr_spectrum_integration"></a>
-      - 3
+      - Example: `3`
     - multiplicity <a name="nmr_data_assignment_data_h_nmr_spectrum_multiplicity"></a>
-      - t
+      - Example: `t`
     - coupling <a name="nmr_data_assignment_data_h_nmr_spectrum_coupling"></a>
-      - [9.6]
+      - Example: `[9.6]`
     - atom_index <a name="nmr_data_assignment_data_h_nmr_spectrum_atom_index"></a>
-      - 4
+      - Example: `4`
     - rdkit_index <a name="nmr_data_assignment_data_h_nmr_spectrum_rdkit_index"></a>
-      - [10]
+      - Example: `[10]`
     - interchangeable_index <a name="nmr_data_assignment_data_h_nmr_spectrum_interchangeable_index"></a>
-      - []
+      - Example: `[]`
 
 - c_nmr <a name="nmr_data_assignment_data_c_nmr"></a>
   - solvent <a name="nmr_data_assignment_data_c_nmr_solvent"></a>
-    - CDCl3
+    - Example: `CDCl3`
   - temperature <a name="nmr_data_assignment_data_c_nmr_temperature"></a>
-    - 300
+    - Example: `300`
   - temperature_units <a name="nmr_data_assignment_data_c_nmr_temperature_units"></a>
-    - K
+    - Example: `K`
   - reference <a name="nmr_data_assignment_data_c_nmr_reference"></a>
-    - TMS
+    - Example: `TMS`
   - frequency <a name="nmr_data_assignment_data_c_nmr_frequency"></a>
-    - 75
+    - Example: `75`
   - frequency_units <a name="nmr_data_assignment_data_c_nmr_frequency_units"></a>
-    - MHz
+    - Example: `MHz`
   - spectrum <a name="nmr_data_assignment_data_c_nmr_spectrum"></a>
     - shift <a name="nmr_data_assignment_data_c_nmr_spectrum_shift"></a>
-      - 70.2
+      - Example: `70.2`
     - atom_index <a name="nmr_data_assignment_data_c_nmr_spectrum_atom_index"></a>
-      - 3
+      - Example: `3`
     - rdkit_index <a name="nmr_data_assignment_data_c_nmr_spectrum_rdkit_index"></a>
-      - 10
+      - Example: `10`
 
 ## predicted_data <a name="nmr_data_predicted_data"></a>
 - prediction_method <a name="nmr_data_predicted_data_prediction_method"></a>
-  - dft
+  - Example: `dft`
 - dft_protocol <a name="nmr_data_predicted_data_dft_protocol"></a>
   - molecular_dynamics <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics"></a>
     - md_software <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics_md_software"></a>
-      - xtb
+      - Example: `xtb`
     - md_software_version <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics_md_software_version"></a>
-      - 3.1
+      - Example: `3.1`
     - forcefield <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics_forcefield"></a>
-      - gff
+      - Example: `gff`
     - energy_window <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics_energy_window"></a>
-      - null
+      - Example: `null`
     - downselection <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics_downselection"></a>
-      - null
+      - Example: `null`
   - quantum_mechanics <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics"></a>
     - qm_software <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_qm_software"></a>
-      - nwchem
+      - Example: `nwchem`
     - qm_software_version <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_qm_software_version"></a>
-      - 6.8.2
+      - Example: `6.8.2`
     - tasks <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_tasks"></a>
-      - [optimized, shielding]
+      - Example: `[optimized, shielding]`
     - functionals <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_functionals"></a>
-      - [b3lyp, mpw91pw91]
+      - Example: `[b3lyp, mpw91pw91]`
     - basis_sets <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_basis_sets"></a>
-      - [6-31g*, 6-311+g**]
+      - Example: `[6-31g*, 6-311+g**]`
     - solvent <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_solvent"></a>
-      - CHCl3
+      - Example: `CHCl3`
     - conversion_factors <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors"></a>
       - H <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors_H"></a>
         - m: 1.0
@@ -381,27 +381,27 @@ null
     - training_set_name
   - training_parameters <a name="nmr_data_predicted_data_ml_protocol_training_parameters"></a>
     - parameter_1 <a name="nmr_data_predicted_data_ml_protocol_training_parameters_parameter_1"></a>
-      - null
+      - Example: `null`
     - parameter_2 <a name="nmr_data_predicted_data_ml_protocol_training_parameters_parameter_2"></a>
-      - null
+      - Example: `null`
   - chemical_shifts <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts"></a>
     - solvent <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_solvent"></a>
-      - CDCl3
+      - Example: `CDCl3`
     - temperature <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_temperature"></a>
-      - 298
+      - Example: `298`
     - temperature_units <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_temperature_units"></a>
-      - K
+      - Example: `K`
     - h_nmr <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_h_nmr"></a>
       - shift <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_h_nmr_shift"></a>
-        - 4.56
+        - Example: `4.56`
       - shielding_tensor <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_h_nmr_shielding_tensor"></a>
-        - 3X3 array
+        - Example: `3X3 array`
       - rdkit_index <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_h_nmr_rdkit_index"></a>
-        - 1
+        - Example: `1`
     - c_nmr <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr"></a>
-     - shift <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr_shift"></a>
-        - 75.2
+      - shift <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr_shift"></a>
+        - Example: `71.2`
       - shielding_tensor <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr_shielding_tensor"></a>
-        - 3x3 array
+        - Example: `3X3 array`
       - rdkit_index <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr_rdkit_index"></a>
-        - 1
+        - Example: `5`
