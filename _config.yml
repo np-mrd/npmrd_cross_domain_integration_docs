@@ -1,9 +1,0 @@
-remote_theme: just-the-docs/just-the-docs
-logo: "https://user-images.githubusercontent.com/55040326/162267823-b6c1ea44-6069-4506-b555-06e89809ee99.png"
-
-# Back to top link
-back_to_top: true
-back_to_top_text: "Back to top"
-
-# Footer last edited timestamp
-last_edit_timestamp: true 
