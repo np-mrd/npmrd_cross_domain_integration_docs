@@ -1,4 +1,4 @@
-# Quick User Guide
+# Index
 
 Please see below links to instructions for each of the integration aspects of the project.
 
