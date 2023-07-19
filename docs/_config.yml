@@ -5,5 +5,7 @@ logo: "./assets/npmrd_logo.png"
 back_to_top: true
 back_to_top_text: "Back to top"
 
+baseurl: "/npmrd_cross_domain_integration_docs"
+
 # Footer last edited timestamp
 last_edit_timestamp: true 
