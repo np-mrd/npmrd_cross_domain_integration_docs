@@ -149,12 +149,14 @@
 
 ## submission <a name="submission"></a>
 - source <a name="submission_source"></a>
-  - Description: 
+  - Description: Indicates where the generated JSON came from.
+  - One of `deposition_system`, `npmrd_curator`, `dft_team`, or `ml_team`. 
   - Example: `deposition_system`
   - type: string
   - MaxLength: 20
 - type <a name="submission_type"></a>
-  - Description: 
+  - Description:
+  - One of `published_article`, `presubmission_article`, or `private_deposition`
   - Example: `published_article`
   - type: string
   - MaxLength: 20
@@ -164,7 +166,7 @@
   - type: string
   - MaxLength: 36
 - compound_uuid <a name="submission_compound_uuid"></a>
-  - Description: 
+  - Description: This uuid value is a short uuid value (10 characters) used as a secondary identifier to identify a specific compound in a deposition entry. This is a new addition added so that we do not need to rely on inchikey or name for this purpose.
   - Example: `SD0z84d9Ds`
   - type: string
   - MaxLength: 10
@@ -173,6 +175,10 @@
   - Example: `2023-04-28T13:45:00.000Z`
 - embargo_status <a name="submission_embargo_status"></a>
   - Description: 
+  - One of `publish`, `embargo_until_date`, or `embargo_until_publication`
+    - `publish` indicates that a user wishes to release this data immediately and is the default value indicating to process and release data as soon as possible.
+    - `embargo_until_date` indicates that the <i>embargo_date</i> field must be checked for the release date to make a submission public. It should be withheld from public access until then.
+    - `embargo_until_publication` indicates to without the data from public access until the article is confirmed to be published OR a user manually releases the data. We will know an article has been published when a DOI is identified and attached to the specific compound/deposition.
   - Example: `embargo_until_publication`
   - type: string
   - MaxLength: 25
@@ -205,7 +211,13 @@
 - private_collection <a name="origin_private_collection"></a>
   - Description: This dictionary contains all necessary origin information if a user has completed a private deposition
   - compound_source_type <a name="origin_private_collection_compound_source_type"></a>
-    - Description: 
+    - Description: For each compound a user adds to a private deposition they choose from one of four different source types. This field indicates which option was chosen for the given compound and therefore which field to extract origin information from. If the deposition is not a private deposition this field will be set to null
+    - One of: `purified_in_house`, `commercial`, `compound_library`, or `other`.
+      - If `commercial` is selected then <b>species</b> and <b>genus will NOT be submitted</b>. `supplier`, `cas_number`, and `catalogue_number` in this object will be filled.
+      - If `purified_in_house` is selected then a <b>species</b>, <b>genus</b>, and biological_material_source <b>will be submitted</b>. Species and Genus are in the standard locations and the `biological_material_source` will be found in this object.
+      - If `commercial` is selected then <b>species and genus will NOT be submitted</b>. `supplier`, `cas_number`, and `catalogue_number` in this object will be filled.
+      - If `compound_library` is selected then species and genus will NOT be submitted.  `library_name`, `library_description`, and `library_compound_code` in this object will be filled.
+      - If `other` is selected then <b>species and genus WILL be submitted</b>. `user_specified_compound_source`, and `biological_material_source_code` in this object will be filled.
     - Example: `null`
     - type: string
     - MaxLength: 20
@@ -352,7 +364,7 @@
     - MaxLength: 10
 - experimental_data <a name="nmr_data_experimental_data"></a>
   - nmr_data_download_link <a name="nmr_data_experimental_data_nmr_data_download_link"></a>
-    - Description: 
+    - Description: This field will provide a presigned amazon s3 url to download the data in the submission directly from the deposition website’s data warehouse. These links will eventually expire after 7 days (the max allowed duraiton).
     - Example: `[Link](https://article-pipeline-test-bucket.s3.amazonaws.com/serve/2023-01-17_16_32.zip?AWSAccessKeyId=AKIATG5FM4URBBXHRLET&Signature=B7QypMRri9XmWbdKUT%2BuFIqtKN4%3D&Expires=1682986167)`
     - type: string
     - MaxLength: null
@@ -363,7 +375,8 @@
       - type: string
       - MaxLength: 20
     - filetype <a name="nmr_data_experimental_data_nmr_metadata_filetype"></a>
-      - Description: 
+      - Description: Specifies the format of the NMR data.
+      - One of `Varian_native`, `Bruker_native`, `JEOL_native`, `Jcampdx`, `Mnova`.
       - Example: `Bruker_native`
       - type: string
       - MaxLength: 20
