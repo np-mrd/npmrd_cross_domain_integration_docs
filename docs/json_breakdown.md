@@ -1,3 +1,5 @@
+# <b>LAST UPDATED TO REFLECT VERSION 2.0.1<b/>
+
 ## JSON Fields
 - [compound_name](#compound_name)
 - [smiles](#smiles)
@@ -130,301 +132,586 @@
 					- [rdkit_index](#nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr_rdkit_index)
 
 ## compound_name <a name="compound_name"></a>
+- Description: 
 - Example: `TEST COMPOUND`
 
 ## smiles <a name="smiles"></a>
+- Description: 
 - Example: `CCC=CCCC`
 
 ## inchikey <a name="inchikey"></a>
+- Description: 
 - Example: `VQOIHQFCIVFBEC-IQPAJRPASA-N`
 
 ## npmrd_id <a name="npmrd_id"></a>
+- Description: 
 - Example: `NP0000001`
 
 ## submission <a name="submission"></a>
 - source <a name="submission_source"></a>
+  - Description: 
   - Example: `deposition_system`
-  - One of “deposition_system”, “npmrd_curator”, “dft_team”, or “ml_team”. This simply indicates where the generated JSON came from.
+  - type: string
+  - MaxLength: 20
 - type <a name="submission_type"></a>
+  - Description: 
   - Example: `published_article`
-  - One of “published_article”, “presubmission_article”, or “private_deposition”. This indicates what the source of the compound in the JSON is.
+  - type: string
+  - MaxLength: 20
 - uuid <a name="submission_uuid"></a>
+  - Description: 
   - Example: `97d6db8a-631d-43bf-8afd-3208f79ec8d3`
-  - This uuid value is used to identify tie each compound back to the deposition entry in the deposition database it came from.
+  - type: string
+  - MaxLength: 36
 - compound_uuid <a name="submission_compound_uuid"></a>
+  - Description: 
   - Example: `SD0z84d9Ds`
-  - This uuid value is a short uuid value (10 characters) used as a secondary identifier to identify a specific compound in a deposition entry. This is a new addition added so that we do not need to rely on inchikey or name for this purpose. This gives us freedom to change either of the structure or name if they are later found to be incorrect.
+  - type: string
+  - MaxLength: 10
 - submission_date <a name="submission_submission_date"></a>
+  - Description: 
   - Example: `2023-04-28T13:45:00.000Z`
 - embargo_status <a name="submission_embargo_status"></a>
+  - Description: 
   - Example: `embargo_until_publication`
+  - type: string
+  - MaxLength: 25
 - embargo_date <a name="submission_embargo_date"></a>
+  - Description: 
   - Example: `2023-07-22`
-  - Will be one of “publish”, “embargo_until_date”, or “embargo_until_publication”. Since the job of embargoing data will be moved from the deposition database to the website database, the Alberta Team will have to start handling the temporary gating of data.
-    - `publish` indicates that a user wishes to release this data immediately and is the default value indicating to process and release data as soon as possible.
-    - `embargo_until_date` indicates that the <i>embargo_date</i> field must be checked for the release date to make a submission public. It should be withheld from public access until then.
-    - `embargo_until_publication` indicates to without the data from public access until the article is confirmed to be published OR a user manually releases the data. We will know an article has been published when a DOI is identified and attached to the specific compound/deposition.
-  
+  - type: string
+  - MaxLength: 10
 
 ## citation <a name="citation"></a>
 - doi <a name="citation_doi"></a>
+  - Description: 
   - Example: `10.9999/npmr.99999999`
+  - type: string
+  - MaxLength: 20
 - pmid <a name="citation_pmid"></a>
+  - Description: 
   - Example: `null`
 - pii <a name="citation_pii"></a>
+  - Description: 
   - Example: `null`
 
 ## origin <a name="origin"></a>
 - species <a name="origin_species"></a>
+  - Description: 
   - Example: `SOURCE SPECIES`
 - genus <a name="origin_genus"></a>
+  - Description: 
   - Example: `SOURCE GENUS`
-- private_collection <a name="origin_private_collection"></a>- 
-  - (This dictionary contains all necessary origin information if a user has completed a private deposition.)
+- private_collection <a name="origin_private_collection"></a>
+  - Description: This dictionary contains all necessary origin information if a user has completed a private deposition
   - compound_source_type <a name="origin_private_collection_compound_source_type"></a>
+    - Description: 
     - Example: `null`
-    - For each compound a user adds to a private deposition they choose from one of four different source types. `purified_in_house`, `commercial`, `compound_library`, or `other`. This field indicates which option was chosen for the given compound and therefore which object (see below) to extract origin information from. If the deposition is not a private deposition this field will be set to null.
-    - If `commercial` is selected then <b>species</b> and <b>genus will NOT be submitted</b>. `supplier`, `cas_number`, and `catalogue_number` in this object will be filled.
-    - If `purified_in_house` is selected then a <b>species</b>, <b>genus</b>, and biological_material_source <b>will be submitted</b>. Species and Genus are in the standard locations and the `biological_material_source` will be found in this object.
-    - If `commercial` is selected then <b>species and genus will NOT be submitted</b>. `supplier`, `cas_number`, and `catalogue_number` in this object will be filled.
-    - If `compound_library` is selected then species and genus will NOT be submitted.  `library_name`, `library_description`, and `library_compound_code` in this object will be filled.
-    - If `other` is selected then <b>species and genus WILL be submitted</b>. `user_specified_compound_source`, and `biological_material_source_code` in this object will be filled.
+    - type: string
+    - MaxLength: 20
   - purified_in_house <a name="origin_private_collection_purified_in_house"></a>
     - biological_material_source <a name="origin_private_collection_purified_in_house_biological_material_source"></a>
+      - Description: 
       - Example: `null`
+      - type: string
+      - MaxLength: 20
   - commercial <a name="origin_private_collection_commercial"></a>
     - supplier <a name="origin_private_collection_commercial_supplier"></a>
+      - Description: 
       - Example: `null`
+      - type: string
+      - MaxLength: 20
     - cas_number <a name="origin_private_collection_commercial_cas_number"></a>
+      - Description: 
       - Example: `null`
+      - type: string
+      - MaxLength: 20
     - catalogue_number <a name="origin_private_collection_commercial_catalogue_number"></a>
+      - Description: 
       - Example: `null`
+      - type: string
+      - MaxLength: 20
   - compound_library <a name="origin_private_collection_compound_library"></a>
     - library_name <a name="origin_private_collection_compound_library_library_name"></a>
+      - Description: 
       - Example: `null`
+      - type: string
+      - MaxLength: 20
     - library_description <a name="origin_private_collection_compound_library_library_description"></a>
+      - Description: 
       - Example: `null`
+      - type: string
+      - MaxLength: 20
     - library_compound_code <a name="origin_private_collection_compound_library_library_compound_code"></a>
+      - Description: 
       - Example: `null`
+      - type: string
+      - MaxLength: 20
   - other <a name="origin_private_collection_other"></a>
     - user_specified_compound_source <a name="origin_private_collection_other_user_specified_compound_source"></a>
+      - Description: 
       - Example: `null`
+      - type: string
+      - MaxLength: 20
     - biological_material_source <a name="origin_private_collection_other_biological_material_source"></a>
+      - Description: 
       - Example: `null`
+      - type: string
+      - MaxLength: 20
 
 ## depositor_info <a name="depositor_info"></a>
+- Description: 
 - email <a name="depositor_info_email"></a>
+  - Description: 
   - Example: `mpin@sfu.ca`
+  - type: string
+  - MaxLength: 50
 - account_id <a name="depositor_info_account_id"></a>
+  - Description: 
   - Example: `526`
+  - type: string
+  - MaxLength: 20
 - attribution_name <a name="depositor_info_attribution_name"></a>
+  - Description: 
   - Example: `Matthew Pin`
+  - type: string
+  - MaxLength: 50
 - attribution_organization <a name="depositor_info_attribution_organization"></a>
+  - Description: 
   - Example: `Simon Fraser University`
+  - type: string
+  - MaxLength: 100
 - show_email_in_attribution <a name="depositor_info_show_email_in_attribution"></a>
+  - Description: 
   - Example: `true`
-  - Whether or not to display provided `email` (address) on NP-Card.
+  - type: boolean
 - show_name_in_attribution <a name="depositor_info_show_name_in_attribution"></a>
+  - Description: 
   - Example: `true`
-  - Whether or not to display provided `attribution_name` on NP-Card.
+  - type: boolean
 - show_organization_in_attribution <a name="depositor_info_show_organization_in_attribution"></a>
+  - Description: 
   - Example: `true`
-  - Whether or not to display provided `attribution_organization` on NP-Card.
+  - type: boolean
 
 ## nmr_data <a name="nmr_data"></a>
 - peak_lists <a name="nmr_data_peak_lists"></a>
   - solvent <a name="nmr_data_peak_lists_solvent"></a>
+    - Description: 
     - Example: `CDCl3`
+    - type: string
+    - MaxLength: 20
   - reference <a name="nmr_data_peak_lists_reference"></a>
+    - Description: 
     - Example: `TMS`
+    - type: string
+    - MaxLength: 20
   - c_values <a name="nmr_data_peak_lists_c_values"></a>
+    - Description: 
     - Example: `[172.2, 171.6, 152.1, 146.0, 139.7, 137.7, 123.9, 122.2, 116.3, 106.9, 75.3, 62.8, 61.2, 29.0, 25.3, 24.9, 22.6, 21.4, 20.3, 20.3]`
+    - type: array (of numbers)
+    - MaxLength: null
   - h_values <a name="nmr_data_peak_lists_h_values"></a>
+    - Description: 
     - Example: `[7.17, 6.15, 5.56, 5.28, 4.12, 3.77, 3.23, 2.77, 2.51, 2.33, 1.94, 1.45, 1.45, 1.33, 1.0]`
+    - type: array (of numbers)
+    - MaxLength: null
   - c_frequency <a name="nmr_data_peak_lists_c_frequency"></a>
+    - Description: 
     - Example: `120`
+    - type: integer
+    - maximum: 1000
+    - minimum: 1
   - h_frequency <a name="nmr_data_peak_lists_h_frequency"></a>
+    - Description: 
     - Example: `512`
+    - type: integer
+    - maximum: 1000
+    - minimum: 1
   - frequency_units <a name="nmr_data_peak_lists_frequency_units"></a>
+    - Description: 
     - Example: `MHz`
+    - type: string
+    - MaxLength: 10
   - c_temperature <a name="nmr_data_peak_lists_c_temperature"></a>
+    - Description: 
     - Example: `300`
+    - type: integer
+    - maximum: 500
+    - minimum: 1
   - h_temperature <a name="nmr_data_peak_lists_h_temperature"></a>
+    - Description: 
     - Example: `300`
+    - type: integer
+    - maximum: 500
+    - minimum: 1
   - temperature_units <a name="nmr_data_peak_lists_temperature_units"></a>
+    - Description: 
     - Example: `K`
+    - type: string
+    - MaxLength: 10
 - experimental_data <a name="nmr_data_experimental_data"></a>
   - nmr_data_download_link <a name="nmr_data_experimental_data_nmr_data_download_link"></a>
+    - Description: 
     - Example: `[Link](https://article-pipeline-test-bucket.s3.amazonaws.com/serve/2023-01-17_16_32.zip?AWSAccessKeyId=AKIATG5FM4URBBXHRLET&Signature=B7QypMRri9XmWbdKUT%2BuFIqtKN4%3D&Expires=1682986167)`
-    - This field will provide a presigned amazon s3 url to download the data in the submission directly from the deposition website’s data warehouse. This is how user submitted NMR data will be passed from the deposition system to the website database. Presigned urls can be used to download the data without an identity verification, however, they are REQUIRED to have an expiration date. This will be always set to the maximum which I believe is 7 days. If this causes issues, we can always transition to providing credentials in the future.
+    - type: string
+    - MaxLength: null
   - nmr_metadata <a name="nmr_data_experimental_data_nmr_metadata"></a>
     - vendor <a name="nmr_data_experimental_data_nmr_metadata_vendor"></a>
+      - Description: 
       - Example: `Bruker`
+      - type: string
+      - MaxLength: 20
     - filetype <a name="nmr_data_experimental_data_nmr_metadata_filetype"></a>
+      - Description: 
       - Example: `Bruker_native`
-      - One of `Varian_native`, `Bruker_native`, `JEOL_native`, `Jcampdx`, `Mnova`.
-      - Previously we provided only vendor and used that as a means of deciding which pipeline to ingest the data with. However, we have recently discovered cases where the data can be collected on an instrument but then be converted to a different file format. For that reason, we have added this new “filetype” field which will specify the format of the data and make it clear which pipeline to ingest with.
-      - Note that I have included filetypes which we do not yet support (“JEOL_native”, “Mnova”). I have done this to future-proof the JSON in case we do eventually choose to start accepting data in these formats.
+      - type: string
+      - MaxLength: 20
     - solvent <a name="nmr_data_experimental_data_nmr_metadata_solvent"></a>
+      - Description: 
       - Example: `CDCl3`
+      - type: string
+      - MaxLength: 20
     - frequency <a name="nmr_data_experimental_data_nmr_metadata_frequency"></a>
+      - Description: 
       - Example: `[150.99]`
+      - type: array (of numbers)
+      - MaxLength: null
     - frequency_units <a name="nmr_data_experimental_data_nmr_metadata_frequency_units"></a>
+      - Description: 
       - Example: `MHz`
+      - type: string
+      - MaxLength: 10
     - f1_nucleus <a name="nmr_data_experimental_data_nmr_metadata_f1_nucleus"></a>
+      - Description: 
       - Example: `13C`
+      - type: string
+      - MaxLength: 5
     - f2_nucleus <a name="nmr_data_experimental_data_nmr_metadata_f2_nucleus"></a>
+      - Description: 
       - Example: ``
+      - type: string
+      - MaxLength: 5
     - temperature <a name="nmr_data_experimental_data_nmr_metadata_temperature"></a>
+      - Description: 
       - Example: `300`
+      - type: integer
+      - maximum: 500
+      - minimum: 1
     - temperature_units <a name="nmr_data_experimental_data_nmr_metadata_temperature_units"></a>
+      - Description: 
       - Example: `K`
+      - type: string
+      - MaxLength: 10
     - experiment_type <a name="nmr_data_experimental_data_nmr_metadata_experiment_type"></a>
+      - Description: 
       - Example: `1D`
+      - type: string
+      - MaxLength: 5
     - original_data_path <a name="nmr_data_experimental_data_nmr_metadata_original_data_path"></a>
+      - Description: 
       - Example: `Clavilactone K/13C.fid/acqu`
+      - type: string
+      - MaxLength: null
     - extracted_experiment_folder <a name="nmr_data_experimental_data_nmr_metadata_extracted_experiment_folder"></a>
+      - Description: 
       - Example: `13C_1D`
+      - type: string
+      - MaxLength: null
     - vendor <a name="nmr_data_experimental_data_nmr_metadata_vendor"></a>
+      - Description: 
       - Example: `Bruker`
+      - type: string
+      - MaxLength: 20
     - filetype <a name="nmr_data_experimental_data_nmr_metadata_filetype"></a>
+      - Description: 
       - Example: `Bruker_native`
+      - type: string
+      - MaxLength: 20
     - solvent <a name="nmr_data_experimental_data_nmr_metadata_solvent"></a>
+      - Description: 
       - Example: `CDCl3`
+      - type: string
+      - MaxLength: 20
     - frequency <a name="nmr_data_experimental_data_nmr_metadata_frequency"></a>
+      - Description: 
       - Example: `[600.43]`
+      - type: array (of numbers)
+      - MaxLength: null
     - frequency_units <a name="nmr_data_experimental_data_nmr_metadata_frequency_units"></a>
+      - Description: 
       - Example: `MHz`
+      - type: string
+      - MaxLength: 10
     - f1_nucleus <a name="nmr_data_experimental_data_nmr_metadata_f1_nucleus"></a>
+      - Description: 
       - Example: `1H`
+      - type: string
+      - MaxLength: 5
     - f2_nucleus <a name="nmr_data_experimental_data_nmr_metadata_f2_nucleus"></a>
+      - Description: 
       - Example: ``
+      - type: string
+      - MaxLength: 5
     - temperature <a name="nmr_data_experimental_data_nmr_metadata_temperature"></a>
+      - Description: 
       - Example: `298`
+      - type: integer
+      - maximum: 500
+      - minimum: 1
     - temperature_units <a name="nmr_data_experimental_data_nmr_metadata_temperature_units"></a>
+      - Description: 
       - Example: `K`
+      - type: string
+      - MaxLength: 10
     - experiment_type <a name="nmr_data_experimental_data_nmr_metadata_experiment_type"></a>
+      - Description: 
       - Example: `1D`
+      - type: string
+      - MaxLength: 5
     - original_data_path <a name="nmr_data_experimental_data_nmr_metadata_original_data_path"></a>
+      - Description: 
       - Example: `Clavilactone K/1H.fid/acqu`
+      - type: string
+      - MaxLength: null
     - extracted_experiment_folder <a name="nmr_data_experimental_data_nmr_metadata_extracted_experiment_folder"></a>
+      - Description: 
       - Example: `1H_1D`
+      - type: string
+      - MaxLength: null
 
 ## assignment_data <a name="nmr_data_assignment_data"></a>
 - h_nmr <a name="nmr_data_assignment_data_h_nmr"></a>
   - solvent <a name="nmr_data_assignment_data_h_nmr_solvent"></a>
+    - Description: 
     - Example: `CDCl3`
+    - type: string
+    - MaxLength: 20
   - temperature <a name="nmr_data_assignment_data_h_nmr_temperature"></a>
+    - Description: 
     - Example: `300`
+    - type: integer
+    - maximum: 500
+    - minimum: 1
   - temperature_units <a name="nmr_data_assignment_data_h_nmr_temperature_units"></a>
+    - Description: 
     - Example: `K`
+    - type: string
+    - MaxLength: 10
   - reference <a name="nmr_data_assignment_data_h_nmr_reference"></a>
+    - Description: 
     - Example: `TMS`
+    - type: string
+    - MaxLength: 20
   - frequency <a name="nmr_data_assignment_data_h_nmr_frequency"></a>
+    - Description: 
     - Example: `300`
+    - type: integer
+    - maximum: 500
+    - minimum: 1
   - frequency_units <a name="nmr_data_assignment_data_h_nmr_frequency_units"></a>
+    - Description: 
     - Example: `MHz`
+    - type: string
+    - MaxLength: 10
   - spectrum <a name="nmr_data_assignment_data_h_nmr_spectrum"></a>
     - shift <a name="nmr_data_assignment_data_h_nmr_spectrum_shift"></a>
+      - Description: 
       - Example: `4.52`
+      - type: number
+      - maximum: 1000
+      - minimum: -1000
     - integration <a name="nmr_data_assignment_data_h_nmr_spectrum_integration"></a>
+      - Description: 
       - Example: `3`
+      - type: integer
+      - maximum: 1000
+      - minimum: 0
     - multiplicity <a name="nmr_data_assignment_data_h_nmr_spectrum_multiplicity"></a>
+      - Description: 
       - Example: `t`
+      - type: string
+      - MaxLength: 20
     - coupling <a name="nmr_data_assignment_data_h_nmr_spectrum_coupling"></a>
+      - Description: 
       - Example: `[9.6]`
+      - type: array (of numbers)
+      - MaxLength: null
     - atom_index <a name="nmr_data_assignment_data_h_nmr_spectrum_atom_index"></a>
+      - Description: 
       - Example: `4`
+      - type: integer
+      - maximum: 1000
+      - minimum: 1
     - rdkit_index <a name="nmr_data_assignment_data_h_nmr_spectrum_rdkit_index"></a>
+      - Description: 
       - Example: `[10]`
+      - type: array
+      - MaxLength: null
     - interchangeable_index <a name="nmr_data_assignment_data_h_nmr_spectrum_interchangeable_index"></a>
+      - Description: 
       - Example: `[]`
+      - type: array
+      - MaxLength: null
 
 - c_nmr <a name="nmr_data_assignment_data_c_nmr"></a>
   - solvent <a name="nmr_data_assignment_data_c_nmr_solvent"></a>
+    - Description: 
     - Example: `CDCl3`
+    - type: string
+    - MaxLength: 20
   - temperature <a name="nmr_data_assignment_data_c_nmr_temperature"></a>
+    - Description: 
     - Example: `300`
+    - type: integer
+    - maximum: 500
+    - minimum: 1
   - temperature_units <a name="nmr_data_assignment_data_c_nmr_temperature_units"></a>
+    - Description: 
     - Example: `K`
+    - type: string
+    - MaxLength: 10
   - reference <a name="nmr_data_assignment_data_c_nmr_reference"></a>
+    - Description: 
     - Example: `TMS`
+    - type: string
+    - MaxLength: 20
   - frequency <a name="nmr_data_assignment_data_c_nmr_frequency"></a>
+    - Description: 
     - Example: `75`
+    - type: integer
+    - maximum: 1000
+    - minimum: 1
   - frequency_units <a name="nmr_data_assignment_data_c_nmr_frequency_units"></a>
+    - Description: 
     - Example: `MHz`
+    - type: string
+    - MaxLength: 10
   - spectrum <a name="nmr_data_assignment_data_c_nmr_spectrum"></a>
     - shift <a name="nmr_data_assignment_data_c_nmr_spectrum_shift"></a>
-      - Example: `70.2`
+      - Description: 
+      - Example: `22.75`
+      - type: integer
+      - maximum: 1000
+      - minimum: -1000
+    - integration <a name="nmr_data_assignment_data_c_nmr_spectrum_integration"></a>
+      - Description: 
+      - Example: `2`
+      - type: integer
+      - maximum: 1000
+      - minimum: 0
     - atom_index <a name="nmr_data_assignment_data_c_nmr_spectrum_atom_index"></a>
-      - Example: `3`
+      - Description: 
+      - Example: `6`
+      - type: integer
+      - maximum: 1000
+      - minimum: 1
     - rdkit_index <a name="nmr_data_assignment_data_c_nmr_spectrum_rdkit_index"></a>
+      - Description: 
       - Example: `10`
+      - type: array
 
 ## predicted_data <a name="nmr_data_predicted_data"></a>
 - prediction_method <a name="nmr_data_predicted_data_prediction_method"></a>
+  - Description: 
   - Example: `dft`
 - dft_protocol <a name="nmr_data_predicted_data_dft_protocol"></a>
   - molecular_dynamics <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics"></a>
     - md_software <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics_md_software"></a>
+      - Description: 
       - Example: `xtb`
     - md_software_version <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics_md_software_version"></a>
+      - Description: 
       - Example: `3.1`
     - forcefield <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics_forcefield"></a>
+      - Description: 
       - Example: `gff`
     - energy_window <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics_energy_window"></a>
       - Example: `null`
     - downselection <a name="nmr_data_predicted_data_dft_protocol_molecular_dynamics_downselection"></a>
+      - Description: 
       - Example: `null`
   - quantum_mechanics <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics"></a>
     - qm_software <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_qm_software"></a>
+      - Description: 
       - Example: `nwchem`
     - qm_software_version <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_qm_software_version"></a>
+      - Description: 
       - Example: `6.8.2`
     - tasks <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_tasks"></a>
+      - Description: 
       - Example: `[optimized, shielding]`
     - functionals <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_functionals"></a>
+      - Description: 
       - Example: `[b3lyp, mpw91pw91]`
     - basis_sets <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_basis_sets"></a>
+      - Description: 
       - Example: `[6-31g*, 6-311+g**]`
     - solvent <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_solvent"></a>
+      - Description: 
       - Example: `CHCl3`
     - conversion_factors <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors"></a>
       - H <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors_H"></a>
-        - m: 1.0
-        - b: 0.0
+        - m <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors_H_m"></a>
+	  - Description: 
+          - Example: `1.0`
+          - type: number
+        - b <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors_H_b"></a>
+	   - Description: 
+           - Example: `1.0`
+           - type: number
       - C <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors_C"></a>
-        - m: 1.0
-        - b: 0.0
+        - m <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors_C_m"></a>
+	  - Description: 
+          - Example: `1.0`
+          - type: number
+        - b <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors_C_b"></a>
+	  - Description: 
+          - Example: `1.0`
+          - type: number
 
 - ml_protocol <a name="nmr_data_predicted_data_ml_protocol"></a>
   - ml_model <a name="nmr_data_predicted_data_ml_protocol_ml_model"></a>
+    - Description: 
     - model_name
   - training_set <a name="nmr_data_predicted_data_ml_protocol_training_set"></a>
+    - Description: 
     - training_set_name
   - training_parameters <a name="nmr_data_predicted_data_ml_protocol_training_parameters"></a>
     - parameter_1 <a name="nmr_data_predicted_data_ml_protocol_training_parameters_parameter_1"></a>
+      - Description: 
       - Example: `null`
     - parameter_2 <a name="nmr_data_predicted_data_ml_protocol_training_parameters_parameter_2"></a>
+      - Description: 
       - Example: `null`
   - chemical_shifts <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts"></a>
     - solvent <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_solvent"></a>
+      - Description: 
       - Example: `CDCl3`
     - temperature <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_temperature"></a>
+      - Description: 
       - Example: `298`
     - temperature_units <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_temperature_units"></a>
+      - Description: 
       - Example: `K`
     - h_nmr <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_h_nmr"></a>
       - shift <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_h_nmr_shift"></a>
+        - Description: 
         - Example: `4.56`
       - shielding_tensor <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_h_nmr_shielding_tensor"></a>
+        - Description: 
         - Example: `3X3 array`
       - rdkit_index <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_h_nmr_rdkit_index"></a>
+        - Description: 
         - Example: `1`
     - c_nmr <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr"></a>
       - shift <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr_shift"></a>
+        - Description: 
         - Example: `71.2`
       - shielding_tensor <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr_shielding_tensor"></a>
+        - Description: 
         - Example: `3X3 array`
       - rdkit_index <a name="nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr_rdkit_index"></a>
+        - Description: 
         - Example: `5`
+
