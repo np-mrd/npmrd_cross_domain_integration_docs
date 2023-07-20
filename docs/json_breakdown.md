@@ -665,23 +665,23 @@
       - Example: `CHCl3`
     - conversion_factors <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors"></a>
       - H <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors_H"></a>
-        - m <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors_H_m"></a>
-	  - Description: 
-          - Example: `1.0`
-          - type: number
+      	- m <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors_H_m"></a>
+       		- Description:
+    		- Example: `1.0`
+          	- type: number
         - b <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors_H_b"></a>
-	   - Description: 
-           - Example: `1.0`
-           - type: number
+       		- Description:
+    		- Example: `1.0`
+          	- type: number
       - C <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors_C"></a>
         - m <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors_C_m"></a>
-	  - Description: 
-          - Example: `1.0`
-          - type: number
+       		- Description:
+    		- Example: `1.0`
+          	- type: number
         - b <a name="nmr_data_predicted_data_dft_protocol_quantum_mechanics_conversion_factors_C_b"></a>
-	  - Description: 
-          - Example: `1.0`
-          - type: number
+       		- Description:
+    		- Example: `1.0`
+          	- type: number
 
 - ml_protocol <a name="nmr_data_predicted_data_ml_protocol"></a>
   - ml_model <a name="nmr_data_predicted_data_ml_protocol_ml_model"></a>
