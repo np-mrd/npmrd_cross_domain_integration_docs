@@ -132,30 +132,30 @@
 					- [rdkit_index](#nmr_data_predicted_data_ml_protocol_chemical_shifts_c_nmr_rdkit_index)
 
 ## compound_name <a name="compound_name"></a>
-- Description: 
-- Example: `TEST COMPOUND`
+- Description: Common name for natural product. Can be a common name (as example), or an alpha-numeric code, or sometimes an Iupac name. If compounds are not named in the paper they should be listed as 'Not named' to differentiate entries that are known to have no name from entries where the name is unknown (which should be Null)
+- Example: `Exampleamide A`
 
 ## smiles <a name="smiles"></a>
-- Description: 
+- Description: Isomeric SMILES representation of compound structure
 - Example: `CCC=CCCC`
 
 ## inchikey <a name="inchikey"></a>
-- Description: 
+- Description: Standard structure InChIkey for structure
 - Example: `VQOIHQFCIVFBEC-IQPAJRPASA-N`
 
 ## npmrd_id <a name="npmrd_id"></a>
-- Description: 
+- Description: The primary key for the NP-MRD database. Format is 'NP' followed by 7 digits. Leading zeros must be included
 - Example: `NP0000001`
 
 ## submission <a name="submission"></a>
 - source <a name="submission_source"></a>
-  - Description: Indicates where the generated JSON came from.
+  - Description: Indicates which team generated the JSON.
   - One of `deposition_system`, `npmrd_curator`, `dft_team`, or `ml_team`. 
   - Example: `deposition_system`
   - type: string
   - MaxLength: 20
 - type <a name="submission_type"></a>
-  - Description:
+  - Description: 
   - One of `published_article`, `presubmission_article`, or `private_deposition`
   - Example: `published_article`
   - type: string
