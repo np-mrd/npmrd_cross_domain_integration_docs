@@ -15,6 +15,6 @@ There are 6 fields that must be filled to use the new exchange format. Other fie
 - **origin**
   - None
 - **depositor_info**
-  - Email. This is so we know who created the data. Preferable to account_id for now since historical depositions do not have an account_id in the deposition database
+  - account_id This is so we know who created the data.
 - **nmr_data**
   - None
