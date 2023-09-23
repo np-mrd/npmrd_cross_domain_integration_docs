@@ -1,4 +1,4 @@
-# <b>LAST UPDATED TO REFLECT VERSION 2.0.1<b/>
+# <b>LAST UPDATED TO REFLECT VERSION 2.0.2<b/>
 
 ## JSON Fields
 - [compound_name](#compound_name)
@@ -134,18 +134,28 @@
 ## compound_name <a name="compound_name"></a>
 - Description: Common name for natural product. Can be a common name (as example), or an alpha-numeric code, or sometimes an IUPAC name. If compounds are not named in the paper they should be listed as 'Not named' to differentiate entries that are known to have no name from entries where the name is unknown (which should be Null)
 - Example: `Exampleamide A`
+- type: string
+- MaxLength: 1000
 
 ## smiles <a name="smiles"></a>
 - Description: Isomeric SMILES representation of compound structure
 - Example: `CCC=CCCC`
+- type: string
+- MaxLength: 10000
 
 ## inchikey <a name="inchikey"></a>
 - Description: Standard structure InChIkey for structure
 - Example: `VQOIHQFCIVFBEC-IQPAJRPASA-N`
+- type: string
+- MinLegnth: 27
+- MaxLength: 27
 
 ## npmrd_id <a name="npmrd_id"></a>
 - Description: The primary key for the NP-MRD database. Format is 'NP' followed by 7 digits. Leading zeros must be included
 - Example: `NP0000001`
+- type: string
+- MinLegnth: 9
+- MaxLength: 9
 
 ## submission <a name="submission"></a>
 - source <a name="submission_source"></a>
@@ -153,7 +163,7 @@
   - One of `deposition_system`, `npmrd_curator`, `dft_team`, or `ml_team`. 
   - Example: `deposition_system`
   - type: string
-  - MaxLength: 20
+  - MaxLength: 30
 - type <a name="submission_type"></a>
   - Description: Type of data submission.
   - One of `published_article`, `presubmission_article`, or `private_deposition`
@@ -162,17 +172,19 @@
     - `private_deposition` datasets not associated with academic publications
   - Example: `published_article`
   - type: string
-  - MaxLength: 20
+  - MaxLength: 30
 - uuid <a name="submission_uuid"></a>
   - Description: Internal reference ID for the deposition system. This is the primary key for submission-based data storage. Fixed length 36 character uuid string.
   - Example: `97d6db8a-631d-43bf-8afd-3208f79ec8d3`
   - type: string
   - MaxLength: 36
+  - MinLength: 36
 - compound_uuid <a name="submission_compound_uuid"></a>
   - Description: This uuid value is a short uuid value (10 characters) used as a secondary identifier to identify a specific compound in a deposition entry. This is a new addition added so that we do not need to rely on inchikey or name for this purpose. Required to address issues like atropisomers with the same InChIkey
   - Example: `SD0z84d9Ds`
   - type: string
   - MaxLength: 10
+  - MinLength: 10
 - submission_date <a name="submission_submission_date"></a>
   - Description: Date on which submission was made
   - Example: `2023-04-28T13:45:00.000Z`
@@ -184,7 +196,7 @@
     - `embargo_until_publication` indicates to withhold the data from public access until the article is confirmed to be published OR a user manually releases the data. We will know an article has been published when a DOI is identified and attached to the specific compound/deposition by the deposition system.
   - Example: `embargo_until_publication`
   - type: string
-  - MaxLength: 25
+  - MaxLength: 30
 - embargo_date <a name="submission_embargo_date"></a>
   - Description: Embargo date for public release of the data
   - Example: `2023-07-22`
@@ -196,7 +208,7 @@
   - Description: the Digital Object Identifier for the associated publication. Most articles have this
   - Example: `10.9999/npmr.99999999`
   - type: string
-  - MaxLength: 200
+  - MaxLength: 1000
 - pmid <a name="citation_pmid"></a>
   - Description: The PubMed Central ID number for the associated publications. Some articles have this.
   - Example: `32856641`
@@ -232,7 +244,7 @@
       - Description: Origin of biological material. Did the raw material come from a collection trip, commercial supplier etc.
       - Example: `Natural herbs inc.`
       - type: string
-      - MaxLength: 20
+      - MaxLength: 30
   - commercial <a name="origin_private_collection_commercial"></a>
     - supplier <a name="origin_private_collection_commercial_supplier"></a>
       - Description: Name of commercial supplier
@@ -337,13 +349,13 @@
   - c_frequency <a name="nmr_data_peak_lists_c_frequency"></a>
     - Description: Spectrometer frequency for carbon NMR acquisition. Default unit is MHz
     - Example: `120`
-    - type: integer
+    - type: number
     - maximum: 300
     - minimum: 1
   - h_frequency <a name="nmr_data_peak_lists_h_frequency"></a>
     - Description: Spectrometer frequency for proton NMR acquisition. Default unit is MHz
     - Example: `600`
-    - type: integer
+    - type: number
     - maximum: 1200
     - minimum: 1
   - frequency_units <a name="nmr_data_peak_lists_frequency_units"></a>
@@ -385,32 +397,33 @@
       - One of `Varian_native`, `Bruker_native`, `JEOL_native`, `Jcampdx`, `Mnova`.
       - Example: `Bruker_native`
       - type: string
-      - MaxLength: 20
+      - MaxLength: 30
     - solvent <a name="nmr_data_experimental_data_nmr_metadata_solvent"></a>
       - Description: Solvent in which NMR spectrum was acquired.
       - Example: `CDCl3`
       - type: string
-      - MaxLength: 20
+      - MaxLength: 100
     - frequency <a name="nmr_data_experimental_data_nmr_metadata_frequency"></a>
       - Description: Array of spectrometer frequencies for NMR acquisition. Default unit is MHz. Can be 1 or 2 frequencies depending on experiment type. Always returned as an array.
       - Example: `[150.99]`
       - type: array (of numbers)
       - MaxLength: null
+      - maxItems: 2
     - frequency_units <a name="nmr_data_experimental_data_nmr_metadata_frequency_units"></a>
       - Description: Frequency units. Default is MHz
-      - Example: `MHz`
+      - Example: `MHz`, `Hz`
       - type: string
       - MaxLength: 10
     - f1_nucleus <a name="nmr_data_experimental_data_nmr_metadata_f1_nucleus"></a>
       - Description: Name of observed nucleus in the F1 dimension of the spectrum. Only required for 2D NMR experiments
       - Example: `13C`
       - type: string
-      - MaxLength: 5
+      - MaxLength: 20
     - f2_nucleus <a name="nmr_data_experimental_data_nmr_metadata_f2_nucleus"></a>
       - Description: Name of observed nucleus in the F2 dimension of the spectrum. Required for all experiments.
       - Example: `1H`
       - type: string
-      - MaxLength: 5
+      - MaxLength: 20
     - temperature <a name="nmr_data_experimental_data_nmr_metadata_temperature"></a>
       - Description: Sample temperature for data acquisition. Default units are K.
       - Example: `300`
@@ -426,17 +439,17 @@
       - Description: Standardized experiment type name. Describes which experiment (1H, COSY etc) is present
       - Example: `1D`
       - type: string
-      - MaxLength: 5
+      - MaxLength: 100
     - original_data_path <a name="nmr_data_experimental_data_nmr_metadata_original_data_path"></a>
       - Description: Relative path to original data in Deposition system UUID folder. NOT REQUIRED IN NP-MRD DB
       - Example: `Clavilactone K/13C.fid/acqu`
       - type: string
-      - MaxLength: null
+      - MaxLength: 10000
     - extracted_experiment_folder <a name="nmr_data_experimental_data_nmr_metadata_extracted_experiment_folder"></a>
       - Description: Name of extracted data directory for this experiment in the extracted data directory for the compound
       - Example: `13C_1D`
       - type: string
-      - MaxLength: null
+      - MaxLength: 10000
 
 ## assignment_data <a name="nmr_data_assignment_data"></a>
 - h_nmr <a name="nmr_data_assignment_data_h_nmr"></a>
@@ -464,7 +477,7 @@
   - frequency <a name="nmr_data_assignment_data_h_nmr_frequency"></a>
     - Description: Spectrometer frequency for proton NMR acquisition. Default unit is MHz
     - Example: `300`
-    - type: integer
+    - type: number
     - maximum: 500
     - minimum: 1
   - frequency_units <a name="nmr_data_assignment_data_h_nmr_frequency_units"></a>
@@ -536,7 +549,7 @@
   - frequency <a name="nmr_data_assignment_data_c_nmr_frequency"></a>
     - Description: Spectrometer frequency for proton NMR acquisition. Default unit is MHz
     - Example: `75`
-    - type: integer
+    - type: number
     - maximum: 1000
     - minimum: 1
   - frequency_units <a name="nmr_data_assignment_data_c_nmr_frequency_units"></a>
@@ -550,7 +563,7 @@
       - Example: `22.75`
       - type: integer
       - maximum: 250
-      - minimum: -10
+      - minimum: -11
     - atom_index <a name="nmr_data_assignment_data_c_nmr_spectrum_atom_index"></a>
       - Description: Atom index from original data source (e.g. atom numbering from publication). Can be int or string
       - Example: `6`
