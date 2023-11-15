@@ -1,4 +1,4 @@
-## JSON Fields
+## Deposition Report JSON Fields
 - [compound_name](#compound_name)
 - [compound_uuid](#compound_uuid)
 - [submission_uuid](#submission_uuid)
