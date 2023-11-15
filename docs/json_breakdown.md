@@ -160,13 +160,13 @@
 ## submission <a name="submission"></a>
 - source <a name="submission_source"></a>
   - Description: Indicates which team generated the JSON.
-  - One of `deposition_system`, `npmrd_curator`, `dft_team`, or `ml_team`. 
+  - One of: `deposition_system`, `npmrd_curator`, `dft_team`, or `ml_team`. 
   - Example: `deposition_system`
   - type: string
   - MaxLength: 30
 - type <a name="submission_type"></a>
   - Description: Type of data submission.
-  - One of `published_article`, `presubmission_article`, or `private_deposition`
+  - One of: `published_article`, `presubmission_article`, or `private_deposition`
     - `published_article` published papers that have dois
     - `presubmission_article` papers under review that do not yet have dois
     - `private_deposition` datasets not associated with academic publications
@@ -190,7 +190,7 @@
   - Example: `2023-04-28T13:45:00.000Z`
 - embargo_status <a name="submission_embargo_status"></a>
   - Description: User-specified field for embargo status. Allows users to set release condition for their data. 
-  - One of `publish`, `embargo_until_date`, or `embargo_until_publication`
+  - One of: `publish`, `embargo_until_date`, or `embargo_until_publication`
     - `publish` indicates that a user wishes to release this data immediately. This is the default value in the deposition system.
     - `embargo_until_date` indicates that the <i>embargo_date</i> field must be checked for the release date to make a submission public. It should be withheld from public access until then.
     - `embargo_until_publication` indicates to withhold the data from public access until the article is confirmed to be published OR a user manually releases the data. We will know an article has been published when a DOI is identified and attached to the specific compound/deposition by the deposition system.
@@ -388,13 +388,14 @@
     - MaxLength: null
   - nmr_metadata <a name="nmr_data_experimental_data_nmr_metadata"></a>
     - vendor <a name="nmr_data_experimental_data_nmr_metadata_vendor"></a>
-      - Description: The manufacturer that built the NMR instrument. Options are `Bruker`, `Varian`, `JEOL`
+      - Description: The manufacturer that built the NMR instrument. 
+      - One of: `Bruker`, `Varian`, `JEOL`
       - Example: `Bruker`
       - type: string
       - MaxLength: 20
     - filetype <a name="nmr_data_experimental_data_nmr_metadata_filetype"></a>
       - Description: Specifies the format of the NMR data.
-      - One of `Varian_native`, `Bruker_native`, `JEOL_native`, `Jcampdx`, `Mnova`.
+      - One of: `Varian_native`, `Bruker_native`, `JEOL_native`, `Jcampdx`, `Mnova`.
       - Example: `Bruker_native`
       - type: string
       - MaxLength: 30
