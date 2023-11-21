@@ -114,7 +114,7 @@
             - Description: Whether or not the ingestion of the provided peak lists was completed successfully or not.
             - Example: `ingested`
             - Type: array
-            - One of: `ingested`, `not_ingested`, `not_provided`
+            - One of: `ingested`, `not_ingested`
         - peak_list_errors <a name="peak_list_errors"></a>
             - Example (error):
                 ```
@@ -159,7 +159,7 @@
         - Description: Status of the spectrum ingestion
         - Example: `ingested`
         - Type: string
-        - One of: `ingested`, `not_ingested`, `not_provided`
+        - One of: `ingested`, `not_ingested`
       - spectrum_errors <a name="nmr_data_spectrum_errors"></a>
         - Description: Errors related to the NMR spectrum.
         - Type: array
