@@ -1,4 +1,6 @@
-# <b>LAST UPDATED TO REFLECT VERSION 2.0.2<b/>
+# Exchange JSON Breakdown
+
+## <b>LAST UPDATED TO REFLECT VERSION 2.0.3<b/>
 
 ## JSON Fields
 - [compound_name](#compound_name)
@@ -68,8 +70,9 @@
 			- [temperature](#nmr_data_experimental_data_nmr_metadata_temperature)
 			- [temperature_units](#nmr_data_experimental_data_nmr_metadata_temperature_units)
 			- [experiment_type](#nmr_data_experimental_data_nmr_metadata_experiment_type)
-			- [original_data_path](#nmr_data_experimental_data_nmr_metadata_original_data_path)
 			- [extracted_experiment_folder](#nmr_data_experimental_data_nmr_metadata_extracted_experiment_folder)
+            - [extracted_data_path](#nmr_data_experimental_data_nmr_metadata_extracted_data_path)
+            - [spectrum_uuid](#nmr_data_experimental_data_nmr_metadata_spectrum_uuid)
 	- [assignment_data](#nmr_data_assignment_data)
 		- [h_nmr](#nmr_data_assignment_data_h_nmr)
 			- [solvent](#nmr_data_assignment_data_h_nmr_solvent)
@@ -380,6 +383,11 @@
     - Example: `K`
     - type: string
     - MaxLength: 10
+  - spectrum_uuid <a name="nmr_data_peak_lists_peak_uuid"></a>
+    - Description: uuid value unique to the provided peak list. Used as an identifier for the spectrum. The first 10 characters are the same as the `compound_uuid` while the last 5 characters are unique.
+    - Example: `SD0z84d9Ds-D0nP9`
+    - type: string
+    - MaxLength: 16
 - experimental_data <a name="nmr_data_experimental_data"></a>
   - nmr_data_download_link <a name="nmr_data_experimental_data_nmr_data_download_link"></a>
     - Description: This field will provide a presigned amazon s3 url to download the data in the submission directly from the deposition website’s data warehouse. These links expire after 7 days (the max allowed duration).
@@ -441,16 +449,21 @@
       - Example: `1D`
       - type: string
       - MaxLength: 100
-    - original_data_path <a name="nmr_data_experimental_data_nmr_metadata_original_data_path"></a>
-      - Description: Relative path to original data in Deposition system UUID folder. NOT REQUIRED IN NP-MRD DB
-      - Example: `Clavilactone K/13C.fid/acqu`
-      - type: string
-      - MaxLength: 10000
     - extracted_experiment_folder <a name="nmr_data_experimental_data_nmr_metadata_extracted_experiment_folder"></a>
       - Description: Name of extracted data directory for this experiment in the extracted data directory for the compound
       - Example: `13C_1D`
       - type: string
       - MaxLength: 10000
+    - extracted_data_path <a name="nmr_data_experimental_data_nmr_metadata_extracted_data_path"></a>
+      - Description: Relative path to original data in `extracted_experiment_folder`.
+      - Example: `13C_1D/acqu`
+      - type: string
+      - MaxLength: 10000
+    - spectrum_uuid <a name="nmr_data_experimental_data_nmr_metadata_spectrum_uuid"></a>
+      - Description: uuid value unique to the provided spectrum. Used as an identifier for the spectrum. The first 10 characters are the same as the `compound_uuid` while the last 5 characters are unique.
+      - Example: `SD0z84d9Ds-j3f90`
+      - type: string
+      - MaxLength: 16
 
 ## assignment_data <a name="nmr_data_assignment_data"></a>
 - h_nmr <a name="nmr_data_assignment_data_h_nmr"></a>
