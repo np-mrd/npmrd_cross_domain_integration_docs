@@ -57,6 +57,7 @@
 		- [c_temperature](#nmr_data_peak_lists_c_temperature)
 		- [h_temperature](#nmr_data_peak_lists_h_temperature)
 		- [temperature_units](#nmr_data_peak_lists_temperature_units)
+        - [peak_uuid](#nmr_data_peak_lists_peak_uuid)
 	- [experimental_data](#nmr_data_experimental_data)
 		- [nmr_data_download_link](#nmr_data_experimental_data_nmr_data_download_link)
 		- [nmr_metadata](#nmr_data_experimental_data_nmr_metadata)
@@ -383,7 +384,7 @@
     - Example: `K`
     - type: string
     - MaxLength: 10
-  - spectrum_uuid <a name="nmr_data_peak_lists_peak_uuid"></a>
+  - peak_uuid <a name="nmr_data_peak_lists_peak_uuid"></a>
     - Description: uuid value unique to the provided peak list. Used as an identifier for the spectrum. The first 10 characters are the same as the `compound_uuid` while the last 5 characters are unique.
     - Example: `SD0z84d9Ds-D0nP9`
     - type: string

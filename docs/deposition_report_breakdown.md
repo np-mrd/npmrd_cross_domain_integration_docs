@@ -11,25 +11,18 @@
 - [ingestion_time](#ingestion_time)
 - [compound_errors](#compound_errors)
 - [nmr_data](#nmr_data)
-	- [peak_lists](#peak_lists)
+	- [peak_lists](#nmr_data_peak_lists)
 		- [peak_list_ingestion_status](#peak_list_ingestion_status)
-		- [peak_list_errors](#peak_list_errors)
-	- [experimental_data](#experimental_data)
-		- [experiment_type](#experiment_type)
-		- [extracted_experiment_folder](#extracted_experiment_folder)
-		- [original_data_path](#original_data_path)
-		- [vendor](#vendor)
-		- [filetype](#filetype)
-		- [spectrum_display_status](#spectrum_display_status)
-		- [spectrum_errors](#spectrum_errors)
-	- [experiment_type](#experiment_type)
-	- [extracted_experiment_folder](#extracted_experiment_folder)
-	- [original_data_path](#original_data_path)
-	- [vendor](#vendor)
-	- [filetype](#filetype)
-	- [spectrum_ingestion_status](#spectrum_ingestion_status)
-	- [spectrum_errors](#spectrum_errors)
-
+		- [peak_list_errors](#nmr_data_peak_list_errors)
+        - [peak_uuid](#nmr_data_peak_lists_peak_uuid)
+	- [experimental_data](#nmr_data_experimental_data)
+		- [experiment_type](#nmr_data_experimental_data_experiment_type)
+		- [extracted_experiment_folder](#nmr_data_experimental_data_extracted_experiment_folder)
+		- [vendor](#nmr_data_experimental_data_vendor)
+		- [filetype](#nmr_data_experimental_data_filetype)
+		- [spectrum_ingestion_status](#nmr_data_experimental_data_spectrum_ingestion_status)
+		- [spectrum_errors](#nmr_data_experimental_data_spectrum_errors)
+        - [spectrum_uuid](#nmr_data_experimental_data_spectrum_uuid)
 
 ## compound_name <a name="compound_name"></a>
 - Description: The name of the compound.
@@ -107,7 +100,7 @@
 ## nmr_data <a name="nmr_data"></a>
 - Description: Information related to NMR data for the compound (peak lists and experimental data).
 - Type: object
-  - peak_lists <a name="peak_lists"></a>
+  - peak_lists <a name="nmr_data_peak_lists"></a>
     - Type: array (of objects)
     - Description: Status reporting for peak lists. Array in case there are multiple peak lists for a single compound. Can be left as a blank array if no peaks were sent.
         - peak_list_ingestion_status <a name="peak_list_ingestion_status"></a>
@@ -115,7 +108,7 @@
             - Example: `ingested`
             - Type: array
             - One of: `ingested`, `not_ingested`
-        - peak_list_errors <a name="peak_list_errors"></a>
+        - peak_list_errors <a name="nmr_data_peak_list_errors"></a>
             - Example (error):
                 ```
                 {
@@ -132,35 +125,40 @@
                 - `c_values`: Something is wrong with the carbon values.
                 - `h_values`: Something is wrong with the hydrogen values.
                 - `metadata`: Something is wrong with the peak list metadata.
-  - experimental_data <a name="experimental_data"></a>
+        - peak_uuid <a name="nmr_data_peak_lists_peak_uuid"></a>
+          - Description: uuid value unique to the provided peak list. Used as an identifier for the spectrum. The first 10 characters are the same as the `compound_uuid` while the last 5 characters are unique.
+          - Example: `SD0z84d9Ds-D0nP9`
+          - type: string
+          - MaxLength: 16
+  - experimental_data <a name="nmr_data_experimental_data"></a>
     - Description: Status report of experimental NMR data (NMR Spectra). Each entry represents a different experiment/spectra. Can be left as a blank array if no experimental data was sent.
     - Type: array (of objects)
-      - experiment_type <a name="nmr_data_experiment_type"></a>
+      - experiment_type <a name="nmr_data_experimental_data_experiment_type"></a>
         - Description: Type of NMR experiment performed.
         - Example: `TOCSY`
         - Type: string
-      - extracted_experiment_folder <a name="nmr_data_extracted_experiment_folder"></a>
+      - extracted_experiment_folder <a name="nmr_data_experimental_data_experiment_folder"></a>
         - Description: Name of the folder where the extracted NMR experiment data was stored in.
         - Example: `1H_1H_TOCSY`
         - Type: string
-      - original_data_path <a name="nmr_data_original_data_path"></a>
+      - original_data_path <a name="nmr_data_experimental_data_original_data_path"></a>
         - Description: Path through the original directory to the main experimental file.
         - Example: `TU011_ISP4_KS_FR14_SEMI_07_CRYO/7/acqu2`
         - Type: string
-      - vendor <a name="nmr_data_vendor"></a>
+      - vendor <a name="nmr_data_experimental_data_vendor"></a>
         - Description: Vendor of the NMR experiment file
         - Example: `Bruker`
         - Type: string
-      - filetype <a name="nmr_data_filetype"></a>
+      - filetype <a name="nmr_data_experimental_data_filetype"></a>
         - Description: Filetype of the NMR data.
         - Example: `Bruker_native`
         - Type: string
-      - spectrum_ingestion_status <a name="nmr_data_spectrum_display_status"></a>
+      - spectrum_ingestion_status <a name="nmr_data_experimental_data_spectrum_ingestion_status"></a>
         - Description: Status of the spectrum ingestion
         - Example: `ingested`
         - Type: string
         - One of: `ingested`, `not_ingested`
-      - spectrum_errors <a name="nmr_data_spectrum_errors"></a>
+      - spectrum_errors <a name="nmr_data_experimental_data_spectrum_errors"></a>
         - Description: Errors related to the NMR spectrum.
         - Type: array
         - Example (error):
@@ -175,4 +173,9 @@
             ```
             {}
             ```
+      - spectrum_uuid <a name="nmr_data_experimental_data_nmr_metadata_spectrum_uuid"></a>
+        - Description: uuid value unique to the provided spectrum. Used as an identifier for the spectrum. The first 10 characters are the same as the `compound_uuid` while the last 5 characters are unique.
+        - Example: `pldss5do2g-j3f90`
+        - type: string
+        - MaxLength: 16
         
