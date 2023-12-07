@@ -64,7 +64,7 @@
 - Description: Indicates the current status of embargo of the provided compound within the NP-MRD database.
 - Example: `embargo_until_date`
 - Type: string
-- One of: `embargo_until_date`, `no_embargo`
+- One of: `embargo_until_date`, `no_embargo`, `released`
 
 ## embargo_date <a name="embargo_date"></a>
 - Description: The date for which an embargo period has been applied to the given compound.
