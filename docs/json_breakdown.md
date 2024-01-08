@@ -10,7 +10,7 @@
 - [submission](#submission)
 	- [source](#submission_source)
 	- [type](#submission_type)
-	- [uuid](#submission_uuid)
+	- [submission_uuid](#submission_uuid)
 	- [compound_uuid](#submission_compound_uuid)
 	- [submission_date](#submission_submission_date)
 	- [embargo_status](#submission_embargo_status)
@@ -177,7 +177,7 @@
   - Example: `published_article`
   - type: string
   - MaxLength: 30
-- uuid <a name="submission_uuid"></a>
+- submission_uuid <a name="submission_uuid"></a>
   - Description: Internal reference ID for the deposition system. This is the primary key for submission-based data storage. Fixed length 36 character uuid string.
   - Example: `97d6db8a-631d-43bf-8afd-3208f79ec8d3`
   - type: string
@@ -194,7 +194,7 @@
   - Example: `2023-04-28T13:45:00.000Z`
 - embargo_status <a name="submission_embargo_status"></a>
   - Description: User-specified field for embargo status. Allows users to set release condition for their data. 
-  - One of: `publish`, `embargo_until_date`, or `embargo_until_publication`
+  - One of: `publish`, `do_not_publish`, `embargo_until_date`, or `embargo_until_publication`
     - `publish` indicates that a user wishes to release this data immediately. This is the default value in the deposition system.
     - `embargo_until_date` indicates that the <i>embargo_date</i> field must be checked for the release date to make a submission public. It should be withheld from public access until then.
     - `embargo_until_publication` indicates to withhold the data from public access until the article is confirmed to be published OR a user manually releases the data. We will know an article has been published when a DOI is identified and attached to the specific compound/deposition by the deposition system.
