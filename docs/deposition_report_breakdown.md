@@ -6,7 +6,6 @@
 - [inchikey](#inchikey)
 - [np_card_status](#np_card_status)
 - [npmrd_id](#npmrd_id)
-- [embargo_uuid](#embargo_uuid)
 - [npmrd_db_release_status](#npmrd_db_release_status)
 - [ingestion_time](#ingestion_time)
 - [compound_errors](#compound_errors)
@@ -61,12 +60,6 @@
 - Description: The NP-CARD ID that was assigned to the compound.
 - Example: `NP9999999`
 - Type: string
-
-## embargo_uuid <a name="embargo_uuid"></a>
-  - Description: Short UUID used to track this specific embargo since it likely applies to more than one compound, spectra, peak list, etc.
-  - Example: `EVVeW7BLVr`
-  - type: string
-  - MaxLength: 10
 
 ## npmrd_db_release_status <a name="npmrd_db_release_status"></a>
   - Description: Reports whether or not the provided compound has been released. If the provided data is still embargoed then it will be indicated as such here. `embargoed` means the data is hidden from the public under an embargo, `released` means the data is publically available, and `withdrawn` indicates that the data was once public but has been re-embargoed

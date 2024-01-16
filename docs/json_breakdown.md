@@ -15,8 +15,7 @@
 	- [submission_date](#submission_submission_date)
 	- [embargo_status](#submission_embargo_status)
 	- [embargo_date](#submission_embargo_date)
-    - [embargo_uuid](#submission_embargo_uuid)
-    - [embargo_ready_to_release](#embargo_ready_to_release)
+    - [compound_embargo_release_ready](#submission_compound_embargo_release_ready)
 - [citation](#citation)
 	- [doi](#citation_doi)
 	- [pmid](#citation_pmid)
@@ -48,34 +47,36 @@
 	- [show_name_in_attribution](#depositor_info_show_name_in_attribution)
 	- [show_organization_in_attribution](#depositor_info_show_organization_in_attribution)
 - [nmr_data](#nmr_data)
-	- [peak_lists](#nmr_data_peak_lists)
-		- [solvent](#nmr_data_peak_lists_solvent)
-		- [reference](#nmr_data_peak_lists_reference)
-		- [c_values](#nmr_data_peak_lists_c_values)
-		- [h_values](#nmr_data_peak_lists_h_values)
-		- [c_frequency](#nmr_data_peak_lists_c_frequency)
-		- [h_frequency](#nmr_data_peak_lists_h_frequency)
-		- [frequency_units](#nmr_data_peak_lists_frequency_units)
-		- [c_temperature](#nmr_data_peak_lists_c_temperature)
-		- [h_temperature](#nmr_data_peak_lists_h_temperature)
-		- [temperature_units](#nmr_data_peak_lists_temperature_units)
-        - [peak_uuid](#nmr_data_peak_lists_peak_uuid)
-	- [experimental_data](#nmr_data_experimental_data)
-		- [nmr_data_download_link](#nmr_data_experimental_data_nmr_data_download_link)
-		- [nmr_metadata](#nmr_data_experimental_data_nmr_metadata)
-			- [vendor](#nmr_data_experimental_data_nmr_metadata_vendor)
-			- [filetype](#nmr_data_experimental_data_nmr_metadata_filetype)
-			- [solvent](#nmr_data_experimental_data_nmr_metadata_solvent)
-			- [frequency](#nmr_data_experimental_data_nmr_metadata_frequency)
-			- [frequency_units](#nmr_data_experimental_data_nmr_metadata_frequency_units)
-			- [f1_nucleus](#nmr_data_experimental_data_nmr_metadata_f1_nucleus)
-			- [f2_nucleus](#nmr_data_experimental_data_nmr_metadata_f2_nucleus)
-			- [temperature](#nmr_data_experimental_data_nmr_metadata_temperature)
-			- [temperature_units](#nmr_data_experimental_data_nmr_metadata_temperature_units)
-			- [experiment_type](#nmr_data_experimental_data_nmr_metadata_experiment_type)
-			- [extracted_experiment_folder](#nmr_data_experimental_data_nmr_metadata_extracted_experiment_folder)
-            - [extracted_data_path](#nmr_data_experimental_data_nmr_metadata_extracted_data_path)
-            - [spectrum_uuid](#nmr_data_experimental_data_nmr_metadata_spectrum_uuid)
+  - [peak_lists](#nmr_data_peak_lists)
+    - [solvent](#nmr_data_peak_lists_solvent)
+    - [reference](#nmr_data_peak_lists_reference)
+    - [c_values](#nmr_data_peak_lists_c_values)
+    - [h_values](#nmr_data_peak_lists_h_values)
+    - [c_frequency](#nmr_data_peak_lists_c_frequency)
+    - [h_frequency](#nmr_data_peak_lists_h_frequency)
+    - [frequency_units](#nmr_data_peak_lists_frequency_units)
+    - [c_temperature](#nmr_data_peak_lists_c_temperature)
+    - [h_temperature](#nmr_data_peak_lists_h_temperature)
+    - [temperature_units](#nmr_data_peak_lists_temperature_units)
+    - [peak_uuid](#nmr_data_peak_lists_peak_uuid)
+    - [peak_embargo_release_ready](#nmr_data_peak_lists_embargo_release_ready)
+  - [experimental_data](#nmr_data_experimental_data)
+    - [nmr_data_download_link](#nmr_data_experimental_data_nmr_data_download_link)
+    - [nmr_metadata](#nmr_data_experimental_data_nmr_metadata)
+      - [vendor](#nmr_data_experimental_data_nmr_metadata_vendor)
+      - [filetype](#nmr_data_experimental_data_nmr_metadata_filetype)
+      - [solvent](#nmr_data_experimental_data_nmr_metadata_solvent)
+      - [frequency](#nmr_data_experimental_data_nmr_metadata_frequency)
+      - [frequency_units](#nmr_data_experimental_data_nmr_metadata_frequency_units)
+      - [f1_nucleus](#nmr_data_experimental_data_nmr_metadata_f1_nucleus)
+      - [f2_nucleus](#nmr_data_experimental_data_nmr_metadata_f2_nucleus)
+      - [temperature](#nmr_data_experimental_data_nmr_metadata_temperature)
+      - [temperature_units](#nmr_data_experimental_data_nmr_metadata_temperature_units)
+      - [experiment_type](#nmr_data_experimental_data_nmr_metadata_experiment_type)
+      - [extracted_experiment_folder](#nmr_data_experimental_data_nmr_metadata_extracted_experiment_folder)
+      - [extracted_data_path](#nmr_data_experimental_data_nmr_metadata_extracted_data_path)
+      - [spectrum_uuid](#nmr_data_experimental_data_nmr_metadata_spectrum_uuid)
+      - [spectrum_embargo_release_ready](#nmr_data_experimental_data_nmr_metadata_spectrum_embargo_release_ready)
 	- [assignment_data](#nmr_data_assignment_data)
 		- [h_nmr](#nmr_data_assignment_data_h_nmr)
 			- [solvent](#nmr_data_assignment_data_h_nmr_solvent)
@@ -208,13 +209,8 @@
   - Example: `2023-07-22`
   - type: string
   - MaxLength: 10
-- embargo_uuid <a name="embargo_uuid"></a>
-  - Description: Short UUID used to track this specific embargo since it likely applies to more than one compound, spectra, peak list, etc.
-  - Example: `EVVeW7BLVr`
-  - type: string
-  - MaxLength: 10
-- embargo_ready_to_release <a name="embargo_ready_to_release"></a>
-  - Description: Whether or not the data associated with this embargo (everything is in the current compound) is ready to be released. The deposition system is in charge of deciding whether or not an embargo should lock down any deposited data and uses this field to indicate that. 
+- compound_embargo_release_ready <a name="submission_compound_embargo_release_ready"></a>
+  - Description: Whether or not THIS COMPOUND is ready to be released according any embargoes on the submission. If false this compound's NP-Card should be put into an embargoed (not publicly available) state. If true the compound's NP-Card should be made publicly available. If the provided compound already exists in the main database FROM A DIFFERENT SOURCE this bool should be ignored. If it already exists FROM THE SAME SOURCE the value should be overwritten.
   - Example: true
   - type: bool
 
@@ -401,6 +397,10 @@
     - Example: `SD0z84d9Ds-D0nP9`
     - type: string
     - MaxLength: 16
+  - peak_embargo_release_ready <a name="nmr_data_peak_lists_embargo_release_ready"></a>
+    - Description: Whether or not THIS PEAK LIST is ready to be released according any embargoes on the submission. If false this peak list should be put into an embargoed (not publicly available) state. If true the peak list should be made publicly available. If the provided peak_list already exists in the main database this bool should OVERWRITE it.
+    - Example: true
+    - type: bool
 - experimental_data <a name="nmr_data_experimental_data"></a>
   - nmr_data_download_link <a name="nmr_data_experimental_data_nmr_data_download_link"></a>
     - Description: This field will provide a presigned amazon s3 url to download the data in the submission directly from the deposition website’s data warehouse. These links expire after 7 days (the max allowed duration).
@@ -477,6 +477,10 @@
       - Example: `SD0z84d9Ds-j3f90`
       - type: string
       - MaxLength: 16
+    - spectrum_embargo_release_ready <a name="nmr_data_experimental_data_nmr_metadata_embargo_release_ready"></a>
+      - Description: Whether or not THIS SPECTRUM is ready to be released according any embargoes on the submission. If false THIS SPECTRUM should be put into an embargoed (not publicly available) state. If true the compound's NP-Card should be made publicly available. If it already exists then the value should be overwritten.
+      - Example: true
+      - type: bool
 
 ## assignment_data <a name="nmr_data_assignment_data"></a>
 - h_nmr <a name="nmr_data_assignment_data_h_nmr"></a>
