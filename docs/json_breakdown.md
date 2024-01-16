@@ -217,7 +217,6 @@
   - Description: Whether or not the data associated with this embargo (everything is in the current compound) is ready to be released. The deposition system is in charge of deciding whether or not an embargo should lock down any deposited data and uses this field to indicate that. 
   - Example: true
   - type: bool
-  - MaxLength: 10
 
 
 ## citation <a name="citation"></a>
