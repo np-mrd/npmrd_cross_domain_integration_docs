@@ -1,6 +1,6 @@
 # Exchange JSON Breakdown
 
-## <b>LAST UPDATED TO REFLECT VERSION 2.0.3<b/>
+## <b>LAST UPDATED TO REFLECT VERSION 2.0.4<b/>
 
 ## JSON Fields
 - [compound_name](#compound_name)
@@ -15,6 +15,8 @@
 	- [submission_date](#submission_submission_date)
 	- [embargo_status](#submission_embargo_status)
 	- [embargo_date](#submission_embargo_date)
+    - [embargo_uuid](#submission_embargo_uuid)
+    - [embargo_ready_to_release](#embargo_ready_to_release)
 - [citation](#citation)
 	- [doi](#citation_doi)
 	- [pmid](#citation_pmid)
@@ -194,7 +196,7 @@
   - Example: `2023-04-28T13:45:00.000Z`
 - embargo_status <a name="submission_embargo_status"></a>
   - Description: User-specified field for embargo status. Allows users to set release condition for their data. 
-  - One of: `publish`, `do_not_publish`, `embargo_until_date`, or `embargo_until_publication`
+  - One of: `release_immediately`, `do_not_release`, `embargo_until_date`, or `embargo_until_publication`
     - `publish` indicates that a user wishes to release this data immediately. This is the default value in the deposition system.
     - `embargo_until_date` indicates that the <i>embargo_date</i> field must be checked for the release date to make a submission public. It should be withheld from public access until then.
     - `embargo_until_publication` indicates to withhold the data from public access until the article is confirmed to be published OR a user manually releases the data. We will know an article has been published when a DOI is identified and attached to the specific compound/deposition by the deposition system.
@@ -206,6 +208,17 @@
   - Example: `2023-07-22`
   - type: string
   - MaxLength: 10
+- embargo_uuid <a name="embargo_uuid"></a>
+  - Description: Short UUID used to track this specific embargo since it likely applies to more than one compound, spectra, peak list, etc.
+  - Example: `EVVeW7BLVr`
+  - type: string
+  - MaxLength: 10
+- embargo_ready_to_release <a name="embargo_ready_to_release"></a>
+  - Description: Whether or not the data associated with this embargo (everything is in the current compound) is ready to be released. The deposition system is in charge of deciding whether or not an embargo should lock down any deposited data and uses this field to indicate that. 
+  - Example: true
+  - type: bool
+  - MaxLength: 10
+
 
 ## citation <a name="citation"></a>
 - doi <a name="citation_doi"></a>

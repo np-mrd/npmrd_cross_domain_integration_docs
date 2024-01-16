@@ -6,23 +6,25 @@
 - [inchikey](#inchikey)
 - [np_card_status](#np_card_status)
 - [npmrd_id](#npmrd_id)
-- [embargo_status](#embargo_status)
-- [embargo_date](#embargo_date)
+- [embargo_uuid](#embargo_uuid)
+- [npmrd_db_release_status](#npmrd_db_release_status)
 - [ingestion_time](#ingestion_time)
 - [compound_errors](#compound_errors)
 - [nmr_data](#nmr_data)
 	- [peak_lists](#nmr_data_peak_lists)
 		- [peak_list_ingestion_status](#peak_list_ingestion_status)
-		- [peak_list_errors](#nmr_data_peak_list_errors)
-        - [peak_uuid](#nmr_data_peak_lists_peak_uuid)
+    - [peak_uuid](#nmr_data_peak_lists_peak_uuid)
+    - [npmrd_db_release_status](#nmr_data_peak_lists_npmrd_db_release_status)
+    - [peak_list_errors](#nmr_data_peak_list_errors)
 	- [experimental_data](#nmr_data_experimental_data)
 		- [experiment_type](#nmr_data_experimental_data_experiment_type)
 		- [extracted_experiment_folder](#nmr_data_experimental_data_extracted_experiment_folder)
 		- [vendor](#nmr_data_experimental_data_vendor)
 		- [filetype](#nmr_data_experimental_data_filetype)
 		- [spectrum_ingestion_status](#nmr_data_experimental_data_spectrum_ingestion_status)
-		- [spectrum_errors](#nmr_data_experimental_data_spectrum_errors)
-        - [spectrum_uuid](#nmr_data_experimental_data_spectrum_uuid)
+    - [spectrum_uuid](#nmr_data_experimental_data_spectrum_uuid)
+    - [npmrd_db_release_status](#npmrd_db_release_status)
+    - [spectrum_errors](#nmr_data_experimental_data_spectrum_errors)
 
 ## compound_name <a name="compound_name"></a>
 - Description: The name of the compound.
@@ -60,16 +62,17 @@
 - Example: `NP9999999`
 - Type: string
 
-## embargo_status <a name="embargo_status"></a>
-- Description: Indicates the current status of embargo of the provided compound within the NP-MRD database.
-- Example: `embargo_until_date`
-- Type: string
-- One of: `embargo_until_date`, `no_embargo`, `released`
+## embargo_uuid <a name="embargo_uuid"></a>
+  - Description: Short UUID used to track this specific embargo since it likely applies to more than one compound, spectra, peak list, etc.
+  - Example: `EVVeW7BLVr`
+  - type: string
+  - MaxLength: 10
 
-## embargo_date <a name="embargo_date"></a>
-- Description: The date for which an embargo period has been applied to the given compound.
-- Example: `2023-12-01`
-- Type: string (date format)
+## npmrd_db_release_status <a name="npmrd_db_release_status"></a>
+  - Description: Reports whether or not the provided compound has been released. If the provided data is still embargoed then it will be indicated as such here. `embargoed` means the data is hidden from the public under an embargo, `released` means the data is publically available, and `withdrawn` indicates that the data was once public but has been re-embargoed
+  - Example: `embargoed`
+  - type: string
+  - One of: `embargoed`, `released`, or `withdrawn`
 
 ## ingestion_time <a name="ingestion_time"></a>
 - Description: The date and time that the compound ingestion was complete.
@@ -108,6 +111,16 @@
             - Example: `ingested`
             - Type: array
             - One of: `ingested`, `not_ingested`
+        - peak_uuid <a name="nmr_data_peak_lists_peak_uuid"></a>
+          - Description: uuid value unique to the provided peak list. Used as an identifier for the spectrum. The first 10 characters are the same as the `compound_uuid` while the last 5 characters are unique.
+          - Example: `SD0z84d9Ds-D0nP9`
+          - type: string
+          - MaxLength: 16
+        - npmrd_db_release_status <a name="nmr_data_peak_lists_npmrd_db_release_status"></a>
+          - Description: Indicates whether or not this specific peak list has been `embargoed`, `released`, or `withdrawn`. Included to be able to track indiviudal peak lists.
+          - Example: `embargoed`
+          - type: string
+          - One of: `embargoed`, `released`, or `withdrawn`
         - peak_list_errors <a name="nmr_data_peak_list_errors"></a>
             - Example (error):
                 ```
@@ -125,11 +138,6 @@
                 - `c_values`: Something is wrong with the carbon values.
                 - `h_values`: Something is wrong with the hydrogen values.
                 - `metadata`: Something is wrong with the peak list metadata.
-        - peak_uuid <a name="nmr_data_peak_lists_peak_uuid"></a>
-          - Description: uuid value unique to the provided peak list. Used as an identifier for the spectrum. The first 10 characters are the same as the `compound_uuid` while the last 5 characters are unique.
-          - Example: `SD0z84d9Ds-D0nP9`
-          - type: string
-          - MaxLength: 16
   - experimental_data <a name="nmr_data_experimental_data"></a>
     - Description: Status report of experimental NMR data (NMR Spectra). Each entry represents a different experiment/spectra. Can be left as a blank array if no experimental data was sent.
     - Type: array (of objects)
@@ -158,6 +166,16 @@
         - Example: `ingested`
         - Type: string
         - One of: `ingested`, `not_ingested`
+      - spectrum_uuid <a name="nmr_data_experimental_data_nmr_metadata_spectrum_uuid"></a>
+        - Description: uuid value unique to the provided spectrum. Used as an identifier for the spectrum. The first 10 characters are the same as the `compound_uuid` while the last 5 characters are unique.
+        - Example: `pldss5do2g-j3f90`
+        - type: string
+        - MaxLength: 16
+      - npmrd_db_release_status <a name="nmr_data_experimental_data_nmr_metadata_npmrd_db_release_status"></a>
+          - Description: Indicates whether or not this specific peak list has been `embargoed`, `released`, or `withdrawn`. Included to be able to track indiviudal spectra.
+          - Example: `embargoed`
+          - type: string
+          - One of: `embargoed`, `released`, or `withdrawn`
       - spectrum_errors <a name="nmr_data_experimental_data_spectrum_errors"></a>
         - Description: Errors related to the NMR spectrum.
         - Type: array
@@ -173,9 +191,4 @@
             ```
             {}
             ```
-      - spectrum_uuid <a name="nmr_data_experimental_data_nmr_metadata_spectrum_uuid"></a>
-        - Description: uuid value unique to the provided spectrum. Used as an identifier for the spectrum. The first 10 characters are the same as the `compound_uuid` while the last 5 characters are unique.
-        - Example: `pldss5do2g-j3f90`
-        - type: string
-        - MaxLength: 16
         
