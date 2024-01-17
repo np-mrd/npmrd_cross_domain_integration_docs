@@ -6,24 +6,24 @@
 - [inchikey](#inchikey)
 - [np_card_status](#np_card_status)
 - [npmrd_id](#npmrd_id)
-- [npmrd_db_release_status](#npmrd_db_release_status)
+- [compound_npmrd_db_release_status](#compound_npmrd_db_release_status)
 - [ingestion_time](#ingestion_time)
 - [compound_errors](#compound_errors)
 - [nmr_data](#nmr_data)
 	- [peak_lists](#nmr_data_peak_lists)
 		- [peak_list_ingestion_status](#peak_list_ingestion_status)
-    - [peak_uuid](#nmr_data_peak_lists_peak_uuid)
-    - [npmrd_db_release_status](#nmr_data_peak_lists_npmrd_db_release_status)
-    - [peak_list_errors](#nmr_data_peak_list_errors)
+        - [peak_list_uuid](#nmr_data_peak_lists_peak_list_uuid)
+        - [peak_list_npmrd_db_release_status](#nmr_data_peak_lists_peak_list_npmrd_db_release_status)
+        - [peak_list_errors](#nmr_data_peak_list_errors)
 	- [experimental_data](#nmr_data_experimental_data)
 		- [experiment_type](#nmr_data_experimental_data_experiment_type)
 		- [extracted_experiment_folder](#nmr_data_experimental_data_extracted_experiment_folder)
 		- [vendor](#nmr_data_experimental_data_vendor)
 		- [filetype](#nmr_data_experimental_data_filetype)
 		- [spectrum_ingestion_status](#nmr_data_experimental_data_spectrum_ingestion_status)
-    - [spectrum_uuid](#nmr_data_experimental_data_spectrum_uuid)
-    - [npmrd_db_release_status](#npmrd_db_release_status)
-    - [spectrum_errors](#nmr_data_experimental_data_spectrum_errors)
+        - [spectrum_uuid](#nmr_data_experimental_data_spectrum_uuid)
+        - [spectrum_npmrd_db_release_status](#nmr_data_experimental_data_nmr_metadata_spectrum_npmrd_db_release_status)
+        - [spectrum_errors](#nmr_data_experimental_data_spectrum_errors)
 
 ## compound_name <a name="compound_name"></a>
 - Description: The name of the compound.
@@ -61,7 +61,7 @@
 - Example: `NP9999999`
 - Type: string
 
-## npmrd_db_release_status <a name="npmrd_db_release_status"></a>
+## compound_npmrd_db_release_status <a name="compound_npmrd_db_release_status"></a>
   - Description: Reports whether or not the provided compound has been released. If the provided data is still embargoed then it will be indicated as such here. `embargoed` means the data is hidden from the public under an embargo, `released` means the data is publically available, and `withdrawn` indicates that the data was once public but has been re-embargoed
   - Example: `embargoed`
   - type: string
@@ -104,12 +104,12 @@
             - Example: `ingested`
             - Type: array
             - One of: `ingested`, `not_ingested`
-        - peak_uuid <a name="nmr_data_peak_lists_peak_uuid"></a>
+        - peak_list_uuid <a name="nmr_data_peak_lists_peak_list_uuid"></a>
           - Description: uuid value unique to the provided peak list. Used as an identifier for the spectrum. The first 10 characters are the same as the `compound_uuid` while the last 5 characters are unique.
           - Example: `SD0z84d9Ds-D0nP9`
           - type: string
           - MaxLength: 16
-        - npmrd_db_release_status <a name="nmr_data_peak_lists_npmrd_db_release_status"></a>
+        - peak_list_npmrd_db_release_status <a name="nmr_data_peak_lists_peak_list_npmrd_db_release_status"></a>
           - Description: Indicates whether or not this specific peak list has been `embargoed`, `released`, or `withdrawn`. Included to be able to track indiviudal peak lists.
           - Example: `embargoed`
           - type: string
@@ -164,7 +164,7 @@
         - Example: `pldss5do2g-j3f90`
         - type: string
         - MaxLength: 16
-      - npmrd_db_release_status <a name="nmr_data_experimental_data_nmr_metadata_npmrd_db_release_status"></a>
+      - spectrum_npmrd_db_release_status <a name="nmr_data_experimental_data_nmr_metadata_spectrum_npmrd_db_release_status"></a>
           - Description: Indicates whether or not this specific peak list has been `embargoed`, `released`, or `withdrawn`. Included to be able to track indiviudal spectra.
           - Example: `embargoed`
           - type: string

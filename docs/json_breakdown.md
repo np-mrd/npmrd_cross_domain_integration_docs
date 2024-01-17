@@ -15,7 +15,7 @@
 	- [submission_date](#submission_submission_date)
 	- [embargo_status](#submission_embargo_status)
 	- [embargo_date](#submission_embargo_date)
-    - [compound_embargo_release_ready](#submission_compound_embargo_release_ready)
+  - [compound_embargo_release_ready](#submission_compound_embargo_release_ready)
 - [citation](#citation)
 	- [doi](#citation_doi)
 	- [pmid](#citation_pmid)
@@ -58,8 +58,8 @@
     - [c_temperature](#nmr_data_peak_lists_c_temperature)
     - [h_temperature](#nmr_data_peak_lists_h_temperature)
     - [temperature_units](#nmr_data_peak_lists_temperature_units)
-    - [peak_uuid](#nmr_data_peak_lists_peak_uuid)
-    - [peak_embargo_release_ready](#nmr_data_peak_lists_embargo_release_ready)
+    - [peak_list_uuid](#nmr_data_peak_lists_peak_list_uuid)
+    - [peak_list_embargo_release_ready](#nmr_data_peak_lists_peak_list_embargo_release_ready)
   - [experimental_data](#nmr_data_experimental_data)
     - [nmr_data_download_link](#nmr_data_experimental_data_nmr_data_download_link)
     - [nmr_metadata](#nmr_data_experimental_data_nmr_metadata)
@@ -392,12 +392,12 @@
     - Example: `K`
     - type: string
     - MaxLength: 10
-  - peak_uuid <a name="nmr_data_peak_lists_peak_uuid"></a>
+  - peak_list_uuid <a name="nmr_data_peak_lists_peak_list_uuid"></a>
     - Description: uuid value unique to the provided peak list. Used as an identifier for the spectrum. The first 10 characters are the same as the `compound_uuid` while the last 5 characters are unique.
     - Example: `SD0z84d9Ds-D0nP9`
     - type: string
     - MaxLength: 16
-  - peak_embargo_release_ready <a name="nmr_data_peak_lists_embargo_release_ready"></a>
+  - peak_list_embargo_release_ready <a name="nmr_data_peak_lists_peak_list_embargo_release_ready"></a>
     - Description: Whether or not THIS PEAK LIST is ready to be released according any embargoes on the submission. If false this peak list should be put into an embargoed (not publicly available) state. If true the peak list should be made publicly available. If the provided peak_list already exists in the main database this bool should OVERWRITE it.
     - Example: true
     - type: bool
@@ -477,7 +477,7 @@
       - Example: `SD0z84d9Ds-j3f90`
       - type: string
       - MaxLength: 16
-    - spectrum_embargo_release_ready <a name="nmr_data_experimental_data_nmr_metadata_embargo_release_ready"></a>
+    - spectrum_embargo_release_ready <a name="nmr_data_experimental_data_nmr_metadata_spectrum_embargo_release_ready"></a>
       - Description: Whether or not THIS SPECTRUM is ready to be released according any embargoes on the submission. If false THIS SPECTRUM should be put into an embargoed (not publicly available) state. If true the compound's NP-Card should be made publicly available. If it already exists then the value should be overwritten.
       - Example: true
       - type: bool
