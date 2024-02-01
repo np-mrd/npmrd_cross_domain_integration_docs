@@ -93,6 +93,7 @@ NOTE: Fields marked with a `response_field` tag indicate that they  will be empt
     - `response_field`
 
 ## compounds <a name="compounds"></a>
+type: list
 
 - compound_name <a name="compounds_compound_name"></a>
   - Description: Common name for natural product. Can be a common name (as example), or an alpha-numeric code, or sometimes an IUPAC name. If compounds are not named in the paper they should be listed as 'Not named' to differentiate entries that are known to have no name from entries where the name is unknown (which should be Null)
@@ -127,7 +128,7 @@ NOTE: Fields marked with a `response_field` tag indicate that they  will be empt
   - MaxLength: 9
 
 - compound_embargo_release_ready <a name="compounds_compound_embargo_release_ready"></a>
-  - Description: Whether or not THIS COMPOUND in THIS SUBMISSION is ready to be released according any embargoes on the submission. If false this compound's NP-Card should be put into an embargoed (not publicly available) state. If true the compound's NP-Card should be made publicly available. If the provided compound already exists in the main database FROM A DIFFERENT SOURCE this bool should be ignored. If it already exists FROM THE SAME SOURCE the value should be overwritten.
+  - Description: Whether or not THIS COMPOUND in THIS SUBMISSION is ready to be released according any embargoes on the submission. If false this compound's NP-Card should be put into an embargoed (not publicly available) state. If true the compound's NP-Card should be made publicly available. If the provided compound already exists in the main database FROM A DIFFERENT SOURCE this bool should be ignored. If it already exists FROM THE SAME SOURCE the value should be overwritten. (For now) will never differ from `embargo_release_ready`.
   - Example: true
   - type: bool
 
@@ -148,7 +149,7 @@ NOTE: Fields marked with a `response_field` tag indicate that they  will be empt
       - MaxLength: 16
 
     - peak_list_embargo_release_ready <a name="compounds_peak_lists_peak_list_embargo_release_ready"></a>
-      - Description: Whether or not THIS PEAK LIST is ready to be released according any embargoes on the submission. If false this peak list should be put into an embargoed (not publicly available) state. If true the peak list should be made publicly available.
+      - Description: Whether or not THIS PEAK LIST is ready to be released according any embargoes on the submission. If false this peak list should be put into an embargoed (not publicly available) state. If true the peak list should be made publicly available. (For now) will never differ from `embargo_release_ready`.
       - Example: true
       - type: bool
     
@@ -188,7 +189,7 @@ NOTE: Fields marked with a `response_field` tag indicate that they  will be empt
       - MaxLength: 30
     
   - spectrum_embargo_release_ready <a name="compounds_nmr_metadata_spectrum_embargo_release_ready"></a>
-      - Description: Whether or not THIS SPECTRUM is ready to be released according any embargoes on the submission. If false this spectrum should be put into an embargoed (not publicly available) state. If true the spectrum should be made publicly available.
+      - Description: Whether or not THIS SPECTRUM is ready to be released according any embargoes on the submission. If false this spectrum should be put into an embargoed (not publicly available) state. If true the spectrum should be made publicly available. (For now) will never differ from `embargo_release_ready`.
       - Example: true
       - type: bool
     
