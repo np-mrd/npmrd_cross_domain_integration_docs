@@ -70,24 +70,24 @@ NOTE: Fields marked with a `response_field` tag indicate that they  will be empt
   - MaxLength: 20
 
 - doi_ingested <a name="doi_ingested"></a>
-  - Description: Whether or not the provided `submission_doi` was ingested. If the string is blank then (there is no doi to ingest) then this value should be `ingested`. It should only be `not_ingested` if the value was not ingested for some reason.
+  - Description: Whether or not the provided `submission_doi` was ingested. If the value is null (there is no doi to ingest) then this value should be null. It should only be `not_ingested` if the value was not ingested for some reason.
   - Example: `ingested`
   - Type: array
-  - One of: `ingested`, `not_ingested`
+  - One of: `ingested`, `not_ingested`, or null
   - `response_field`
 
 - doi_ingested <a name="doi_ingested"></a>
-  - Description: Whether or not the provided `submission_pii` was ingested. If the string is blank then (there is no pii to ingest) then this value should be `ingested`. It should only be `not_ingested` if the value was not ingested for some reason.
+  - Description: Whether or not the provided `submission_pii` was ingested. If the value is null (there is no pii to ingest) then this value should be null. It should only be `not_ingested` if the value was not ingested for some reason.
   - Example: `ingested`
   - Type: array
-  - One of: `ingested`, `not_ingested`
+  - One of: `ingested`, `not_ingested`, or null
   - `response_field`
 
 - pmid_ingested <a name="doi_ingested"></a>
-  - Description: Whether or not the provided `submission_pmid` was ingested. If the string is blank then (there is no pmid to ingest) then this value should be `ingested`. It should only be `not_ingested` if the value was not ingested for some reason.
+  - Description: Whether or not the provided `submission_pmid` was ingested. If the value is null (there is no pmid to ingest) then this value should be null. It should only be `not_ingested` if the value was not ingested for some reason.
   - Example: `ingested`
   - Type: array
-  - One of: `ingested`, `not_ingested`
+  - One of: `ingested`, `not_ingested`, or null
   - `response_field`
 
 - identifier_ingestion_errors <a name="identifier_ingestion_errors"></a>
