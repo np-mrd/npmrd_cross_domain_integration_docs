@@ -1,6 +1,6 @@
 # Exchange JSON Breakdown
 
-## <b>LAST UPDATED TO REFLECT VERSION 2.0.4<b/>
+## <b>LAST UPDATED TO REFLECT VERSION 2.0.5<b/>
 
 ## JSON Fields
 - [compound_name](#compound_name)
@@ -48,15 +48,13 @@
 	- [show_organization_in_attribution](#depositor_info_show_organization_in_attribution)
 - [nmr_data](#nmr_data)
   - [peak_lists](#nmr_data_peak_lists)
+    - [atom][#nmr_data_peak_lists_atom]
     - [solvent](#nmr_data_peak_lists_solvent)
     - [reference](#nmr_data_peak_lists_reference)
-    - [c_values](#nmr_data_peak_lists_c_values)
-    - [h_values](#nmr_data_peak_lists_h_values)
-    - [c_frequency](#nmr_data_peak_lists_c_frequency)
-    - [h_frequency](#nmr_data_peak_lists_h_frequency)
+    - [values](#nmr_data_peak_list_values)
+    - [frequency](#nmr_data_peak_lists_frequency)
     - [frequency_units](#nmr_data_peak_lists_frequency_units)
-    - [c_temperature](#nmr_data_peak_lists_c_temperature)
-    - [h_temperature](#nmr_data_peak_lists_h_temperature)
+    - [temperature](#nmr_data_peak_lists_h_temperature)
     - [temperature_units](#nmr_data_peak_lists_temperature_units)
     - [peak_list_uuid](#nmr_data_peak_lists_peak_list_uuid)
     - [peak_list_embargo_release_ready](#nmr_data_peak_lists_peak_list_embargo_release_ready)
@@ -78,32 +76,21 @@
       - [spectrum_uuid](#nmr_data_experimental_data_nmr_metadata_spectrum_uuid)
       - [spectrum_embargo_release_ready](#nmr_data_experimental_data_nmr_metadata_spectrum_embargo_release_ready)
 	- [assignment_data](#nmr_data_assignment_data)
-		- [h_nmr](#nmr_data_assignment_data_h_nmr)
-			- [solvent](#nmr_data_assignment_data_h_nmr_solvent)
-			- [temperature](#nmr_data_assignment_data_h_nmr_temperature)
-			- [temperature_units](#nmr_data_assignment_data_h_nmr_temperature_units)
-			- [reference](#nmr_data_assignment_data_h_nmr_reference)
-			- [frequency](#nmr_data_assignment_data_h_nmr_frequency)
-			- [frequency_units](#nmr_data_assignment_data_h_nmr_frequency_units)
-			- [spectrum](#nmr_data_assignment_data_h_nmr_spectrum)
-				- [shift](#nmr_data_assignment_data_h_nmr_spectrum_shift)
-				- [integration](#nmr_data_assignment_data_h_nmr_spectrum_integration)
-				- [multiplicity](#nmr_data_assignment_data_h_nmr_spectrum_multiplicity)
-				- [coupling](#nmr_data_assignment_data_h_nmr_spectrum_coupling)
-				- [atom_index](#nmr_data_assignment_data_h_nmr_spectrum_atom_index)
-				- [rdkit_index](#nmr_data_assignment_data_h_nmr_spectrum_rdkit_index)
-				- [interchangeable_index](#nmr_data_assignment_data_h_nmr_spectrum_interchangeable_index)
-		- [c_nmr](#nmr_data_assignment_data_c_nmr)
-			- [solvent](#nmr_data_assignment_data_c_nmr_solvent)
-			- [temperature](#nmr_data_assignment_data_c_nmr_temperature)
-			- [temperature_units](#nmr_data_assignment_data_c_nmr_temperature_units)
-			- [reference](#nmr_data_assignment_data_c_nmr_reference)
-			- [frequency](#nmr_data_assignment_data_c_nmr_frequency)
-			- [frequency_units](#nmr_data_assignment_data_c_nmr_frequency_units)
-			- [spectrum](#nmr_data_assignment_data_c_nmr_spectrum)
-				- [shift](#nmr_data_assignment_data_c_nmr_spectrum_shift)
-				- [atom_index](#nmr_data_assignment_data_c_nmr_spectrum_atom_index)
-				- [rdkit_index](#nmr_data_assignment_data_c_nmr_spectrum_rdkit_index)
+        - [atom](#nmr_data_assignment_data_atom)
+        - [solvent](#nmr_data_assignment_data_solvent)
+        - [temperature](#nmr_data_assignment_data_temperature)
+        - [temperature_units](#nmr_data_assignment_data_temperature_units)
+        - [reference](#nmr_data_assignment_data_reference)
+        - [frequency](#nmr_data_assignment_data_frequency)
+        - [frequency_units](#nmr_data_assignment_data_frequency_units)
+        - [spectrum](#nmr_data_assignment_data_spectrum)
+            - [shift](#nmr_data_assignment_data_spectrum_shift)
+            - [integration](#nmr_data_assignment_data_spectrum_integration)
+            - [multiplicity](#nmr_data_assignment_data_spectrum_multiplicity)
+            - [coupling](#nmr_data_assignment_data_spectrum_spectrum_coupling)
+            - [atom_index](#nmr_data_assignment_data_spectrum_atom_index)
+            - [rdkit_index](#nmr_data_assignment_data_spectrum_rdkit_index)
+            - [interchangeable_index](#nmr_data_assignment_data_spectrum_interchangeable_index)
 	- [predicted_data](#nmr_data_predicted_data)
 		- [prediction_method](#nmr_data_predicted_data_prediction_method)
 		- [dft_protocol](#nmr_data_predicted_data_dft_protocol)
@@ -338,6 +325,12 @@
 
 ## nmr_data <a name="nmr_data"></a>
 - peak_lists <a name="nmr_data_peak_lists"></a>
+  - atom <a name="nmr_data_peak_lists_atom"></a>
+    - Description: The atom the assignment data pertains to.
+    - One of: `C` or `H`
+    - Example: `C`
+    - type: string
+    - MaxLength: 1
   - solvent <a name="nmr_data_peak_lists_solvent"></a>
     - Description: Solvent in which NMR spectrum was acquired.
     - Example: `CDCl3`
@@ -348,40 +341,23 @@
     - Example: `TMS`
     - type: string
     - MaxLength: 20
-  - c_values <a name="nmr_data_peak_lists_c_values"></a>
-    - Description: Array of carbon chemical shift values. 
+  - values <a name="nmr_data_peak_list_values"></a>
+    - Description: Array of chemical shift values. 
     - Example: `[172.2, 171.6, 152.1, 146.0, 139.7, 137.7, 123.9, 122.2, 116.3, 106.9, 75.3, 62.8, 61.2, 29.0, 25.3, 24.9, 22.6, 21.4, 20.3, 20.3]`
     - type: array (of numbers)
     - MaxLength: null
-  - h_values <a name="nmr_data_peak_lists_h_values"></a>
-    - Description: Array of proton chemical shift values. Ranges are allowed.
-    - Example: `[7.17, 6.15, 5.56, 5.28, 4.12, 3.77, 3.23, 2.77, 2.51, 2.33, 1.94, 1.45, 1.45, 1.33, 1.0]`
-    - type: array (of numbers)
-    - MaxLength: null
-  - c_frequency <a name="nmr_data_peak_lists_c_frequency"></a>
-    - Description: Spectrometer frequency for carbon NMR acquisition. Default unit is MHz
+  - frequency <a name="nmr_data_peak_lists_frequency"></a>
+    - Description: Spectrometer frequency for NMR acquisition. Default unit is MHz
     - Example: `120`
     - type: number
     - maximum: 300
-    - minimum: 1
-  - h_frequency <a name="nmr_data_peak_lists_h_frequency"></a>
-    - Description: Spectrometer frequency for proton NMR acquisition. Default unit is MHz
-    - Example: `600`
-    - type: number
-    - maximum: 1200
     - minimum: 1
   - frequency_units <a name="nmr_data_peak_lists_frequency_units"></a>
     - Description: Frequency units. Default is MHz
     - Example: `MHz`
     - type: string
     - MaxLength: 10
-  - c_temperature <a name="nmr_data_peak_lists_c_temperature"></a>
-    - Description: Sample temperature for data acquisition. Default units are K.
-    - Example: `300`
-    - type: integer
-    - maximum: 500
-    - minimum: 1
-  - h_temperature <a name="nmr_data_peak_lists_h_temperature"></a>
+  - temperature <a name="nmr_data_peak_lists_h_temperature"></a>
     - Description: Sample temperature for data acquisition. Default units are K.
     - Example: `300`
     - type: integer
@@ -483,129 +459,82 @@
       - type: bool
 
 ## assignment_data <a name="nmr_data_assignment_data"></a>
-- h_nmr <a name="nmr_data_assignment_data_h_nmr"></a>
-  - solvent <a name="nmr_data_assignment_data_h_nmr_solvent"></a>
+  - atom <a name="nmr_data_assignment_data_atom"></a>
+    - Description: The atom the assignment data pertains to.
+    - One of: `C` or `H`
+    - Example: `C`
+    - type: string
+    - MaxLength: 1
+  - solvent <a name="nmr_data_assignment_data_solvent"></a>
     - Description: Solvent in which NMR spectrum was acquired.
     - Example: `CDCl3`
     - type: string
     - MaxLength: 20
-  - temperature <a name="nmr_data_assignment_data_h_nmr_temperature"></a>
+  - temperature <a name="nmr_data_assignment_data_temperature"></a>
     - Description: Sample temperature for data acquisition. Default units are K.
     - Example: `300`
     - type: integer
     - maximum: 500
     - minimum: 1
-  - temperature_units <a name="nmr_data_assignment_data_h_nmr_temperature_units"></a>
+  - temperature_units <a name="nmr_data_assignment_data_temperature_units"></a>
     - Description: Units for temperature value. Default is K.
     - Example: `K`
     - type: string
     - MaxLength: 10
-  - reference <a name="nmr_data_assignment_data_h_nmr_reference"></a>
+  - reference <a name="nmr_data_assignment_data_reference"></a>
     - Description: The referencing method (if known). Can be None. 'residual_solvent' is the most common entry.
     - Example: `TMS`
     - type: string
     - MaxLength: 20
-  - frequency <a name="nmr_data_assignment_data_h_nmr_frequency"></a>
+  - frequency <a name="nmr_data_assignment_data_frequency"></a>
     - Description: Spectrometer frequency for proton NMR acquisition. Default unit is MHz
     - Example: `300`
     - type: number
     - maximum: 500
     - minimum: 1
-  - frequency_units <a name="nmr_data_assignment_data_h_nmr_frequency_units"></a>
+  - frequency_units <a name="nmr_data_assignment_data_frequency_units"></a>
     - Description: Frequency units. Default is MHz
     - Example: `MHz`
     - type: string
     - MaxLength: 10
-  - spectrum <a name="nmr_data_assignment_data_h_nmr_spectrum"></a>
-    - shift <a name="nmr_data_assignment_data_h_nmr_spectrum_shift"></a>
+  - spectrum <a name="nmr_data_assignment_data_spectrum"></a>
+    - shift <a name="nmr_data_assignment_data_spectrum_shift"></a>
       - Description: Chemical shift for a given proton in the chemical structure
       - Example: `4.52`
       - type: number
       - maximum: 20
       - minimum: -2
-    - integration <a name="nmr_data_assignment_data_h_nmr_spectrum_integration"></a>
+    - integration <a name="nmr_data_assignment_data_spectrum_integration"></a>
       - Description: Relative integral under the curve for each signal. Computed from structure. Integer values
       - Example: `3`
       - type: integer
       - maximum: 1000
       - minimum: 0
-    - multiplicity <a name="nmr_data_assignment_data_h_nmr_spectrum_multiplicity"></a>
+    - multiplicity <a name="nmr_data_assignment_data_spectrum_multiplicity"></a>
       - Description: Description of the splitting of the signal. Examples include dd, dt, ddd dq etc.
       - Example: `t`
       - type: string
       - MaxLength: 20
-    - coupling <a name="nmr_data_assignment_data_h_nmr_spectrum_coupling"></a>
+    - coupling <a name="nmr_data_assignment_data_spectrum_spectrum_coupling"></a>
       - Description: Array of scalar coupling constants
       - Example: `[9.6]`
       - type: array (of numbers)
       - MaxLength: null
-    - atom_index <a name="nmr_data_assignment_data_h_nmr_spectrum_atom_index"></a>
+    - atom_index <a name="nmr_data_assignment_data_spectrum_atom_index"></a>
       - Description: Atom index from original data source (e.g. atom numbering from publication). Can be int or string
       - Example: `4'`
       - type: string
       - MaxLength: 50
-    - rdkit_index <a name="nmr_data_assignment_data_h_nmr_spectrum_rdkit_index"></a>
+    - rdkit_index <a name="nmr_data_assignment_data_spectrum_rdkit_index"></a>
       - Description: Array of atom indices using standard RDkit atom indexing. For example, CH3 will have three entries (one for each H) 
       - Example: `[10]`
       - type: array
       - MaxLength: null
-    - interchangeable_index <a name="nmr_data_assignment_data_h_nmr_spectrum_interchangeable_index"></a>
+    - interchangeable_index <a name="nmr_data_assignment_data_spectrum_interchangeable_index"></a>
       - Description: Array of RDkit atom indices that are interchangable with this assignment. Examples include diastereotopic methylene protons that are not explicitly defined, or atoms on two different groups (e.g. two CH3 groups) that cannot be unequivocally assigned with the available data
       - Example: `[]`
       - type: array
       - MaxLength: null
-
-- c_nmr <a name="nmr_data_assignment_data_c_nmr"></a>
-  - solvent <a name="nmr_data_assignment_data_c_nmr_solvent"></a>
-    - Description: Solvent in which NMR spectrum was acquired.
-    - Example: `CDCl3`
-    - type: string
-    - MaxLength: 20
-  - temperature <a name="nmr_data_assignment_data_c_nmr_temperature"></a>
-    - Description: Sample temperature for data acquisition. Default units are K.
-    - Example: `300`
-    - type: integer
-    - maximum: 500
-    - minimum: 1
-  - temperature_units <a name="nmr_data_assignment_data_c_nmr_temperature_units"></a>
-    - Description: Units for temperature value. Default is K.
-    - Example: `K`
-    - type: string
-    - MaxLength: 10
-  - reference <a name="nmr_data_assignment_data_c_nmr_reference"></a>
-    - Description: The referencing method (if known). Can be None. 'residual_solvent' is the most common entry.
-    - Example: `TMS`
-    - type: string
-    - MaxLength: 20
-  - frequency <a name="nmr_data_assignment_data_c_nmr_frequency"></a>
-    - Description: Spectrometer frequency for proton NMR acquisition. Default unit is MHz
-    - Example: `75`
-    - type: number
-    - maximum: 1000
-    - minimum: 1
-  - frequency_units <a name="nmr_data_assignment_data_c_nmr_frequency_units"></a>
-    - Description: Frequency units. Default is MHz
-    - Example: `MHz`
-    - type: string
-    - MaxLength: 10
-  - spectrum <a name="nmr_data_assignment_data_c_nmr_spectrum"></a>
-    - shift <a name="nmr_data_assignment_data_c_nmr_spectrum_shift"></a>
-      - Description: Chemical shift for a given carbon in the chemical structure
-      - Example: `22.75`
-      - type: integer
-      - maximum: 250
-      - minimum: -11
-    - atom_index <a name="nmr_data_assignment_data_c_nmr_spectrum_atom_index"></a>
-      - Description: Atom index from original data source (e.g. atom numbering from publication). Can be int or string
-      - Example: `6`
-      - type: string
-      - MaxLength: 50
-    - rdkit_index <a name="nmr_data_assignment_data_c_nmr_spectrum_rdkit_index"></a>
-      - Description: Atom index using standard RDkit atom indexing
-      - Example: `10`
-      - type: int
-      - maximum: 2000
-      - minimum: 1
 
 
 ## predicted_data <a name="nmr_data_predicted_data"></a>
