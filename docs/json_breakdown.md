@@ -48,15 +48,16 @@
 	- [show_organization_in_attribution](#depositor_info_show_organization_in_attribution)
 - [nmr_data](#nmr_data)
   - [peak_lists](#nmr_data_peak_lists)
-    - [atom][#nmr_data_peak_lists_atom]
+    - [nucleus](#nmr_data_peak_lists_nucleus)
     - [solvent](#nmr_data_peak_lists_solvent)
     - [reference](#nmr_data_peak_lists_reference)
     - [values](#nmr_data_peak_list_values)
     - [frequency](#nmr_data_peak_lists_frequency)
     - [frequency_units](#nmr_data_peak_lists_frequency_units)
-    - [temperature](#nmr_data_peak_lists_h_temperature)
+    - [temperature](#nmr_data_peak_lists_temperature)
     - [temperature_units](#nmr_data_peak_lists_temperature_units)
     - [peak_list_uuid](#nmr_data_peak_lists_peak_list_uuid)
+    - [linked_peak_list_uuids](#nmr_data_peak_lists_linked_peak_list_uuids)
     - [peak_list_embargo_release_ready](#nmr_data_peak_lists_peak_list_embargo_release_ready)
   - [experimental_data](#nmr_data_experimental_data)
     - [nmr_data_download_link](#nmr_data_experimental_data_nmr_data_download_link)
@@ -76,7 +77,7 @@
       - [spectrum_uuid](#nmr_data_experimental_data_nmr_metadata_spectrum_uuid)
       - [spectrum_embargo_release_ready](#nmr_data_experimental_data_nmr_metadata_spectrum_embargo_release_ready)
 	- [assignment_data](#nmr_data_assignment_data)
-        - [atom](#nmr_data_assignment_data_atom)
+        - [nucleus](#nmr_data_assignment_data_nucleus)
         - [solvent](#nmr_data_assignment_data_solvent)
         - [temperature](#nmr_data_assignment_data_temperature)
         - [temperature_units](#nmr_data_assignment_data_temperature_units)
@@ -325,7 +326,7 @@
 
 ## nmr_data <a name="nmr_data"></a>
 - peak_lists <a name="nmr_data_peak_lists"></a>
-  - atom <a name="nmr_data_peak_lists_atom"></a>
+  - nucleus <a name="nmr_data_peak_lists_nucleus"></a>
     - Description: The atom the assignment data pertains to.
     - One of: `C` or `H`
     - Example: `C`
@@ -357,7 +358,7 @@
     - Example: `MHz`
     - type: string
     - MaxLength: 10
-  - temperature <a name="nmr_data_peak_lists_h_temperature"></a>
+  - temperature <a name="nmr_data_peak_lists_temperature"></a>
     - Description: Sample temperature for data acquisition. Default units are K.
     - Example: `300`
     - type: integer
@@ -373,6 +374,10 @@
     - Example: `SD0z84d9Ds-D0nP9`
     - type: string
     - MaxLength: 16
+  - linked_peak_list_uuids <a name="nmr_data_peak_lists_linked_peak_list_uuids"></a>
+    - Description: array of UUID values of other peak_list_uuids that are linked to this peak list
+    - Example: `[BoS6oVW9Si-9a2rf]`
+    - type: array of strings
   - peak_list_embargo_release_ready <a name="nmr_data_peak_lists_peak_list_embargo_release_ready"></a>
     - Description: Whether or not THIS PEAK LIST is ready to be released according any embargoes on the submission. If false this peak list should be put into an embargoed (not publicly available) state. If true the peak list should be made publicly available. If the provided peak_list already exists in the main database this bool should OVERWRITE it.
     - Example: true

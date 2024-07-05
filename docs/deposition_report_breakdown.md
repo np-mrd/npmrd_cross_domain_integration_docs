@@ -13,6 +13,7 @@
 	- [peak_lists](#nmr_data_peak_lists)
 		- [peak_list_ingestion_status](#peak_list_ingestion_status)
         - [peak_list_uuid](#nmr_data_peak_lists_peak_list_uuid)
+        - [nucleus](#nmr_data_peak_lists_nucleus)
         - [peak_list_npmrd_db_release_status](#nmr_data_peak_lists_peak_list_npmrd_db_release_status)
         - [peak_list_errors](#nmr_data_peak_list_errors)
 	- [experimental_data](#nmr_data_experimental_data)
@@ -109,6 +110,11 @@
           - Example: `SD0z84d9Ds-D0nP9`
           - type: string
           - MaxLength: 16
+        - nucleus <a name="nmr_data_peak_lists_nucleus"></a>
+          - Description: The nucleus associated with this peak list entry.
+          - Example: `H`
+          - type: string
+          - One of: `H`, or `C`
         - peak_list_npmrd_db_release_status <a name="nmr_data_peak_lists_peak_list_npmrd_db_release_status"></a>
           - Description: Indicates whether or not this specific peak list has been `embargoed`, `released`, or `withdrawn`. Included to be able to track indiviudal peak lists.
           - Example: `embargoed`
