@@ -465,13 +465,13 @@
       - type: bool
 
 ## assignment_data <a name="nmr_data_assignment_data"></a>
-  - assignment_uuid <a name="nmr_data_assignment_data_atom"></a>
+  - assignment_uuid <a name="nmr_data_assignment_uuid"></a>
     - Description: Internal reference ID for an assignment data entry. Generated from the standard curator output based on the SMILEs, doi, and nucleus of the entry that has been converted to the exchange format.
     - Example: `6a9988ca-2f56-4230-8a62-45acc83db53b`
     - type: string
     - MaxLength: 36
     - MinLength: 36
-  - atom <a name="nmr_data_assignment_data_atom"></a>
+  - nucleus <a name="nmr_data_assignment_data_nuclues"></a>
     - Description: The atom the assignment data pertains to.
     - One of: `C` or `H`
     - Example: `C`

@@ -190,4 +190,39 @@
             ```
             {}
             ```
-        
+  - assignment_data <a name="nmr_data_assignment_data"></a>
+    - Type: array (of objects)
+    - Description: Status reporting for assignment data. Array in case there are multiple assignment data lists were submitted for a single compound. Can be left as a blank array if no assignment data was included.
+        - assignment_data_ingestion_status <a name="nmr_data_assignment_data_ingestion_status"></a>
+            - Description: Whether or not the ingestion of the provided assignmetn data was completed successfully or not.
+            - Example: `ingested`
+            - Type: array
+            - One of: `ingested`, `not_ingested`
+        - assignment_uuid <a name="nmr_data_assignment_data_assignment_uuid"></a>
+            - Description: uuid value unique to the provided assignment data. Used as an identifier for this assignment data. Full length 36 character uuid.
+            - Example: `ff29e8c3-bbcb-4165-9631-a103743dd703`
+            - type: string
+            - MaxLength: 36
+        - nucleus <a name="nmr_data_assignment_data_nucleus"></a>
+          - Description: The nucleus associated with this assignment data entry.
+          - Example: `H`
+          - type: string
+          - One of: `H`, or `C`
+        - assignment_data_npmrd_db_release_status <a name="nmr_data_assignment_data_assignment_data_npmrd_db_release_status"></a>
+          - Description: Indicates whether or not this specific assignment data entry has been `embargoed`, `released`, or `withdrawn`. Included to be able to track individual assignment data entries.
+          - Example: `embargoed`
+          - type: string
+          - One of: `embargoed`, `released`, or `withdrawn`
+        - assignment_data_errors <a name="nmr_data_assignment_data_errors"></a>
+            - Example (error):
+                ```
+                {
+                    "shift": "Too many C values were provided for the given SMILES",
+                    "coupling": "invalid value 2.94 provided in coupling list field."
+                }
+                ```
+            - Example (no error):
+                ```
+                {}
+                ```
+            - Type: object

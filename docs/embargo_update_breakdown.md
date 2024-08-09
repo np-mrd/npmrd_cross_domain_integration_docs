@@ -17,6 +17,7 @@
   - [compound_npmrd_db_release_status](#compounds_compound_npmrd_db_release_status)
   - [peak_lists](#compounds_peak_lists)
     - [peak_list_uuid](#compounds_peak_lists_peak_list_uuid)
+    - [nuclues](#compounds_peak_lists_nuclues)
     - [peak_list_embargo_release_ready](#compounds_peak_lists_peak_list_embargo_release_ready)
     - [peak_list_npmrd_db_release_status](#compounds_peak_lists_peak_list_npmrd_db_release_status)
   - [nmr_metadata](#compounds_nmr_metadata)
@@ -27,7 +28,8 @@
     - [spectrum_embargo_release_ready](#compounds_nmr_metadata_spectrum_embargo_release_ready)
     - [spectrum_npmrd_db_release_status](#compounds_nmr_metadata_spectrum_npmrd_db_release_status)
   - [assignment_data](#compounds_assignment_data)
-    - [assignment_data_uuid](#compounds_assignment_data_assignment_uuid)
+    - [assignment_uuid](#compounds_assignment_data_assignment_uuid)
+    - [nuclues](#compounds_assignment_data_nuclues)
     - [assignment_data_embargo_release_ready](#compounds_assignment_data_assignment_data_embargo_release_ready)
     - [assignment_data_npmrd_db_release_status](#compounds_assignment_data_assignment_data_npmrd_db_release_status)
 
@@ -151,6 +153,12 @@ type: list
       - Example: `SD0z84d9Ds-D0nP9`
       - type: string
       - MaxLength: 16
+    
+    - nuclues <a name="compounds_peak_lists_peak_list_nuclues"></a>
+      - Description: The nucleus associated with this peak list entry.
+      - Example: `H`
+      - type: string
+      - One of: `H`, or `C`
 
     - peak_list_embargo_release_ready <a name="compounds_peak_lists_peak_list_embargo_release_ready"></a>
       - Description: Whether or not THIS PEAK LIST is ready to be released according any embargoes on the submission. If false this peak list should be put into an embargoed (not publicly available) state. If true the peak list should be made publicly available. (For now) will never differ from `embargo_release_ready`.
@@ -200,11 +208,17 @@ type: list
   ### assignment_data <a name="compounds_assignment_data"></a>
   type: list
 
-    - assignment_data_uuid <a name="compounds_assignment_data_assignment_uuid"></a>
+    - assignment_uuid <a name="compounds_assignment_data_assignment_uuid"></a>
       - Description: uuid value unique to the provided assignment data. Used as an identifier for this assignmetn data. Full length 36 character uuid.
       - Example: `ff29e8c3-bbcb-4165-9631-a103743dd703`
       - type: string
       - MaxLength: 36
+    
+    - nuclues <a name="compounds_assignment_data_nuclues"></a>
+      - Description: The nucleus associated with this peak list entry.
+      - Example: `H`
+      - type: string
+      - One of: `H`, or `C`
 
     - assignment_data_embargo_release_ready <a name="compounds_peak_lists_peak_list_embargo_release_ready"></a>
       - Description: Whether or not THIS ASSIGNMENT DATA is ready to be released according any embargoes on the submission. If false this data should be put into an embargoed (not publicly available) state. If true this data should be made publicly available. This value should override any previous versions of it that were sent. (For now) should never differ from `embargo_release_ready`.
