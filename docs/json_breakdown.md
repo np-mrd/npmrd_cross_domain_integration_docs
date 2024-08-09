@@ -1,6 +1,6 @@
 # Exchange JSON Breakdown
 
-## <b>LAST UPDATED TO REFLECT VERSION 2.0.5<b/>
+## <b>LAST UPDATED TO REFLECT VERSION 2.0.6<b/>
 
 ## JSON Fields
 - [compound_name](#compound_name)
@@ -84,6 +84,7 @@
         - [reference](#nmr_data_assignment_data_reference)
         - [frequency](#nmr_data_assignment_data_frequency)
         - [frequency_units](#nmr_data_assignment_data_frequency_units)
+        - [assignment_data_embargo_release_ready](#nmr_data_assignment_data_release_ready)
         - [spectrum](#nmr_data_assignment_data_spectrum)
             - [shift](#nmr_data_assignment_data_spectrum_shift)
             - [integration](#nmr_data_assignment_data_spectrum_integration)
@@ -508,6 +509,10 @@
     - Example: `MHz`
     - type: string
     - MaxLength: 10
+  - assignment_data_embargo_release_ready <a name="nmr_data_assignment_data_release_ready"></a>
+    - Description: Whether or not THIS ASSIGNMENT DATA is ready to be released according any embargoes on the submission. If false this data should be put into an embargoed (not publicly available) state. If true this data should be made publicly available. This value should override any previous versions of it that were sent.
+    - Example: true
+    - type: bool
   - spectrum <a name="nmr_data_assignment_data_spectrum"></a>
     - shift <a name="nmr_data_assignment_data_spectrum_shift"></a>
       - Description: Chemical shift for a given proton in the chemical structure

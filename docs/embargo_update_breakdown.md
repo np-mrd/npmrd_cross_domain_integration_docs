@@ -26,6 +26,10 @@
     - [filetype](#compounds_nmr_metadata_filetype)
     - [spectrum_embargo_release_ready](#compounds_nmr_metadata_spectrum_embargo_release_ready)
     - [spectrum_npmrd_db_release_status](#compounds_nmr_metadata_spectrum_npmrd_db_release_status)
+  - [assignment_data](#compounds_assignment_data)
+    - [assignment_data_uuid](#compounds_assignment_data_assignment_uuid)
+    - [assignment_data_embargo_release_ready](#compounds_assignment_data_assignment_data_embargo_release_ready)
+    - [assignment_data_npmrd_db_release_status](#compounds_assignment_data_assignment_data_npmrd_db_release_status)
 
 
 NOTE: Fields marked with a `response_field` tag indicate that they  will be empty in the initial json that is pushed to NP-MRD but is expected to be updated (as part of the ingestion process) so that when this JSON is returned it can act as confirmation sent back to the deposition system. This is to simplify the json exchange process so that only one JSON is needed.
@@ -59,7 +63,7 @@ NOTE: Fields marked with a `response_field` tag indicate that they  will be empt
   - type: bool
 
 - embargo_npmrd_db_release_status <a name="embargo_npmrd_db_release_status"></a>
-  - Description: The current embargo status of in the NP-MRD Database FOR THIS SUBMISSION. Acts as a general guide for everything in this submission, however, there can be exceptions, i.e. there is an embargo on this submisison but one of the compounds sent already exists in the database.
+  - Description: The current embargo status of in the NP-MRD Database FOR THIS SUBMISSION. Acts as a general guide for everything in this submission, however, there can be exceptions, i.e. there is an embargo on this submission but one of the compounds sent already exists in the database. Updated by the database site and sent back to the deposition site.
   - Example: `embargoed`
   - type: string
   - One of: `embargoed`, `released`, `withdrawn`, or ``
@@ -133,7 +137,7 @@ type: list
   - type: bool
 
 - compound_npmrd_db_release_status <a name="compounds_compound_npmrd_db_release_status"></a>
-  - Description: The current embargo status of in the NP-MRD Database FOR THIS COMPOUND. If the compound already existed (prior to this submission) it should be classified as `released` regardless of the release status of its peaks and for the rest of the submission.
+  - Description: The current embargo status of in the NP-MRD Database FOR THIS COMPOUND. If the compound already existed (prior to this submission) it should be classified as `released` regardless of the release status of its peaks and for the rest of the submission. Updated by the database site and sent back to the deposition site.
   - Example: `embargoed`
   - type: string
   - One of: `embargoed`, `released`, `withdrawn`, or ``
@@ -154,7 +158,7 @@ type: list
       - type: bool
     
     - peak_list_npmrd_db_release_status <a name="compounds_peak_lists_peak_list_peak_list_npmrd_db_release_status"></a>
-      - Description: The current embargo status of in the NP-MRD Database FOR THIS PEAK LIST. Should follow the submission embargo status (unless there is an error).
+      - Description: The current embargo status of in the NP-MRD Database FOR THIS PEAK LIST. Should follow the submission embargo status (unless there is an error). Updated by the database site and sent back to the deposition site.
       - Example: `embargoed`
       - type: string
       - One of: `embargoed`, `released`, `withdrawn`, or ``
@@ -192,9 +196,23 @@ type: list
       - Description: Whether or not THIS SPECTRUM is ready to be released according any embargoes on the submission. If false this spectrum should be put into an embargoed (not publicly available) state. If true the spectrum should be made publicly available. (For now) will never differ from `embargo_release_ready`.
       - Example: true
       - type: bool
+
+  ### assignment_data <a name="compounds_assignment_data"></a>
+  type: list
+
+    - assignment_data_uuid <a name="compounds_assignment_data_assignment_uuid"></a>
+      - Description: uuid value unique to the provided assignment data. Used as an identifier for this assignmetn data. Full length 36 character uuid.
+      - Example: `ff29e8c3-bbcb-4165-9631-a103743dd703`
+      - type: string
+      - MaxLength: 36
+
+    - assignment_data_embargo_release_ready <a name="compounds_peak_lists_peak_list_embargo_release_ready"></a>
+      - Description: Whether or not THIS ASSIGNMENT DATA is ready to be released according any embargoes on the submission. If false this data should be put into an embargoed (not publicly available) state. If true this data should be made publicly available. This value should override any previous versions of it that were sent. (For now) should never differ from `embargo_release_ready`.
+      - Example: true
+      - type: bool
     
-    - peak_list_npmrd_db_release_status <a name="compounds_nmr_metadata_spectrum_peak_list_npmrd_db_release_status"></a>
-      - Description: The current embargo status of in the NP-MRD Database FOR THIS SPECTRUM. Should follow the submission embargo status (unless there is an error).
+    - assignment_data_npmrd_db_release_status <a name="compounds_assignment_data_assignment_data_npmrd_db_release_status"></a>
+      - Description: The current embargo status of in the NP-MRD Database FOR THIS ASSIGNMENT DATA. Should follow the submission embargo status (unless there is an error). Updated by the database site and sent back to the deposition site.
       - Example: `embargoed`
       - type: string
       - One of: `embargoed`, `released`, `withdrawn`, or ``
