@@ -470,7 +470,7 @@
 ## assignment_data <a name="nmr_data_assignment_data"></a>
   - assignment_uuid <a name="nmr_data_assignment_data_assignment_uuid"></a>
     - Description: uuid value unique to the provided assignment data. Used as an identifier for this assignment data. 38 characters in length due to including a standard 36 character uuid as well as an additional dash and nucleus character. The first 36 characters are identical to the "sister assignment entry" (between C and H) to make matching the two of them easier.
-    - Example: `ff29e8c3-bbcb-4165-9631-a103743dd703-C`
+    - Example: `ff29e8c3-bbcb-4165-9631-a103743dd703-c`
     - type: string
     - MaxLength: 38
   - curator_email_address <a name="nmr_data_assignment_data_curator_email_address"></a>
