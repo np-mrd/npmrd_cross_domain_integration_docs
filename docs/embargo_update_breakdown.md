@@ -208,11 +208,11 @@ type: list
   ### assignment_data <a name="compounds_assignment_data"></a>
   type: list
 
-    - assignment_uuid <a name="compounds_assignment_data_assignment_uuid"></a>
-      - Description: uuid value unique to the provided assignment data. Used as an identifier for this assignmetn data. Full length 36 character uuid.
-      - Example: `ff29e8c3-bbcb-4165-9631-a103743dd703`
-      - type: string
-      - MaxLength: 36
+    - assignment_uuid <a name="nmr_data_assignment_data_assignment_uuid"></a>
+        - Description: uuid value unique to the provided assignment data. Used as an identifier for this assignment data. 38 characters in length due to including a standard 36 character uuid as well as an additional dash and nucleus character. The first 36 characters are identical to the "sister assignment entry" (between C and H) to make matching the two of them easier.
+        - Example: `ff29e8c3-bbcb-4165-9631-a103743dd703-C`
+        - type: string
+        - MaxLength: 38
     
     - nuclues <a name="compounds_assignment_data_nuclues"></a>
       - Description: The nucleus associated with this peak list entry.

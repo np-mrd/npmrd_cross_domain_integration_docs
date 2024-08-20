@@ -77,6 +77,9 @@
       - [spectrum_uuid](#nmr_data_experimental_data_nmr_metadata_spectrum_uuid)
       - [spectrum_embargo_release_ready](#nmr_data_experimental_data_nmr_metadata_spectrum_embargo_release_ready)
 	- [assignment_data](#nmr_data_assignment_data)
+        - [assignment_uuid](#nmr_data_assignment_data_assignment_uuid)
+        - [curator_email_address](#nmr_data_assignment_data_curator_email_address)
+        - [rdkit_version](#nmr_data_assignment_data_curator_rdkit_version)
         - [nucleus](#nmr_data_assignment_data_nucleus)
         - [solvent](#nmr_data_assignment_data_solvent)
         - [temperature](#nmr_data_assignment_data_temperature)
@@ -465,12 +468,21 @@
       - type: bool
 
 ## assignment_data <a name="nmr_data_assignment_data"></a>
-  - assignment_uuid <a name="nmr_data_assignment_uuid"></a>
-    - Description: Internal reference ID for an assignment data entry. Generated from the standard curator output based on the SMILEs, doi, and nucleus of the entry that has been converted to the exchange format.
-    - Example: `6a9988ca-2f56-4230-8a62-45acc83db53b`
+  - assignment_uuid <a name="nmr_data_assignment_data_assignment_uuid"></a>
+    - Description: uuid value unique to the provided assignment data. Used as an identifier for this assignment data. 38 characters in length due to including a standard 36 character uuid as well as an additional dash and nucleus character. The first 36 characters are identical to the "sister assignment entry" (between C and H) to make matching the two of them easier.
+    - Example: `ff29e8c3-bbcb-4165-9631-a103743dd703-C`
     - type: string
-    - MaxLength: 36
-    - MinLength: 36
+    - MaxLength: 38
+  - curator_email_address <a name="nmr_data_assignment_data_curator_email_address"></a>
+    - Description: The email address of the individual that performed the curation using internal curation tools.
+    - Example: `curatorName@outlook.com`
+    - type: string
+    - MaxLength: 1000
+  - rdkit_version <a name="nmr_data_assignment_data_curator_rdkit_version"></a>
+    - Description: The version of rdkit that was used to perform this curation. Included due to changes in index numbering between rdkit versions.
+    - Example: `curatorName@outlook.com`
+    - type: string
+    - MaxLength: 100
   - nucleus <a name="nmr_data_assignment_data_nuclues"></a>
     - Description: The atom the assignment data pertains to.
     - One of: `C` or `H`
