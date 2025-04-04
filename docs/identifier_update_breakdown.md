@@ -15,22 +15,13 @@
   - [compound_smiles](#compounds_compound_smiles)
   - [compound_inchikey](#compounds_compound_inchikey)
   - [npmrd_id](#compounds_npmrd_id)
-  - [compound_submission_doi](#compound_submission_doi)
-  - [compound_submission_pii](#compound_submission_pii)
-  - [compound_submission_pmid](#compound_submission_pmid)
   - [peak_lists](#compounds_peak_lists)
     - [peak_list_uuid](#compounds_peak_lists_peak_list_uuid)
-    - [peak_list_submission_doi](#compounds_peak_lists_peak_list_submission_doi)
-    - [peak_list_submission_pii](#compounds_peak_lists_peak_list_submission_pii)
-    - [peak_list_submission_pmid](#compounds_peak_lists_peak_list_submission_pmid)
   - [nmr_metadata](#compounds_nmr_metadata)
     - [spectrum_uuid](#compounds_nmr_metadata_spectrum_uuid)
     - [extracted_experiment_folder](#compounds_nmr_metadata_extracted_experiment_folder)
     - [experiment_type](#compounds_nmr_metadata_experiment_type)
     - [filetype](#compounds_nmr_metadata_filetype)
-    - [spectrum_submission_doi](#compounds_nmr_metadata_spectrum_submission_doi)
-    - [spectrum_submission_pii](#compounds_nmr_metadata_spectrum_submission_pii)
-    - [spectrum_submission_pmid](#compounds_nmr_metadata_spectrum_submission_pmid)
 
 NOTE: Fields marked with a `response_field` tag indicate that they  will be empty in the initial json that is pushed to NP-MRD but is expected to be updated (as part of the ingestion process) so that when this JSON is returned it can act as confirmation sent back to the deposition system. This is to simplify the json exchange process so that only one JSON is needed.
 
@@ -76,14 +67,14 @@ NOTE: Fields marked with a `response_field` tag indicate that they  will be empt
   - One of: `ingested`, `not_ingested`, or null
   - `response_field`
 
-- doi_ingested <a name="doi_ingested"></a>
+- pii_ingested <a name="pii_ingested"></a>
   - Description: Whether or not the provided `submission_pii` was ingested. If the value is null (there is no pii to ingest) then this value should be null. It should only be `not_ingested` if the value was not ingested for some reason.
   - Example: `ingested`
   - Type: array
   - One of: `ingested`, `not_ingested`, or null
   - `response_field`
 
-- pmid_ingested <a name="doi_ingested"></a>
+- pmid_ingested <a name="pmid_ingested"></a>
   - Description: Whether or not the provided `submission_pmid` was ingested. If the value is null (there is no pmid to ingest) then this value should be null. It should only be `not_ingested` if the value was not ingested for some reason.
   - Example: `ingested`
   - Type: array
@@ -142,24 +133,6 @@ NOTE: Fields marked with a `response_field` tag indicate that they  will be empt
   - MinLegnth: 9
   - MaxLength: 9
 
-- compound_submission_doi <a name="compounds_compound_submission_doi"></a>
-  - Description: the Digital Object Identifier for the associated publication. Most articles have this. Applies to all data for THIS COMPOUND. (For now) will never differ from `submission_doi`.
-  - Example: `10.9999/npmr.99999999`
-  - type: string or None
-  - MaxLength: 1000
-
-- compound_submission_pii <a name="compounds_compound_submission_pii"></a>
-  - Description: Publisher Item Identifier. Used exclusively by the Elsevier publishing house.  Applies to all data for THIS COMPOUND. (For now) will never differ from `submission_pii`.
-  - Example: `null`
-  - type: string or None
-  - MaxLength: 20
-
-- compound_submission_pii <a name="compounds_compound_submission_pii"></a>
-  - Description: The PubMed Central ID number for the associated publications. Some articles have this. Applies to all data for THIS COMPOUND. (For now) will never differ from `submission_pmid`.
-  - Example: `32856641`
-  - type: int or None
-  - MaxLength: 20
-
   ### peak_lists <a name="compounds_peak_lists"></a>
   type: list
 
@@ -168,24 +141,6 @@ NOTE: Fields marked with a `response_field` tag indicate that they  will be empt
       - Example: `SD0z84d9Ds-D0nP9`
       - type: string
       - MaxLength: 16
-
-    - peak_list_submission_doi <a name="compounds_peak_lists_peak_list_submission_doi"></a>
-        - Description: the Digital Object Identifier for the associated publication. Most articles have this. Applies to all data for THIS PEAK LIST. (For now) will never differ from `submission_doi`.
-        - Example: `10.9999/npmr.99999999`
-        - type: string or None
-        - MaxLength: 1000
-
-    - peak_list_submission_pii <a name="compounds_peak_lists_peak_list_submission_pii"></a>
-        - Description: Publisher Item Identifier. Used exclusively by the Elsevier publishing house.  Applies to all data for THIS PEAK LIST. (For now) will never differ from `submission_pii`.
-        - Example: `null`
-        - type: string or None
-        - MaxLength: 20
-
-    - peak_list_submission_pmid <a name="compounds_peak_lists_peak_list_submission_pmid"></a>
-        - Description: The PubMed Central ID number for the associated publications. Some articles have this. Applies to all data for THIS PEAK LIST. (For now) will never differ from `submission_pmid`.
-        - Example: `32856641`
-        - type: int or None
-        - MaxLength: 20
 
   ### nmr_metadata <a name="compounds_nmr_metadata"></a>
   type: list
@@ -214,21 +169,3 @@ NOTE: Fields marked with a `response_field` tag indicate that they  will be empt
     - Example: `Bruker_native`
     - type: string
     - MaxLength: 30
-
-  - spectrum_submission_doi <a name="compounds_nmr_metadata_spectrum_submission_doi"></a>
-      - Description: the Digital Object Identifier for the associated publication. Most articles have this. Applies to all data for THIS SPECTRUM. (For now) will never differ from `submission_doi`.
-      - Example: `10.9999/npmr.99999999`
-      - type: string or None
-      - MaxLength: 1000
-
-  - spectrum_submission_pii <a name="compounds_nmr_metadata_spectrum_spectrum_submission_pii"></a>
-      - Description: Publisher Item Identifier. Used exclusively by the Elsevier publishing house.  Applies to all data for THIS SPECTRUM. (For now) will never differ from `submission_pii`.
-      - Example: `null`
-      - type: string or None
-      - MaxLength: 20
-
-  - spectrum_submission_pmid <a name="compounds_nmr_metadata_spectrum_spectrum_submission_pmid"></a>
-      - Description: The PubMed Central ID number for the associated publications. Some articles have this. Applies to all data for THIS SPECTRUM. (For now) will never differ from `submission_pmid`.
-      - Example: `32856641`
-      - type: int or None
-      - MaxLength: 20
