@@ -82,14 +82,14 @@ NOTE: Fields marked with a `response_field` tag indicate that they  will be empt
     - Description: A field to detail any errors in the embargo ingestion process.
     - Example (error):
         ```
-        {
-            "submission_uuid": "No data associated with the provided submission_uuid could be found",
-            "embargo_status": "Embargo status is not one of the valid options"
-        }
+        [
+            {"submission_uuid": "No data associated with the provided submission_uuid could be found"},
+            {"embargo_status": "Embargo status is not one of the valid options"}
+        ]
         ```
     - Example (no error):
         ```
-        {}
+        []
         ```
     - Type: object
     - Error Types:

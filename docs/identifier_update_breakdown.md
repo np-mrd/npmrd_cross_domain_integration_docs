@@ -86,13 +86,14 @@ NOTE: Fields marked with a `response_field` tag indicate that they  will be empt
     - Example: 
         - If error: 
         ```
-        {
-            "format_error": "submission_doi is not a valid string or null",
-        }
+        [
+            {"format_error": "submission_doi is not a valid string"},
+            {"format_error": "submission_pii is not a valid string"}
+        ]
         ```
         - If no Error:
         ```
-        {}
+        []
         ```
     - Type: object
     - Error Types:
