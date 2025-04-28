@@ -1,4 +1,142 @@
-## Identifier Update Json
+## Purpose
+
+In the deposition platform users are able to complete presubmissions without providing a publication identifier. The deposition platform has tools and pipelines in place to link these identifiers to presubmissions once they have been published. This json used to send doi, pii, and pmid values that have been retroactively ingested in this way to the Database website.
+
+## Usage Flow
+This API call is triggered through a cronjob in the deposition backend once every hour. It pushes the json to the database website with the expectation of an immediate ingestion response. The response is expected to contain an updated version of the exchange json which reflects the ingestion status of compounds.
+
+- Source: NP-MRD Deposition Platform
+- Target: NP-MRD Database Platform. Is sent to the database site endpoint `[DATABASE_SITE_API_PATH]/external_depositions/update_identifier`
+- Response Type: Immediate response contains ingestion status
+- Response Format: Modify the provided exchange json to a response version and return it.
+
+
+## Testing
+This json can be generated for any entry in the deposition database at the API endpoint `[DEPOSITION_SITE_EXCHANGE_API]/generate_npmrd_exchange_identifier_json`.
+
+On the dev server this test json can be generated and automatically pushed to the Target endpoint on the NP-MRD database website via the API call `[DEPOSITION_SITE_EXCHANGE_API]/send_npmrd_exchange_identifier_json_to_npmrd`.
+
+## Example json
+
+### Send json
+
+```
+[
+  {
+    "submission_uuid": "3d4f4c42-96f6-4c26-b411-9f92bf58da96",
+    "submission_type": "presubmission_match",
+    "submission_doi": "10.999/test.2025.99999",
+    "submission_pii": "s009999999999999",
+    "submission_pmid": null,
+    "doi_ingested": null,
+    "pii_ingested": null,
+    "pmid_ingested": null,
+    "identifier_ingestion_errors": [],
+    "compounds": [
+      {
+        "compound_name": "TEST COMP 2",
+        "compound_uuid": "GrJXd6HDqY",
+        "compound_smiles": "CC=CCC\\CCCC/CCC=CCCCC/CC=CCC\\CCCC/CCC=CCCCCCC",
+        "compound_inchikey": "MNBSRDQSGVNSQD-UHFFFAOYSA-N",
+        "npmrd_id": "NP9999999",
+        "peak_lists": [],
+        "nmr_metadata": [
+          {
+            "spectrum_uuid": "GrJXd6HDqY-zNCYy",
+            "extracted_experiment_folder": "1H_1D",
+            "experiment_type": "1D",
+            "filetype": "Varian_native"
+          }
+        ]
+      },
+      {
+        "compound_name": "TEST COMP 1",
+        "compound_uuid": "YeybvJF6eu",
+        "compound_smiles": "CC=CCC\\CCCC/CCC=CCCCC/CC=CCC\\CCCC/CCC=CCCCC",
+        "compound_inchikey": "RREZTOXHAUZFQT-UHFFFAOYSA-N",
+        "npmrd_id": "NP9999999",
+        "peak_lists": [],
+        "nmr_metadata": [
+          {
+            "spectrum_uuid": "YeybvJF6eu-ibqUf",
+            "extracted_experiment_folder": "1H_1D",
+            "experiment_type": "1D",
+            "filetype": "Varian_native"
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+
+### Response json
+
+```
+[
+  {
+    "submission_uuid": "3d4f4c42-96f6-4c26-b411-9f92bf58da96",
+    "submission_type": "presubmission_match",
+    "submission_doi": "10.999/test.2025.99999",
+    "submission_pii": "s009999999999999",
+    "submission_pmid": null,
+    "doi_ingested": true,
+    "pii_ingested": true,
+    "pmid_ingested": null,
+    "identifier_ingestion_errors": [
+      {
+        "type": "identifier_error",
+        "message": "TEST ERROR: test identifier_error"
+      }
+    ],
+    "compounds": [
+      {
+        "compound_name": "TEST COMP 2",
+        "compound_uuid": "GrJXd6HDqY",
+        "compound_smiles": "CC=CCC\\CCCC/CCC=CCCCC/CC=CCC\\CCCC/CCC=CCCCCCC",
+        "compound_inchikey": "MNBSRDQSGVNSQD-UHFFFAOYSA-N",
+        "npmrd_id": "NP9999999",
+        "peak_lists": [],
+        "nmr_metadata": [
+          {
+            "spectrum_uuid": "GrJXd6HDqY-zNCYy",
+            "extracted_experiment_folder": "1H_1D",
+            "experiment_type": "1D",
+            "filetype": "Varian_native"
+          }
+        ]
+      },
+      {
+        "compound_name": "TEST COMP 1",
+        "compound_uuid": "YeybvJF6eu",
+        "compound_smiles": "CC=CCC\\CCCC/CCC=CCCCC/CC=CCC\\CCCC/CCC=CCCCC",
+        "compound_inchikey": "RREZTOXHAUZFQT-UHFFFAOYSA-N",
+        "npmrd_id": "NP9999999",
+        "peak_lists": [
+          {
+            "peak_list_uuid": "YeybvJF6eu-zLqXn"
+          }
+        ],
+        "nmr_metadata": [
+          {
+            "spectrum_uuid": "YeybvJF6eu-ibqUf",
+            "extracted_experiment_folder": "1H_1D",
+            "experiment_type": "1D",
+            "filetype": "Varian_native"
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+
+
+## json Breakdown
+
+The json is exchanged as an **array** of entries containing the following. Each entry in the array exists on a **submission** basis with further nesting to hold individual compound information. Note that the final array may include multiple submissions worth of entries, each as their own (outermost) array entry.
+
+NOTE: Fields tagged with response_field will initially be empty in the JjsonSON data pushed to NP-MRD. These fields are intended to be populated during the ingestion process, so that when the json is returned, it serves as a confirmation back to the deposition system. This approach simplifies the exchange by requiring only a single json document throughout the process.
 
 - [submission_uuid](#submission_uuid)
 - [submission_type](#submission_type)
@@ -23,8 +161,6 @@
     - [experiment_type](#compounds_nmr_metadata_experiment_type)
     - [filetype](#compounds_nmr_metadata_filetype)
 
-NOTE: Fields marked with a `response_field` tag indicate that they  will be empty in the initial json that is pushed to NP-MRD but is expected to be updated (as part of the ingestion process) so that when this JSON is returned it can act as confirmation sent back to the deposition system. This is to simplify the json exchange process so that only one JSON is needed.
-
 - submission_uuid <a name="submission_uuid"></a>
   - Description: Internal reference ID for the deposition system. This is the primary key for submission-based data storage. Fixed length 36 character uuid string.
   - Example: `97d6db8a-631d-43bf-8afd-3208f79ec8d3`
@@ -45,40 +181,40 @@ NOTE: Fields marked with a `response_field` tag indicate that they  will be empt
 - submission_doi <a name="submission_doi"></a>
   - Description: the Digital Object Identifier for the associated publication. Most articles have this. Applies to all data for THIS SUBMISSION.
   - Example: `10.9999/npmr.99999999`
-  - type: string or None
+  - type: string or null
   - MaxLength: 1000
 
 - submission_pii <a name="submission_pii"></a>
   - Description: Publisher Item Identifier. Used exclusively by the Elsevier publishing house.  Applies to all data for THIS SUBMISSION.
-  - Example: `null`
-  - type: string or None
+  - Example: `s009999999999999`
+  - type: string or null
   - MaxLength: 20
 
 - submission_pmid <a name="submission_pmid"></a>
   - Description: The PubMed Central ID number for the associated publications. Some articles have this. Applies to all data for THIS SUBMISSION.
-  - Example: `32856641`
-  - type: int or None
+  - Example: `9999999`
+  - type: int or null
   - MaxLength: 20
 
 - doi_ingested <a name="doi_ingested"></a>
-  - Description: Whether or not the provided `submission_doi` was ingested. If the value is null (there is no doi to ingest) then this value should be null. It should only be `not_ingested` if the value was not ingested for some reason.
-  - Example: `ingested`
-  - Type: array
-  - One of: `ingested`, `not_ingested`, or null
+  - Description: Whether or not the provided `submission_doi` was ingested. It should be false if a doi was not provided OR if it failed to ingest. This value starts as null when generated in the deposition platform.
+  - Example: true
+  - Type: bool or null
+  - One of: true, false, null
   - `response_field`
 
 - pii_ingested <a name="pii_ingested"></a>
-  - Description: Whether or not the provided `submission_pii` was ingested. If the value is null (there is no pii to ingest) then this value should be null. It should only be `not_ingested` if the value was not ingested for some reason.
-  - Example: `ingested`
-  - Type: array
-  - One of: `ingested`, `not_ingested`, or null
+  - Description: Whether or not the provided `submission_pii` was ingested. It should be false if a pii was not provided OR if it failed to ingest. This value starts as null when generated in the deposition platform.
+  - Example: true
+  - Type: bool or null
+  - One of: true, false, null
   - `response_field`
 
 - pmid_ingested <a name="pmid_ingested"></a>
-  - Description: Whether or not the provided `submission_pmid` was ingested. If the value is null (there is no pmid to ingest) then this value should be null. It should only be `not_ingested` if the value was not ingested for some reason.
-  - Example: `ingested`
-  - Type: array
-  - One of: `ingested`, `not_ingested`, or null
+  - Description: Whether or not the provided `submission_pmid` was ingested. It should be false if a pmid was not provided OR if it failed to ingest. This value starts as null when generated in the deposition platform.
+  - Example: true
+  - Type: bool or null
+  - One of: true, false, null
   - `response_field`
 
 - identifier_ingestion_errors <a name="identifier_ingestion_errors"></a>
