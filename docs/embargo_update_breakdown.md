@@ -1,3 +1,184 @@
+## Purpose
+When submitting data as a presubmission, users have the option to set an embargo, preventing the data from being viewable by all users of the NP-MRD database. During the embargo period, the data is accessible only to the depositor and authorized NP-MRD administrators. The deposition platform tracks the embargo status, and when the data is ready for release, this json is sent to update its status. Once released, the data becomes viewable in the NP-MRD Database for all users.
+
+## Usage Flow
+This API call is triggered through a cronjob in the deposition backend once every hour. It pushes the json to the database website with the expectation of an immediate ingestion response. The response is expected to contain an updated version of the exchange json which reflects the ingestion status of compounds.
+
+- Source: NP-MRD Deposition Platform
+- Target: NP-MRD Database Platform. Is sent to the database site endpoint `[DATABASE_SITE_API_PATH]/external_depositions/update_embargo_status`
+- Response Type: Immediate response contains ingestion status
+- Response Format: Modify the provided exchange json to a response version and return it.
+
+## Testing
+This json can be generated for any entry in the deposition database at the API endpoint `[DEPOSITION_SITE_EXCHANGE_API]/generate_npmrd_exchange_embargo_update_json`.
+
+On the dev server this test json can be generated and automatically pushed to the Target endpoint on the NP-MRD database website via the API call `[DEPOSITION_SITE_EXCHANGE_API]/send_npmrd_exchange_embargo_update_json_to_npmrd`.
+
+## Example json
+
+
+### Send json
+
+```
+[
+  {
+    "submission_uuid": "5fe927ac-beff-42d8-80c0-38be7b36c7dc",
+    "embargo_status": "release_immediately",
+    "embargo_date": null,
+    "embargo_release_ready": true,
+    "embargo_npmrd_db_release_status": "",
+    "embargo_npmrd_db_ingestion_successful": null,
+    "embargo_errors": [],
+    "compounds": [
+      {
+        "compound_name": "TEST COMP 1 kz2d017",
+        "compound_uuid": "WYMTuDRk2Q",
+        "compound_smiles": "C=CCCC=CCCCCCCCCCCCC(=O)CCCCCCCNCCCCCC",
+        "compound_inchikey": "SEJHMTMZTDBHAM-UHFFFAOYSA-N",
+        "npmrd_id": "NP9999999",
+        "compound_embargo_release_ready": true,
+        "compound_npmrd_db_release_status": "",
+        "peak_lists": [
+          {
+            "peak_list_uuid": "WYMTuDRk2Q-8qaaX",
+            "peak_list_embargo_release_ready": true,
+            "peak_list_npmrd_db_release_status": ""
+          }
+        ],
+        "nmr_metadata": [
+          {
+            "spectrum_uuid": "WYMTuDRk2Q-2A6cg",
+            "extracted_experiment_folder": "1H_1D",
+            "experiment_type": "1D",
+            "filetype": "Varian_native",
+            "spectrum_embargo_release_ready": true,
+            "spectrum_npmrd_db_release_status": ""
+          }
+        ]
+      },
+      {
+        "compound_name": "TEST COMP 2 kz2d017",
+        "compound_uuid": "Cmip6VtE2G",
+        "compound_smiles": "C=CCCC=CCCCCCCCCCCCC(=O)CCCCC=CCCNCCCCCC",
+        "compound_inchikey": "YRNOKDXIABASKX-UHFFFAOYSA-N",
+        "npmrd_id": "NP9999999",
+        "compound_embargo_release_ready": true,
+        "compound_npmrd_db_release_status": "",
+        "peak_lists": [
+          {
+            "peak_list_uuid": "Cmip6VtE2G-3JFgy",
+            "peak_list_embargo_release_ready": true,
+            "peak_list_npmrd_db_release_status": ""
+          },
+          {
+            "peak_list_uuid": "Cmip6VtE2G-KotG6",
+            "peak_list_embargo_release_ready": true,
+            "peak_list_npmrd_db_release_status": ""
+          }
+        ],
+        "nmr_metadata": [
+          {
+            "spectrum_uuid": "Cmip6VtE2G-JQWaq",
+            "extracted_experiment_folder": "1H_1D",
+            "experiment_type": "1D",
+            "filetype": "Varian_native",
+            "spectrum_embargo_release_ready": true,
+            "spectrum_npmrd_db_release_status": ""
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+
+### Response json
+
+```
+[
+  {
+    "submission_uuid": "5fe927ac-beff-42d8-80c0-38be7b36c7dc",
+    "embargo_status": "release_immediately",
+    "embargo_date": null,
+    "embargo_release_ready": true,
+    "embargo_npmrd_db_release_status": "released",
+    "embargo_npmrd_db_ingestion_successful": false,
+    "embargo_errors": [
+      {
+        "type": "embargo_error",
+        "message": "TEST ERROR: Embargo release couldn't be processed"
+      }
+    ],
+    "compounds": [
+      {
+        "compound_name": "TEST COMP 1 kz2d017",
+        "compound_uuid": "WYMTuDRk2Q",
+        "compound_smiles": "C=CCCC=CCCCCCCCCCCCC(=O)CCCCCCCNCCCCCC",
+        "compound_inchikey": "SEJHMTMZTDBHAM-UHFFFAOYSA-N",
+        "npmrd_id": "NP9999999",
+        "compound_embargo_release_ready": true,
+        "compound_npmrd_db_release_status": "released",
+        "peak_lists": [
+          {
+            "peak_list_uuid": "WYMTuDRk2Q-8qaaX",
+            "peak_list_embargo_release_ready": true,
+            "peak_list_npmrd_db_release_status": "released"
+          }
+        ],
+        "nmr_metadata": [
+          {
+            "spectrum_uuid": "WYMTuDRk2Q-2A6cg",
+            "extracted_experiment_folder": "1H_1D",
+            "experiment_type": "1D",
+            "filetype": "Varian_native",
+            "spectrum_embargo_release_ready": true,
+            "spectrum_npmrd_db_release_status": "released"
+          }
+        ]
+      },
+      {
+        "compound_name": "TEST COMP 2 kz2d017",
+        "compound_uuid": "Cmip6VtE2G",
+        "compound_smiles": "C=CCCC=CCCCCCCCCCCCC(=O)CCCCC=CCCNCCCCCC",
+        "compound_inchikey": "YRNOKDXIABASKX-UHFFFAOYSA-N",
+        "npmrd_id": "NP9999999",
+        "compound_embargo_release_ready": true,
+        "compound_npmrd_db_release_status": "released",
+        "peak_lists": [
+          {
+            "peak_list_uuid": "Cmip6VtE2G-3JFgy",
+            "peak_list_embargo_release_ready": true,
+            "peak_list_npmrd_db_release_status": "released"
+          },
+          {
+            "peak_list_uuid": "Cmip6VtE2G-KotG6",
+            "peak_list_embargo_release_ready": true,
+            "peak_list_npmrd_db_release_status": "released"
+          }
+        ],
+        "nmr_metadata": [
+          {
+            "spectrum_uuid": "Cmip6VtE2G-JQWaq",
+            "extracted_experiment_folder": "1H_1D",
+            "experiment_type": "1D",
+            "filetype": "Varian_native",
+            "spectrum_embargo_release_ready": true,
+            "spectrum_npmrd_db_release_status": "released"
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+
+
+## json Breakdown
+
+The json is exchanged as an **array** of entries containing the following. Each entry in the array exists on a **submission** basis with further nesting to hold individual compound information. Note that the final array may include multiple submissions worth of entries, each as their own (outermost) array entry.
+
+NOTE: Fields marked with a `response_field` tag indicate that they  will be empty in the initial json that is pushed to NP-MRD but is expected to be updated (as part of the ingestion process) so that when this JSON is returned it can act as confirmation sent back to the deposition system. This is to simplify the json exchange process so that only one JSON is needed.
+
 ## Embargo Update Json
 
 - [submission_uuid](#submission_uuid)
@@ -33,8 +214,6 @@
     - [assignment_data_embargo_release_ready](#compounds_assignment_data_assignment_data_embargo_release_ready)
     - [assignment_data_npmrd_db_release_status](#compounds_assignment_data_assignment_data_npmrd_db_release_status)
 
-
-NOTE: Fields marked with a `response_field` tag indicate that they  will be empty in the initial json that is pushed to NP-MRD but is expected to be updated (as part of the ingestion process) so that when this JSON is returned it can act as confirmation sent back to the deposition system. This is to simplify the json exchange process so that only one JSON is needed.
 
 - submission_uuid <a name="submission_uuid"></a>
   - Description: Internal reference ID for the deposition system. This is the primary key for submission-based data storage. Fixed length 36 character uuid string.
