@@ -236,7 +236,9 @@ NOTE: Fields tagged with response_field will initially be empty in the JjsonSON 
         - `format_error`: Something is wrong the format of one of the identifiers
     - `response_field`
 
-## compounds <a name="compounds"></a>
+#### • compounds <a name="compounds"></a>
+-- Description: Array to hold compound information on each compound associated with this json to have its identifier updated.<br>
+-- type: array
 
 - compound_name <a name="compounds_compound_name"></a>
   - Description: Common name for natural product. Can be a common name (as example), or an alpha-numeric code, or sometimes an IUPAC name. If compounds are not named in the paper they should be listed as 'Not named' to differentiate entries that are known to have no name from entries where the name is unknown (which should be Null)
