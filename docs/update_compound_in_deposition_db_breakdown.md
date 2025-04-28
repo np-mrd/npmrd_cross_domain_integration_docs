@@ -1,8 +1,11 @@
-## Report Update
+## Update Compound In Deposition Db
 
 Json used to take name, species, genus, or structure updates that has been performed on the database website and send them back to the deposition website.
 
-Any fields changed from what they were when they were originally sent from the deposition system cause the name to update in the deposition system.
+The provided json will cause any fields changed in the database website (from when they were when originally sent from the deposition system) to be updated in the deposition system.
+
+Should be called whenever a compound with a deposition system compound_uuid is updated on the database website. This allows both the database site and the deposition system to keep up to date with one another.
+
 
 - [submission_uuid](#submission_uuid)
 - [compounds](#compounds)
@@ -12,7 +15,7 @@ Any fields changed from what they were when they were originally sent from the d
   - [compound_inchikey](#compounds_compound_inchikey)
   - [npmrd_id](#compounds_npmrd_id)
   - [genus](#compounds_genus)
-  - [genus](#compounds_species)
+  - [species](#compounds_species)
 
 # JSON
 - submission_uuid <a name="submission_uuid"></a>
@@ -24,6 +27,19 @@ Any fields changed from what they were when they were originally sent from the d
 
 
 ## compounds <a name="compounds"></a>
+- type: list (of dict)
+- Example:
+    ```
+        [{
+            'compound_name': 'TEST COMP 2',
+            'compound_uuid': 'GrJXd6HDqY',
+            'compound_smiles': CCC,
+            'compound_inchikey': VQOIHQFCIVFBEC-IQPAJRPASA-N,
+            'genus': 'TEST GENUS',
+            'species': 'TEST SPECIES'
+        }]
+    ```
+
 - compound_uuid <a name="compounds_compound_uuid"></a>
   - Description: The compound_uuid of the compound that is being updated. Must match an entry in the Deposition system.
   - Example: `SD0z84d9Ds`
