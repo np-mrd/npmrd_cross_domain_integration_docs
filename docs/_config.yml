@@ -7,3 +7,15 @@ back_to_top_text: "Back to top"
 
 # Footer last edited timestamp
 last_edit_timestamp: true 
+
+nav:
+  - Home: index.md
+  - JSON Breakdown:
+      - Exchange JSON: json_breakdown.md
+      - Deposition Report: deposition_report_breakdown.md
+  - Deposition Exchange:
+      - Embargo Update: deposition_exchange/embargo_update_breakdown.md
+      - Identifier Update: deposition_exchange/identifier_update_breakdown.md
+      - Update Compound: deposition_exchange/update_compound_in_deposition_db_breakdown.md
+      - Exchange Breakdown: deposition_exchange/exchange_breakdown.md
+      - Report Breakdown: deposition_exchange/report_breakdown.md
