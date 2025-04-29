@@ -1,14 +1,26 @@
-## Purpose
+# Identifier Update JSON
 
+### Updated to Reflect Version: 1.01
+
+## Purpose
 In the deposition platform users are able to complete presubmissions without providing a publication identifier. The deposition platform has tools and pipelines in place to link these identifiers to presubmissions once they have been published. This json used to send doi, pii, and pmid values that have been retroactively ingested in this way to the Database website.
 
 ## Usage Flow
 This API call is triggered through a cronjob in the deposition backend once every hour. It pushes the json to the database website with the expectation of an immediate ingestion response. The response is expected to contain an updated version of the exchange json which reflects the ingestion status of compounds.
 
-- Source: NP-MRD Deposition Platform
-- Target: NP-MRD Database Platform. Is sent to the database site endpoint `[DATABASE_SITE_API_PATH]/external_depositions/update_identifier`
-- Response Type: Immediate response contains ingestion status
+- JSON Type: Array of object entries.
+- Source: NP-MRD Deposition Platform.
+- Target: NP-MRD Database Platform.
+- Request Type: POST.
+- Response Type: Immediate response.
 - Response Format: Modify the provided exchange json to a response version and return it.
+
+## API Endpoint
+This json should be sent to the endpoint `[DATABASE_SITE_API_PATH]/external_depositions/update_identifier`.
+
+Response HTTP Status Code:
+- Success: 200
+- Error: 400+: a number of 400+ response error codes that are thrown if there are errors updating data in the database
 
 
 ## Testing
@@ -136,8 +148,9 @@ On the dev server this test json can be generated and automatically pushed to th
 
 The json is exchanged as an **array** of entries containing the following. Each entry in the array exists on a **submission** basis with further nesting to hold individual compound information. Note that the final array may include multiple submissions worth of entries, each as their own (outermost) array entry.
 
-NOTE: Fields tagged with response_field will initially be empty in the JjsonSON data pushed to NP-MRD. These fields are intended to be populated during the ingestion process, so that when the json is returned, it serves as a confirmation back to the deposition system. This approach simplifies the exchange by requiring only a single json document throughout the process.
+NOTE: Fields tagged with response_field will initially be empty in the json data pushed to NP-MRD. These fields are intended to be populated during the ingestion process, so that when the json is returned, it serves as a confirmation back to the deposition system. This approach simplifies the exchange by requiring only a single json document throughout the process.
 
+- [json_version](#json_version)
 - [submission_uuid](#submission_uuid)
 - [submission_type](#submission_type)
 - [submission_doi](#submission_doi)
@@ -160,6 +173,11 @@ NOTE: Fields tagged with response_field will initially be empty in the JjsonSON 
     - [extracted_experiment_folder](#compounds_nmr_metadata_extracted_experiment_folder)
     - [experiment_type](#compounds_nmr_metadata_experiment_type)
     - [filetype](#compounds_nmr_metadata_filetype)
+
+- json_version <a name="json_version"></a>
+  - Description: The version of the json format. Increments whenever the json format is updated
+  - Example: `1.01`
+  - type: float
 
 - submission_uuid <a name="submission_uuid"></a>
   - Description: Internal reference ID for the deposition system. This is the primary key for submission-based data storage. Fixed length 36 character uuid string.

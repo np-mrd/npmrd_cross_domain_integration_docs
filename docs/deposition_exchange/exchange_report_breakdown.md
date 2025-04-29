@@ -1,4 +1,140 @@
+# Deposition Report JSON
+
+### Updated to Reflect Version: 1.01
+
+## Purpose
+After a deposition exchange json is sent from the NP-MRD deposition system to the NP-MRD database system, ingestion is expected to take anywhere from several minutes to up to an hour. As a result, an immediate response is not expected. Once ingestion is complete, the database system generates this response json and sends it back to the deposition system to provide a status update on the success of the ingestion process.
+
+## Usage Flow
+This API call should be triggered every time a deposition json has finished being processed in the NP-MRD Database website (regardless of if the ingestion was successful or not) and immediately sent to the deposition system. All compounds in a deposition json (which exist on a compound-by-compound basis) are expected to be returned in a single json due to how the deposition system tracks exchange status.
+
+- JSON Type: Array of object entries.
+- Source: NP-MRD Database Platform
+- Target: NP-MRD Deposition Platform. Is sent to the database site endpoint `[DEPOSITION_SITE_EXCHANGE_API]/report_ingestion_status`
+- Request Type: POST.
+- Response Type: Success assumed based on HTTP status code returned.
+- Response Format: None.
+
+## API Endpoint
+This json should be sent to the endpoint `[DEPOSITION_SITE_EXCHANGE_API]/report_ingestion_status`.
+
+Response HTTP Status Code:
+- Success: 200
+- Error: 400+: a number of 400+ response error codes that are thrown if there are errors updating data in the database
+
+
+## Testing
+This json can be generated for any entry in the deposition database at the API endpoint `[DEPOSITION_SITE_EXCHANGE_API]/generate_npmrd_exchange_deposition_report_json`.
+
+On the dev server ingestion of this json can be tested by running `[DEPOSITION_SITE_EXCHANGE_API]/generate_npmrd_exchange_deposition_json`, which will generate a deposition exchange json and send it to the database website which should then return this json as a response.
+
+## Example json
+
+```
+[
+  {
+    "compound_name": "TEST COMP 2",
+    "genus": "TEST GENUS",
+    "species": "TEST SPECIES",
+    "compound_uuid": "GrJXd6HDqY",
+    "submission_uuid": "3d4f4c42-96f6-4c26-b411-9f92bf58da96",
+    "send_record_id": 0,
+    "smiles": "CC=CCCCCCCCCC=CCCCCCC=CCCCCCCCCC=CCCCCCC",
+    "inchikey": "MNBSRDQSGVNSQD-UHFFFAOYSA-N",
+    "np_card_status": "created",
+    "npmrd_id": "NP9999999",
+    "compound_npmrd_db_release_status": "released",
+    "npmrd_match_status": "new_entry",
+    "ingestion_time": "2025-04-28T21:51:59.788736+00:00",
+    "compound_errors": [
+      {
+        "type": "compound_error",
+        "message": "TEST ERROR: Compound could not be processed"
+      }
+    ],
+    "nmr_data": {
+      "peak_lists": [],
+      "experimental_data": [
+        {
+          "experiment_type": "1D",
+          "extracted_experiment_folder": "1H_1D",
+          "vendor": "Varian",
+          "filetype": "Varian_native",
+          "spectrum_ingestion_status": "ingested",
+          "spectrum_uuid": "GrJXd6HDqY-zNCYy",
+          "spectrum_npmrd_db_release_status": "released",
+          "spectrum_errors": [
+            {
+              "type": "spectrum_error",
+              "message": "TEST ERROR: Spectrum could not be processed"
+            }
+          ]
+        }
+      ],
+      "assignment_data": {}
+    }
+  },
+  {
+    "compound_name": "TEST COMP 1",
+    "genus": "TEST GENUS",
+    "species": "TEST SPECIES",
+    "compound_uuid": "YeybvJF6eu",
+    "submission_uuid": "3d4f4c42-96f6-4c26-b411-9f92bf58da96",
+    "send_record_id": 0,
+    "smiles": "CC=CCCCCCCCCC=CCCCCCC=CCCCCCCCCC=CCCCC",
+    "inchikey": "RREZTOXHAUZFQT-UHFFFAOYSA-N",
+    "np_card_status": "created",
+    "npmrd_id": "NP9999999",
+    "compound_npmrd_db_release_status": "released",
+    "npmrd_match_status": "new_entry",
+    "ingestion_time": "2025-04-28T21:51:59.788736+00:00",
+    "compound_errors": [],
+    "nmr_data": {
+      "peak_lists": [
+        {
+          "nucleus": "C",
+          "peak_list_ingestion_status": "ingested",
+          "peak_list_uuid": "YeybvJF6eu-zLqXn",
+          "peak_list_npmrd_db_release_status": "released",
+          "peak_list_errors": [
+            {
+              "type": "peak_list_error",
+              "message": "TEST ERROR: Peak List could not be processed"
+            }
+          ]
+        },
+        {
+          "nucleus": "H",
+          "peak_list_ingestion_status": "ingested",
+          "peak_list_uuid": "YeybvJF6eu-zLqXn",
+          "peak_list_npmrd_db_release_status": "released",
+          "peak_list_errors": []
+        }
+      ],
+      "experimental_data": [
+        {
+          "experiment_type": "1D",
+          "extracted_experiment_folder": "1H_1D",
+          "vendor": "Varian",
+          "filetype": "Varian_native",
+          "spectrum_ingestion_status": "ingested",
+          "spectrum_uuid": "YeybvJF6eu-ibqUf",
+          "spectrum_npmrd_db_release_status": "released",
+          "spectrum_errors": []
+        }
+      ],
+      "assignment_data": {}
+    }
+  }
+]
+```
+
+
 ## Deposition Report JSON Fields
+
+The json is exchanged as an **array** of entries containing the following. Each entry in the array exists on a **compound** basis and contains the information relating to the submission.
+
+- [json_version](#json_version)
 - [compound_name](#compound_name)
 - [compound_uuid](#compound_uuid)
 - [submission_uuid](#submission_uuid)
@@ -30,6 +166,11 @@
         - [assignment_uuid](#nmr_data_assignment_data_assignment_uuid)
         - [nucleus](#nmr_data_assignment_data_nucleus)
         - [assignment_data_npmrd_db_release_status](#nmr_data_assignment_data_assignment_data_npmrd_db_release_status)
+
+## json_version <a name="json_version"></a>
+  - Description: The version of the json format. Increments whenever the json format is updated
+  - Example: `1.01`
+  - type: float
 
 ## compound_name <a name="compound_name"></a>
 - Description: The name of the compound.

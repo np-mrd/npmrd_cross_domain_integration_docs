@@ -1,6 +1,362 @@
-# Exchange JSON Breakdown
+# Data Exchange JSON
 
-## <b>LAST UPDATED TO REFLECT VERSION 2.0.6<b/>
+### Updated to Reflect Version: 2.0.6
+
+## Purpose
+Json used to send major data from one system to another in the NP-MRD Stack. Can contain all forms of data that the system recognizes including system identifiers (npmrd_id, deposition_uuid, deposition compound_uuid, etc.), NMR Data, Peak Lists, Assignment Data, etc.
+
+Every entry represents a single compound with origin information (i.e. submission information) being represented as fields within. All data associated with a compound (nmr, peaks, assignment) are contained in its entry.
+
+A repo that contains this json schema can be found here: [np-mrd/npmrd_data_exchange](https://github.com/np-mrd/npmrd_data_exchange).
+
+## Usage Flow
+### Database System → Deposition System
+
+A cronjob in the database system is setup to push any newly deposited data every hour. Ready to send submissions will be added to the send json until there are 60 or more nmr spectra included, which will then prevent any new entries from being added. This is to give the database system time to ingest provided spectra and avoid overloading it.
+
+Due to an expected ingestion time of several minutes to upwards of an hour a separate API call should be made from the database system to the deposition should be made to report the ingestion status to the database system once ingestion is complete using the Deposition Ingestion Report JSON.
+
+- JSON Type: Array of object entries.
+- Source: NP-MRD Database System.
+- Target: NP-MRD Deposition System.
+- Request Type: POST.
+- Response Type: Respond via separate API call to endpoint deposition system after fully ingesting data: 
+`[DEPOSITION_SITE_EXCHANGE_API]/report_ingestion_status`.
+- Response Format: [Deposition Ingestion Report JSON](../index.md)
+
+### DFT System → Deposition System
+
+<FILL_ME>
+
+- JSON Type: Array of object entries.
+- Source: NP-MRD DFT System
+- Target: NP-MRD Deposition System
+- Response Type: <FILL_ME>
+- Response Format: <FILL_ME>
+
+## API Endpoint
+### Database System → Deposition System
+This json should be sent to the endpoint `[DEPOSITION_SITE_EXCHANGE_API]/generate_npmrd_exchange_update_compound_in_deposition_db_json`.
+
+Response HTTP Status Code:
+- Success: 200
+- Error: 400+: a number of 400+ response error codes that are thrown if there are errors updating data in the database
+
+## Testing
+### Database System
+This json can be generated for any entry in the deposition database at the API endpoint `[DEPOSITION_SITE_EXCHANGE_API]/generate_npmrd_exchange_deposition_json` as a `POST REQUEST`. 
+
+On the dev server ingestion of this json can be tested by running `[DEPOSITION_SITE_EXCHANGE_API]/send_npmrd_exchange_deposition_json_to_npmrd`, which will generate a this json and send it to the database website.
+
+### Example JSON
+### Database System → Deposition System
+```
+[
+  {
+    "compound_name": "TEST COMP 1",
+    "smiles": "CC=CCCCCCCCC=CCCCCCCCC",
+    "inchikey": "MXARNSWMBYQYOP-UHFFFAOYSA-N",
+    "npmrd_id": "NP9999999",
+    "submission": {
+      "source": "deposition_system",
+      "type": "presubmission_article",
+      "submission_uuid": "3d1568f7-064a-4118-834e-8c6e5019e46d",
+      "compound_uuid": "fAWvfyRdQA",
+      "submission_date": "2025-04-03T00:33:00.000000+00:00",
+      "send_record_id": 0,
+      "embargo_status": "embargo_until_date",
+      "embargo_date": "2025-06-30T00:00:00.000000+00:00",
+      "compound_embargo_release_ready": false
+    },
+    "citation": {
+      "doi": null,
+      "pmid": null,
+      "null": null
+    },
+    "origin": {
+      "species": "TEST SPECIES",
+      "genus": "TEST GENUS",
+      "private_collection": {
+        "compound_source_type": null,
+        "purified_in_house": {
+          "biological_material_source": null
+        },
+        "commercial": {
+          "supplier": null,
+          "cas_number": null,
+          "catalogue_number": null
+        },
+        "compound_library": {
+          "library_name": null,
+          "library_description": null,
+          "library_compound_code": null
+        },
+        "other": {
+          "user_specified_compound_source": null,
+          "biological_material_source": null
+        }
+      }
+    },
+    "depositor_info": {
+      "email": "mpin@sfu.ca",
+      "account_id": 526,
+      "attribution_name": "Matthew Pin",
+      "attribution_organization": "Simon Fraser University",
+      "show_email_in_attribution": true,
+      "show_name_in_attribution": true,
+      "show_organization_in_attribution": true
+    },
+    "nmr_data": {
+      "peak_lists": [
+        {
+          "nucleus": "C",
+          "solvent": "CDCl3",
+          "reference": "DSS",
+          "values": [
+            200,
+            200
+          ],
+          "frequency": 300,
+          "frequency_units": "MHz",
+          "temperature": 300,
+          "temperature_units": "K",
+          "peak_list_uuid": "fAWvfyRdQA-LTPYF",
+          "peak_list_embargo_release_ready": false
+        },
+        {
+          "nucleus": "H",
+          "solvent": "CDCl3",
+          "reference": "DSS",
+          "values": [
+            10,
+            10,
+            10
+          ],
+          "frequency": 300,
+          "frequency_units": "MHz",
+          "temperature": 300,
+          "temperature_units": "K",
+          "peak_list_uuid": "fAWvfyRdQA-LTPYF",
+          "peak_list_embargo_release_ready": false
+        }
+      ],
+      "experimental_data": {
+        "nmr_data_download_link": "DOWNLOAD_LINK",
+        "nmr_metadata": [
+          {
+            "vendor": "Varian",
+            "filetype": "Varian_native",
+            "solvent": "CDCl3",
+            "frequency": [
+              500.111410129
+            ],
+            "frequency_units": "MHz",
+            "f1_nucleus": "1H",
+            "f2_nucleus": null,
+            "temperature": 298,
+            "temperature_units": "K",
+            "experiment_type": "1D",
+            "extracted_experiment_folder": "1H_1D",
+            "extracted_data_path": "1H_1D/procpar",
+            "spectrum_uuid": "fAWvfyRdQA-FzXP5",
+            "spectrum_embargo_release_ready": false
+          }
+        ]
+      },
+      "assignment_data": {},
+      "predicted_data": {
+        "prediction_method": null,
+        "dft_protocol": {
+          "molecular_dynamics": {
+            "md_software": null,
+            "md_software_version": null,
+            "forcefield": null,
+            "energy_window": null,
+            "downselection": null
+          },
+          "quantum_mechanics": {
+            "qm_software": null,
+            "qm_software_version": null,
+            "tasks": [],
+            "functionals": [],
+            "basis_sets": [],
+            "solvent": null,
+            "conversion_factors": {
+              "H": {
+                "m": null,
+                "b": null
+              },
+              "C": {
+                "m": null,
+                "b": null
+              }
+            }
+          }
+        },
+        "ml_protocol": {
+          "ml_model": null,
+          "training_set": null,
+          "training_parameters": {
+            "parameter_1": null,
+            "parameter_2": null
+          },
+          "chemical_shifts": {
+            "solvent": null,
+            "temperature": null,
+            "temperature_units": null,
+            "h_nmr": {
+              "shift": null,
+              "shielding_tensor": null,
+              "rdkit_index": null
+            },
+            "c_nmr": {
+              "shift": null,
+              "shielding_tensor": null,
+              "rdkit_index": null
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "compound_name": "TEST COMP 2",
+    "smiles": "CC=CC\\CCCC/CCC=CCCC/CCCCC=CC=CC\\CCCC/CCC=CCCC/CCCCC",
+    "inchikey": "NFCIFLYOUDQACS-UHFFFAOYSA-N",
+    "npmrd_id": "NP9999999",
+    "submission": {
+      "source": "deposition_system",
+      "type": "presubmission_article",
+      "submission_uuid": "3d1568f7-064a-4118-834e-8c6e5019e46d",
+      "compound_uuid": "5uVEMDdU6k",
+      "submission_date": "2025-04-03T00:33:00.000000+00:00",
+      "send_record_id": 0,
+      "embargo_status": "embargo_until_date",
+      "embargo_date": "2025-06-30T00:00:00.000000+00:00",
+      "compound_embargo_release_ready": false
+    },
+    "citation": {
+      "doi": null,
+      "pmid": null,
+      "null": null
+    },
+    "origin": {
+      "species": "TEST SPECIES",
+      "genus": "TEST GENUS",
+      "private_collection": {
+        "compound_source_type": null,
+        "purified_in_house": {
+          "biological_material_source": null
+        },
+        "commercial": {
+          "supplier": null,
+          "cas_number": null,
+          "catalogue_number": null
+        },
+        "compound_library": {
+          "library_name": null,
+          "library_description": null,
+          "library_compound_code": null
+        },
+        "other": {
+          "user_specified_compound_source": null,
+          "biological_material_source": null
+        }
+      }
+    },
+    "depositor_info": {
+      "email": "mpin@sfu.ca",
+      "account_id": 526,
+      "attribution_name": "Matthew Pin",
+      "attribution_organization": "Simon Fraser University",
+      "show_email_in_attribution": true,
+      "show_name_in_attribution": true,
+      "show_organization_in_attribution": true
+    },
+    "nmr_data": {
+      "peak_lists": [],
+      "experimental_data": {
+        "nmr_data_download_link": "DOWNLOAD_LINK",
+        "nmr_metadata": [
+          {
+            "vendor": "Varian",
+            "filetype": "Varian_native",
+            "solvent": "CDCl3",
+            "frequency": [
+              500.111410129
+            ],
+            "frequency_units": "MHz",
+            "f1_nucleus": "1H",
+            "f2_nucleus": null,
+            "temperature": 298,
+            "temperature_units": "K",
+            "experiment_type": "1D",
+            "extracted_experiment_folder": "1H_1D",
+            "extracted_data_path": "1H_1D/procpar",
+            "spectrum_uuid": "5uVEMDdU6k-9ts3u",
+            "spectrum_embargo_release_ready": false
+          }
+        ]
+      },
+      "assignment_data": {},
+      "predicted_data": {
+        "prediction_method": null,
+        "dft_protocol": {
+          "molecular_dynamics": {
+            "md_software": null,
+            "md_software_version": null,
+            "forcefield": null,
+            "energy_window": null,
+            "downselection": null
+          },
+          "quantum_mechanics": {
+            "qm_software": null,
+            "qm_software_version": null,
+            "tasks": [],
+            "functionals": [],
+            "basis_sets": [],
+            "solvent": null,
+            "conversion_factors": {
+              "H": {
+                "m": null,
+                "b": null
+              },
+              "C": {
+                "m": null,
+                "b": null
+              }
+            }
+          }
+        },
+        "ml_protocol": {
+          "ml_model": null,
+          "training_set": null,
+          "training_parameters": {
+            "parameter_1": null,
+            "parameter_2": null
+          },
+          "chemical_shifts": {
+            "solvent": null,
+            "temperature": null,
+            "temperature_units": null,
+            "h_nmr": {
+              "shift": null,
+              "shielding_tensor": null,
+              "rdkit_index": null
+            },
+            "c_nmr": {
+              "shift": null,
+              "shielding_tensor": null,
+              "rdkit_index": null
+            }
+          }
+        }
+      }
+    }
+  }
+]
+```
+
 
 ## JSON Fields
 - [compound_name](#compound_name)

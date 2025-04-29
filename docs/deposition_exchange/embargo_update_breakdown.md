@@ -1,13 +1,28 @@
+# Embargo Update JSON
+
+### Updated to Reflect Version: 1.01
+
 ## Purpose
 When submitting data as a presubmission, users have the option to set an embargo, preventing the data from being viewable by all users of the NP-MRD database. During the embargo period, the data is accessible only to the depositor and authorized NP-MRD administrators. The deposition platform tracks the embargo status, and when the data is ready for release, this json is sent to update its status. Once released, the data becomes viewable in the NP-MRD Database for all users.
 
 ## Usage Flow
+Deposition System → Database System
+
 This API call is triggered through a cronjob in the deposition backend once every hour. It pushes the json to the database website with the expectation of an immediate ingestion response. The response is expected to contain an updated version of the exchange json which reflects the ingestion status of compounds.
 
-- Source: NP-MRD Deposition Platform
-- Target: NP-MRD Database Platform. Is sent to the database site endpoint `[DATABASE_SITE_API_PATH]/external_depositions/update_embargo_status`
-- Response Type: Immediate response contains ingestion status
+- JSON Type: Array of object entries.
+- Source: NP-MRD Deposition Platform.
+- Target: NP-MRD Database Platform.
+- Request Type: POST.
+- Response Type: Immediate response contains ingestion status.
 - Response Format: Modify the provided exchange json to a response version and return it.
+
+## API Endpoint
+This json should be sent to the endpoint `[DATABASE_SITE_API_PATH]/external_depositions/update_embargo_status`.
+
+Response HTTP Status Code:
+- Success: 200
+- Error: 400+: a number of 400+ response error codes that are thrown if there are errors updating data in the database
 
 ## Testing
 This json can be generated for any entry in the deposition database at the API endpoint `[DEPOSITION_SITE_EXCHANGE_API]/generate_npmrd_exchange_embargo_update_json`.
@@ -181,6 +196,7 @@ NOTE: Fields marked with a `response_field` tag indicate that they  will be empt
 
 ## Embargo Update Json
 
+- [json_version](#json_version)
 - [submission_uuid](#submission_uuid)
 - [embargo_status](#embargo_status)
 - [embargo_date](#embargo_date)
@@ -214,6 +230,10 @@ NOTE: Fields marked with a `response_field` tag indicate that they  will be empt
     - [assignment_data_embargo_release_ready](#compounds_assignment_data_assignment_data_embargo_release_ready)
     - [assignment_data_npmrd_db_release_status](#compounds_assignment_data_assignment_data_npmrd_db_release_status)
 
+- json_version <a name="json_version"></a>
+  - Description: The version of the json format. Increments whenever the json format is updated
+  - Example: `1.01`
+  - type: float
 
 - submission_uuid <a name="submission_uuid"></a>
   - Description: Internal reference ID for the deposition system. This is the primary key for submission-based data storage. Fixed length 36 character uuid string.

@@ -1,9 +1,11 @@
 # Index
 
-Please see below links to instructions for each of the integration aspects of the project.
+## JSON Breakdowns
+- [Exchange Breakdown](./exchange_breakdown.md)
 
-- [Exchange JSON Breakdown](./json_breakdown.md)
-- [Exchange Deposition Report JSON Breakdown](./deposition_report_breakdown.md)
-- [Embargo Deposition Update JSON Breakdown](./embargo_update_breakdown.md)
+## Deposition Exchange
 
-- [Requirements For JSONs by Origin](./json_requirements.md)
+- [Embargo Update Breakdown](./deposition_exchange/embargo_update_breakdown.md)
+- [Identifier Update Breakdown](./deposition_exchange/identifier_update_breakdown.md)
+- [Update Compound in Deposition DB Breakdown](./deposition_exchange/update_compound_in_deposition_db_breakdown.md)
+- [Exchange Report Breakdown](./deposition_exchange/exchange_report_breakdown.md)
