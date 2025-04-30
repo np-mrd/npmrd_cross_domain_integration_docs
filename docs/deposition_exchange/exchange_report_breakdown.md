@@ -1,3 +1,10 @@
+---
+layout: default
+title: Exchange Report
+parent: Deposition Exchange
+nav_order: 1
+---
+
 # Deposition Report JSON
 
 ### Updated to Reflect Version: 1.01

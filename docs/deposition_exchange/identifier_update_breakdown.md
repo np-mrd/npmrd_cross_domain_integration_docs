@@ -1,3 +1,10 @@
+---
+layout: default
+title: Identifier Update
+parent: Deposition Exchange
+nav_order: 1
+---
+
 # Identifier Update JSON
 
 ### Updated to Reflect Version: 1.01

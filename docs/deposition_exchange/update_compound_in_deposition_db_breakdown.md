@@ -1,3 +1,10 @@
+---
+layout: default
+title: Update Compound in Deposition Db
+parent: Deposition Exchange
+nav_order: 1
+---
+
 # Update Compound In Deposition Db JSON
 
 ### Updated to Reflect Version: 1.01

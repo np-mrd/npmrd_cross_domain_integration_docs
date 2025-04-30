@@ -1,3 +1,10 @@
+---
+layout: default
+title: Embargo Update
+parent: Deposition Exchange
+nav_order: 1
+---
+
 # Embargo Update JSON
 
 ### Updated to Reflect Version: 1.01
