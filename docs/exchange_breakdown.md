@@ -26,13 +26,13 @@ Due to an expected ingestion time of several minutes to upwards of an hour a sep
 
 ### DFT System → Deposition System
 
-<FILL_ME>
+[FILL_ME]
 
 - JSON Type: Array of object entries.
 - Source: NP-MRD DFT System
 - Target: NP-MRD Deposition System
-- Response Type: <FILL_ME>
-- Response Format: <FILL_ME>
+- Response Type: [FILL_ME]
+- Response Format: [FILL_ME]
 
 ## API Endpoint
 ### Database System → Deposition System
