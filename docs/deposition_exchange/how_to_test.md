@@ -1,3 +1,10 @@
+---
+layout: default
+title: Embargo Update
+parent: Deposition Exchange
+nav_order: 1
+---
+
 # Testing Data Exchange
 
 Various test functions are setup on the deposition platform data exchange API swagger UI. Note that to access the swagger UI you must request its url and security key from a developer on the exchange platform.
