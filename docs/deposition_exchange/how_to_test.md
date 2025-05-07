@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Embargo Update
+title: How To Test
 parent: Deposition Exchange
 nav_order: 1
 ---
