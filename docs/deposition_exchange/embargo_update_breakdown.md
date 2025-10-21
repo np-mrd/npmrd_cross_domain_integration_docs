@@ -232,7 +232,7 @@ NOTE: Fields marked with a `response_field` tag indicate that they  will be empt
     - [spectrum_embargo_release_ready](#compounds_nmr_metadata_spectrum_embargo_release_ready)
     - [spectrum_npmrd_db_release_status](#compounds_nmr_metadata_spectrum_npmrd_db_release_status)
   - [assignment_data](#compounds_assignment_data)
-    - [assignment_uuid](#compounds_assignment_data_assignment_uuid)
+    - [assignment_data_uuid](#compounds_assignment_data_assignment_data_uuid)
     - [nuclues](#compounds_assignment_data_nuclues)
     - [assignment_data_embargo_release_ready](#compounds_assignment_data_assignment_data_embargo_release_ready)
     - [assignment_data_npmrd_db_release_status](#compounds_assignment_data_assignment_data_npmrd_db_release_status)
@@ -414,7 +414,7 @@ type: list
   ### assignment_data <a name="compounds_assignment_data"></a>
   type: list
 
-    - assignment_uuid <a name="nmr_data_assignment_data_assignment_uuid"></a>
+    - assignment_data_uuid <a name="nmr_data_assignment_data_assignment_data_uuid"></a>
         - Description: uuid value unique to the provided assignment data. Used as an identifier for this assignment data. 38 characters in length due to including a standard 36 character uuid as well as an additional dash and nucleus character. The first 36 characters are identical to the "sister assignment entry" (between C and H) to make matching the two of them easier.
         - Example: `ff29e8c3-bbcb-4165-9631-a103743dd703-c`
         - type: string

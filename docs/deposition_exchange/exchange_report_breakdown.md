@@ -170,7 +170,7 @@ The json is exchanged as an **array** of entries containing the following. Each 
         - [spectrum_errors](#nmr_data_experimental_data_spectrum_errors)
     - [assignment_data](#nmr_data_assignment_data)
         - [assignment_data_ingestion_status](#nmr_data_assignment_data_ingestion_status)
-        - [assignment_uuid](#nmr_data_assignment_data_assignment_uuid)
+        - [assignment_data_uuid](#nmr_data_assignment_data_assignment_data_uuid)
         - [nucleus](#nmr_data_assignment_data_nucleus)
         - [assignment_data_npmrd_db_release_status](#nmr_data_assignment_data_assignment_data_npmrd_db_release_status)
 
@@ -375,7 +375,7 @@ The json is exchanged as an **array** of entries containing the following. Each 
             - Type: array
             - One of: `ingested`, `not_ingested`
             - Can Overwrite Deposition Database: `Yes`
-        - assignment_uuid <a name="nmr_data_assignment_data_assignment_uuid"></a>
+        - assignment_data_uuid <a name="nmr_data_assignment_data_assignment_data_uuid"></a>
             - Description: uuid value unique to the provided assignment data. Used as an identifier for this assignment data. 38 characters in length due to including a standard 36 character uuid as well as an additional dash and nucleus character. The first 36 characters are identical to the "sister assignment entry" (between C and H) to make matching the two of them easier.
             - Example: `ff29e8c3-bbcb-4165-9631-a103743dd703-c`
             - type: string
